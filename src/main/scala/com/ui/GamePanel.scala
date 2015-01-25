@@ -3,9 +3,10 @@ package com.ui
 import javax.swing.{JLabel, JPanel}
 import java.awt.{Graphics, Font}
 import com.ui.util.{ThreadDelay, Random2DPoint}
+import com.ui.character.{ArmyCommander, InvaderArmy}
 
 
-object GamePanel{
+object GamePanel {
     private val DELAY_IN_MILLIS = 500
 
     private val PREFERRED_WIDTH: Int  = 291
@@ -17,6 +18,8 @@ class GamePanel extends JPanel with Runnable {
 
     private var animator: Thread = null
     private val random2DPointGenerator = new Random2DPoint(0 to PREFERRED_WIDTH, 0 to PREFERRED_HEIGHT )
+
+    private val invaderArmy  = new InvaderArmy(ArmyCommander.formAnArmy(random2DPointGenerator.nextPoint))
 
     setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
     setToolTipText("")
@@ -44,15 +47,10 @@ class GamePanel extends JPanel with Runnable {
     override def paintComponent(g: Graphics): Unit = {
         super.paintComponent(g)
 
-        val randomPlaceOnScreen = random2DPointGenerator.nextPoint
+        val point = random2DPointGenerator.nextPoint
+        println(s"panel size is  ${this.getSize()}")
 
-        val middleOfScreenX = (randomPlaceOnScreen.x )
-        val middleOfScreenY = (randomPlaceOnScreen.y )
-
-
-        val invader = new Invader(middleOfScreenX, middleOfScreenY)
-
-        invader.draw(g)
+        invaderArmy.moveTo(point).drawArmy(g)
     }
 
     override def run(): Unit = {
@@ -60,6 +58,7 @@ class GamePanel extends JPanel with Runnable {
         var beforeTime = System.currentTimeMillis()
 
         do {
+
             repaint()
 
             sleep(beforeTime)
@@ -68,7 +67,6 @@ class GamePanel extends JPanel with Runnable {
 
         } while(true)
     }
-
 
     private def sleep(beforeTime: Long) {
         try {

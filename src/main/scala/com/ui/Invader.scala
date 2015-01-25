@@ -1,15 +1,23 @@
 package com.ui
 
-import java.awt.{Color, Graphics, Rectangle}
+import java.awt.{Point, Color, Graphics, Rectangle}
 import com.ui.character.invader._
 
-class Invader(val x:Int, val y:Int) {
+object Invader {
+    val INVADER_WIDTH: Int = 11 * DisplayElement.DEFAULT_ELEMENT_WIDTH
+    val INVADER_HEIGHT: Int = 8 * DisplayElement.DEFAULT_ELEMENT_HEIGHT
+}
+class Invader(val topRight:Point) {
+    import Invader._
 
-    val topRightEar   = new TopRightEar(x, y).getBoundingBox
-    val bottomRightEar= new BottomRightEar(x,y).getBoundingBox
+    private val x = topRight.x
+    private val y = topRight.y
+
+    val topRightAntena   = new TopRightAntena(x, y).getBoundingBox
+    val bottomRightAntena= new BottomRightAntena(x,y).getBoundingBox
     
-    val topLeftEar   = new TopLeftEar(x, y).getBoundingBox
-    val bottomLeftEar= new BottomLeftEar(x,y).getBoundingBox
+    val topLeftAntena   = new TopLeftAntena(x, y).getBoundingBox
+    val bottomLeftAntena= new BottomLeftAntena(x,y).getBoundingBox
 
     val forehead  = new Forehead(x,y).getBoundingBox
     val eyeSocket = new EyeSocket(x,y).getBoundingBox
@@ -24,17 +32,24 @@ class Invader(val x:Int, val y:Int) {
     val rightEar = new RightEar(x,y).getBoundingBox
     val chin = new Chin(x,y).getBoundingBox
 
-    def moveTo(x:Int, y:Int): Invader = new Invader(x,y)
+    def moveTo(point:Point): Invader = new Invader(point)
+
+    def moveTo(box:Rectangle): Invader = {
+        val centre =  new Point(DisplayElement.xOffset(box.x , 5.5),
+                                DisplayElement.yOffset(box.y , 4.5 )  )
+
+        moveTo(centre)
+    }
 
     def getBoundingBox: Rectangle = new Rectangle(
         DisplayElement.xOffset(x , -5.5) ,
         DisplayElement.yOffset(y , -4.5 ) ,
-        11 * DisplayElement.DEFAULT_ELEMENT_WIDTH,
-        8 * DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+        INVADER_WIDTH,
+        INVADER_HEIGHT)
 
 
     def draw(g:Graphics) :Unit = {
-        drawEars(g)
+        drawAntena(g)
         drawFace(g)
     }
 
@@ -59,11 +74,11 @@ class Invader(val x:Int, val y:Int) {
         drawBox(g, chin)
     }
 
-    def drawEars(g: Graphics) {
-        drawBox(g, topRightEar)
-        drawBox(g, bottomRightEar)
-        drawBox(g, topLeftEar)
-        drawBox(g, bottomLeftEar)
+    def drawAntena(g: Graphics) {
+        drawBox(g, topRightAntena)
+        drawBox(g, bottomRightAntena)
+        drawBox(g, topLeftAntena)
+        drawBox(g, bottomLeftAntena)
     }
 
     private def drawBox(g:Graphics, rect:Rectangle):Unit = {

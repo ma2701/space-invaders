@@ -1,23 +1,25 @@
+
 package com.ui.character
 
+import java.awt.{Point, Graphics}
 import org.scalatest.FunSuite
 import java.awt.{Point, Graphics}
 import org.scalatest.mock.MockitoSugar
 import com.ui.Invader
 import org.scalatest.FunSuite
-import java.awt.Graphics
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
 
 class InvaderArmyTest extends FunSuite with MockitoSugar {
+    val startingPoint: Point = new Point(11, 11)
 
     test("can create an instance") {
-        val armyOfOne = List(new Invader(11,11))
+        val armyOfOne = List(new Invader(startingPoint))
 
         new InvaderArmy(armyOfOne)
     }
 
-    test("can draw an army of one") {
+    test("given a an army of one then invader army can draw it") {
         val mockGraphics = mock[Graphics]
         val mockInvader = mock[Invader]
 
@@ -30,6 +32,21 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
 
         verify(mockInvader).draw(mockGraphics)
     }
+
+    test("given an army of one then invader army can move it in + X direction") {
+        val armyOfOne = List(new Invader(startingPoint))
+
+        val invaderArmy = new InvaderArmy(armyOfOne)
+
+        val point = new Point(22,22)
+        invaderArmy.moveTo(point)
+
+//        invaderArmy.allArmyPositions.foreach {
+//            assert(_.)
+//        }
+    }
+
+
 }
 
 

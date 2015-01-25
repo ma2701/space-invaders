@@ -29,8 +29,8 @@ class Random2DPointTest extends FunSuite {
 
        for( p <- 0 to 10 ) {
            val point = dp.nextPoint
-           println(point.getY)
-           println(point.getX)
+           assert(xRange.contains(point.x))
+           assert(yRange.contains(point.y))
        }
     }
 }
