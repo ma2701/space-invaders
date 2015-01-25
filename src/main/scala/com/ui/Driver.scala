@@ -1,7 +1,6 @@
 package com.ui
 
-
-object SpaceInvadersManualUITest extends App {
+object Driver extends App {
 
     override
     def main(args: Array[String]) :Unit =  {
