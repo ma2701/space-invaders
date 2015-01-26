@@ -1,12 +1,13 @@
 package com.ui
 
 import java.awt.{Point, Color, Graphics, Rectangle}
-import com.ui.character.invader._
+import com.ui.character.element._
 
 object Invader {
     val INVADER_WIDTH: Int = 11 * DisplayElement.DEFAULT_ELEMENT_WIDTH
     val INVADER_HEIGHT: Int = 8 * DisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
+
 class Invader(val topRight:Point) {
     import Invader._
 
@@ -41,7 +42,7 @@ class Invader(val topRight:Point) {
         moveTo(centre)
     }
 
-    def getBoundingBox: Rectangle = new Rectangle(
+    def boundingBox: Rectangle = new Rectangle(
         DisplayElement.xOffset(x , -5.5) ,
         DisplayElement.yOffset(y , -4.5 ) ,
         INVADER_WIDTH,

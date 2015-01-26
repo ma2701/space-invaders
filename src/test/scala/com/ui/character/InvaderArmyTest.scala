@@ -33,17 +33,17 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
         verify(mockInvader).draw(mockGraphics)
     }
 
-    test("given an army of one then invader army can move it in + X direction") {
+    test("given an army of one then invader army can move to point(x,y)") {
         val armyOfOne = List(new Invader(startingPoint))
 
         val invaderArmy = new InvaderArmy(armyOfOne)
 
         val point = new Point(22,22)
-        invaderArmy.moveTo(point)
 
-//        invaderArmy.allArmyPositions.foreach {
-//            assert(_.)
-//        }
+        invaderArmy.moveTo(point).army.foreach { invader =>
+            assertResult(33) { invader.topRight.x }
+            assertResult(33) { invader.topRight.y }
+        }
     }
 
 

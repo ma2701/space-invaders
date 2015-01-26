@@ -1,4 +1,4 @@
-package com.ui.character.invader
+package com.ui.character.element
 
 import java.awt.Rectangle
 

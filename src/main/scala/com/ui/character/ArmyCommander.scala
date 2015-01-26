@@ -2,7 +2,7 @@ package com.ui.character
 
 import java.awt.Point
 import com.ui.Invader
-import com.ui.character.invader.DisplayElement
+import com.ui.character.element.DisplayElement
 
 object ArmyCommander {
     def ROW_CNT = 5

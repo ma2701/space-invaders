@@ -13,7 +13,7 @@ class InvaderArmy(val army:Seq[Invader]) {
     }
 
     def moveTo(point:Point):InvaderArmy = {
-        new InvaderArmy(ArmyCommander.moveAllArmyInYDirection( point.y,
+        new InvaderArmy(ArmyCommander.moveAllArmyInYDirection(point.y,
             ArmyCommander.moveAllArmyInXDirection(point.x, army)))
     }
 

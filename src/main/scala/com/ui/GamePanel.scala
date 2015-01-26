@@ -1,13 +1,15 @@
 package com.ui
 
 import javax.swing.{JLabel, JPanel}
-import java.awt.{Graphics, Font}
-import com.ui.util.{ThreadDelay, Random2DPoint}
-import com.ui.character.{ArmyCommander, InvaderArmy}
 
+import java.awt.{Point, Graphics, Font}
+import com.ui.util.{Random2DPoint}
+import com.ui.character.{ArmyDirection, ArmyCommander, InvaderArmy}
+
+import com.ui.util.ThreadDelay._
 
 object GamePanel {
-    private val DELAY_IN_MILLIS = 500
+    private val DELAY_IN_MILLIS = 10
 
     private val PREFERRED_WIDTH: Int  = 291
     private val PREFERRED_HEIGHT: Int = 600
@@ -19,7 +21,7 @@ class GamePanel extends JPanel with Runnable {
     private var animator: Thread = null
     private val random2DPointGenerator = new Random2DPoint(0 to PREFERRED_WIDTH, 0 to PREFERRED_HEIGHT )
 
-    private val invaderArmy  = new InvaderArmy(ArmyCommander.formAnArmy(random2DPointGenerator.nextPoint))
+    private val invaderArmy  = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0,0)))
 
     setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
     setToolTipText("")
@@ -43,12 +45,13 @@ class GamePanel extends JPanel with Runnable {
                          .add(0, PREFERRED_HEIGHT, java.lang.Short.MAX_VALUE))
 
 
-
     override def paintComponent(g: Graphics): Unit = {
         super.paintComponent(g)
 
-        val point = random2DPointGenerator.nextPoint
-        println(s"panel size is  ${this.getSize()}")
+        val width: Int = this.getWidth
+        val height: Int = this.getHeight
+
+        val point = ArmyDirection.whereToNext(width, height)
 
         invaderArmy.moveTo(point).drawArmy(g)
     }
@@ -70,7 +73,7 @@ class GamePanel extends JPanel with Runnable {
 
     private def sleep(beforeTime: Long) {
         try {
-            Thread.sleep(ThreadDelay.calculateThreadSleepTime(beforeTime, DELAY_IN_MILLIS));
+            Thread.sleep(calculateThreadSleepTime(beforeTime, DELAY_IN_MILLIS));
         } catch {
             case e: InterruptedException => println("Interrupted: " + e.getMessage());
         }
