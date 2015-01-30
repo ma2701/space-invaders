@@ -73,8 +73,8 @@ class ArmyCommanderTest extends FunSuite with MockitoSugar {
 
     test("given a starting point(10,10) form an army of invader soldiers") {
         ArmyCommander.formAnArmy(startingPoint).foreach { invader =>
-            assert(invader.topRight.x !=0 )
-            assert(invader.topRight.y !=0 )
+            assert(invader.topLeft.x !=0 )
+            assert(invader.topLeft.y !=0 )
         }
     }
 

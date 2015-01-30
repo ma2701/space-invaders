@@ -2,7 +2,7 @@ package com.ui
 
 import javax.swing.{JLabel, JPanel}
 
-import java.awt.{Point, Graphics, Font}
+import java.awt.{Rectangle, Point, Graphics, Font}
 import com.ui.util.{Random2DPoint}
 import com.ui.character.{ArmyDirection, ArmyCommander, InvaderArmy}
 
@@ -19,9 +19,7 @@ class GamePanel extends JPanel with Runnable {
     import GamePanel._
 
     private var animator: Thread = null
-    private val random2DPointGenerator = new Random2DPoint(0 to PREFERRED_WIDTH, 0 to PREFERRED_HEIGHT )
-
-    private val invaderArmy  = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0,0)))
+    private var invaderArmy  = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0,0)))
 
     setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
     setToolTipText("")
@@ -48,12 +46,13 @@ class GamePanel extends JPanel with Runnable {
     override def paintComponent(g: Graphics): Unit = {
         super.paintComponent(g)
 
-        val width: Int = this.getWidth
-        val height: Int = this.getHeight
+        val point = ArmyDirection.whereToNext(
+            new Rectangle(0, 0, this.getWidth, this.getHeight / 2),
+            invaderArmy.getBoundingBox)
 
-        val point = ArmyDirection.whereToNext(width, height)
+        invaderArmy = invaderArmy.moveTo(point)
 
-        invaderArmy.moveTo(point).drawArmy(g)
+        invaderArmy.drawArmy(g)
     }
 
     override def run(): Unit = {

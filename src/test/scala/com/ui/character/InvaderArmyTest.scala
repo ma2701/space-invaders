@@ -33,16 +33,32 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
         verify(mockInvader).draw(mockGraphics)
     }
 
-    test("given an army of one then invader army can move to point(x,y)") {
-        val armyOfOne = List(new Invader(startingPoint))
-
-        val invaderArmy = new InvaderArmy(armyOfOne)
+    test("given an army then invader army can move to point(x,y)") {
+        val invaderArmy = new InvaderArmy(ArmyCommander.formAnArmy(startingPoint))
 
         val point = new Point(22,22)
 
-        invaderArmy.moveTo(point).army.foreach { invader =>
-            assertResult(33) { invader.topRight.x }
-            assertResult(33) { invader.topRight.y }
+       assertResult(point) {
+           invaderArmy.moveTo(point).army(0).topLeft
+       }
+    }
+
+    test("given an army of one then invader army can move to point(x,y) and back") {
+
+        val invaderArmy = new InvaderArmy(ArmyCommander.formAnArmy(startingPoint))
+
+        val point = new Point(22,22)
+
+        assertResult(startingPoint) {
+            invaderArmy.moveTo(point).moveTo(startingPoint).army(0).topLeft
+        }
+    }
+
+    test("given an invader army the get its bounding box") {
+        val invaderArmy = new InvaderArmy(ArmyCommander.formAnArmy(startingPoint))
+
+        assertResult(startingPoint.x) {
+            invaderArmy.getBoundingBox.getX
         }
     }
 

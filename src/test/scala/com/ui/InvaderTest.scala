@@ -16,7 +16,7 @@ class InvaderTest extends FunSuite with MockitoSugar {
         val invader = new Invader(new Point(10, 10))
 
         assertResult(50) {
-            invader.moveTo(new Point(50,50)).topRight.x
+            invader.moveTo(new Point(50,50)).topLeft.x
         }
     }
 

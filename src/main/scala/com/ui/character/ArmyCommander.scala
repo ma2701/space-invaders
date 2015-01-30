@@ -28,13 +28,13 @@ object ArmyCommander {
 
     def moveAllArmyInXDirection(x:Int , army:Seq[Invader]):Seq[Invader] = {
         army.map { invader =>
-            invader.moveTo(new Point(invader.topRight.x + x, invader.topRight.y))
+            invader.moveTo(new Point(x, invader.topLeft.y))
         }
     }
 
     def moveAllArmyInYDirection(y:Int , army:Seq[Invader]):Seq[Invader] = {
         army.map { invader =>
-            invader.moveTo(new Point(invader.topRight.x , invader.topRight.y + y))
+            invader.moveTo(new Point(invader.topLeft.x , y))
         }
     }
 

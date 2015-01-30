@@ -8,11 +8,11 @@ object Invader {
     val INVADER_HEIGHT: Int = 8 * DisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
-class Invader(val topRight:Point) {
+class Invader(val topLeft:Point) {
     import Invader._
 
-    private val x = topRight.x
-    private val y = topRight.y
+    private val x = topLeft.x
+    private val y = topLeft.y
 
     val topRightAntena   = new TopRightAntena(x, y).getBoundingBox
     val bottomRightAntena= new BottomRightAntena(x,y).getBoundingBox

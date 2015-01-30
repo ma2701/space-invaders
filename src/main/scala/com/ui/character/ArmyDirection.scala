@@ -5,8 +5,8 @@ import com.ui.character.MovementDirection.ArmyMovement
 import com.ui.character.GeneralArmyDirection.GeneralArmyDirection
 
 object ArmyDirection {
-    val movementInXDirection = 10
-    val movementInYDirection = 10
+    val movementInXDirection = 1
+    val movementInYDirection = 1
 
     private[this] var startPosition:Point = _
     private[this] var currentPosition:Point = _
@@ -14,19 +14,23 @@ object ArmyDirection {
     private[this] var currentGeneralArmyDirection: GeneralArmyDirection = _
     private[this] var displayBoundingBox:Rectangle = _
 
-    def whereToNext(displayWidth:Int , displayHeight:Int ):Point = {
+    def whereToNext(displayWindow:Rectangle , armyBoundingBox:Rectangle ):Point = {
         import MovementDirection._
         import GeneralArmyDirection._
-        displayBoundingBox = new Rectangle(0,0, displayWidth, displayHeight)
+        displayBoundingBox = new Rectangle(0,0, displayWindow.width, displayWindow.height)
 
         if(startPosition ==null) {
-            startPosition = new Point((displayWidth / 5) * 2 ,(displayHeight / 8) * 1 )
+            val x:Int  = (displayWindow.width - armyBoundingBox.width) / 2
+            val y:Int  = (displayWindow.height - armyBoundingBox.height) / 2
+
+            startPosition = new Point(x,y)
+
             currentPosition = startPosition
             currentGeneralArmyDirection = Downward
             currentMovementDirection= Left
             currentPosition
         } else {
-            println(s"current pos ${currentPosition}")
+            println(s"current pos ${currentPosition} moving ${currentMovementDirection}")
             if(currentMovementDirection == Left) {
                 if(currentPosition.x > 0 ) {
                     currentPosition = new Point(currentPosition.x - movementInXDirection, currentPosition.y)
@@ -44,9 +48,9 @@ object ArmyDirection {
                 }
             }
             else if (currentMovementDirection == Down){
-                if(currentPosition.y < displayHeight ) {
+                if(currentPosition.y < displayWindow.height ) {
                     // have not reached the bottom yet..
-                    if(currentPosition.x >= 0 ) {
+                    if(currentPosition.x <=0 ) {
 
                         currentMovementDirection = Right
                         // at the left edge of the screen
@@ -75,7 +79,7 @@ object ArmyDirection {
                 }
             }
             else if(currentMovementDirection == Right) {
-                if(currentPosition.x < displayWidth) {
+                if(currentPosition.x < displayWindow.width) {
                     currentPosition  = new Point(currentPosition.x +movementInXDirection , currentPosition.y)
                     currentPosition
                 } else {
@@ -92,7 +96,7 @@ object ArmyDirection {
                     }
                 }
             } else {
-                if(currentPosition.y <  displayHeight) {
+                if(currentPosition.y >=0 ) {
                     //not reached the top edge yet
                     if(currentPosition.x == 0 ) {
                         // left edge
