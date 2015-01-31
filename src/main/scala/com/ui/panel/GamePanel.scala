@@ -10,7 +10,7 @@ import com.ui.util.ThreadDelay._
 import com.ui.util.InvaderArmyMoveDelay._
 
 object GamePanel {
-    private val DELAY_IN_MILLIS = 50
+    private val DELAY_IN_MILLIS = 2
 
     private val PREFERRED_WIDTH: Int  = 878
     private val PREFERRED_HEIGHT: Int = 600
@@ -44,16 +44,20 @@ class GamePanel extends JPanel with Runnable {
                          .add(0, PREFERRED_HEIGHT, java.lang.Short.MAX_VALUE))
 
 
-    override def paintComponent(g: Graphics): Unit = {
+    override
+    def paintComponent(g: Graphics): Unit = {
         super.paintComponent(g)
 
         val displayWindowBoundingBox = new Rectangle(0, 0, this.getWidth, this.getHeight / 2)
 
         if(isTimeToMoveArmy(System.currentTimeMillis())) {
-           val point = whereToNext(displayWindowBoundingBox,invaderArmy.getBoundingBox)
+            val point = whereToNext(displayWindowBoundingBox,invaderArmy.getBoundingBox)
+
             invaderArmy = invaderArmy.moveTo(point)
             invaderArmy.drawArmy(g)
+
         } else {
+
             invaderArmy.drawArmy(g)
         }
     }

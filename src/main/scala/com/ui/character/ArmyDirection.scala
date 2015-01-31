@@ -3,16 +3,16 @@ package com.ui.character
 import java.awt.{Rectangle, Point}
 
 import com.ui.character.GeneralArmyDirection._
-import com.ui.character.Directions.{RightDirection, LeftDirection, UpDirection, DownDirection}
+import com.ui.character.Direction.{Right, Left, Up, Down}
 
 object ArmyDirection {
-    val movementInXDirection = 5
-    val movementInYDirection = 7
+    val oneHopInXDirection = 5
+    val oneHopInYDirection = 7
 
     private[this] var startPosition:Point = _
     private[this] var currentPosition:Point = _
     private[this] var direction: MovementDirection = _
-    private[this] var UpDownDirection: GeneralArmyDirection = _
+    private[this] var generalDirection: GeneralArmyDirection = _
     private[this] var displayBoundingBox:Rectangle = _
 
     def whereToNext(displayWindow:Rectangle , armyBoundingBox:Rectangle ):Point = {
@@ -23,25 +23,24 @@ object ArmyDirection {
             setInitialPosition(displayWindow, armyBoundingBox)
         else
             direction match {
-                case LeftDirection =>
+                case Left =>
                     if(hasReachedLeftWall)
                         moveUpOrDown
                     else
-                        moveInXAxis(-movementInXDirection)
-                 case DownDirection =>
-                    if(hasReachedBottomWall(armyBoundingBox, displayWindow) )
-                        UpDownDirection = Upward
-                    moveLeftOrRight
-                case RightDirection =>
+                        moveInXAxis(-oneHopInXDirection)
+                case Right =>
                     if(hasReachedRightWall(armyBoundingBox, displayWindow))
                         moveUpOrDown
                     else
-                        moveInXAxis(movementInXDirection)
-                case UpDirection =>
+                        moveInXAxis(oneHopInXDirection)
+                case Up =>
                     if(hasReachedTopWall)
-                        UpDownDirection = Downward
+                        generalDirection = Downward
                     moveLeftOrRight
-
+                case Down =>
+                    if(hasReachedBottomWall(armyBoundingBox, displayWindow) )
+                    generalDirection = Upward
+                    moveLeftOrRight
             }
     }
 
@@ -54,8 +53,8 @@ object ArmyDirection {
         startPosition = new Point(x, y)
 
         currentPosition = startPosition
-        UpDownDirection = Downward
-        direction = LeftDirection
+        generalDirection = Downward
+        direction = Left
         currentPosition
     }
 
@@ -64,7 +63,7 @@ object ArmyDirection {
 
     private def moveUpOrDown: Point = {
         import GeneralArmyDirection._
-        if (UpDownDirection == Downward) {
+        if (generalDirection == Downward) {
             moveDown
         } else {
             moveUp
@@ -82,23 +81,23 @@ object ArmyDirection {
     private def isCalledForFirstTime: Boolean = startPosition == null
 
     private def moveDown:  Point  = {
-        direction = DownDirection
-        moveInYAxis(movementInYDirection)
+        direction = Down
+        moveInYAxis(oneHopInYDirection)
     }
 
     private def moveUp:  Point  = {
-        direction = UpDirection
-        moveInYAxis(-movementInYDirection)
+        direction = Up
+        moveInYAxis(-oneHopInYDirection)
     }
 
     private def moveLeft: Point = {
-        direction = LeftDirection
-        moveInXAxis(-movementInXDirection)
+        direction = Left
+        moveInXAxis(-oneHopInXDirection)
     }
 
     private def moveRight: Point = {
-        direction = RightDirection
-        moveInXAxis(movementInXDirection)
+        direction = Right
+        moveInXAxis(oneHopInXDirection)
     }
 
     private def hasReachedTopWall: Boolean = currentPosition.y < 0

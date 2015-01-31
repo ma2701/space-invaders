@@ -1,7 +1,7 @@
 package com.ui.util
 
-object InvaderArmyMoveDelay{
-    var lastRedraw:Long = 0L
+object InvaderArmyMoveDelay {
+    var lastRedraw:Long   = 0L
     val drawDelayInMillis = 333
 
     def isTimeToMoveArmy(now:Long):Boolean = {
