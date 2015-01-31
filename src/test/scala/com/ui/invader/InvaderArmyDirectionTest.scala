@@ -1,12 +1,12 @@
 
-package com.ui.character
+package com.ui.invader
 
 import java.awt.{Rectangle, Point}
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 
 
-class ArmyDirectionTest extends FunSuite with MockitoSugar {
+class InvaderArmyDirectionTest extends FunSuite with MockitoSugar {
 
     /**
      *
@@ -36,10 +36,10 @@ class ArmyDirectionTest extends FunSuite with MockitoSugar {
 
     private def makeNConsecutiveMoves(displayWindow:Rectangle,armyBoundingBox:Rectangle, n : Int ): Point = {
         1 to n-1 foreach {i =>
-            ArmyDirection.whereToNext(displayWindow, armyBoundingBox)
+            InvaderArmyDirection.whereToNext(displayWindow, armyBoundingBox)
         }
 
-        ArmyDirection.whereToNext(displayWindow, armyBoundingBox)
+        InvaderArmyDirection.whereToNext(displayWindow, armyBoundingBox)
     }
 }
 

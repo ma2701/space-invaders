@@ -1,9 +1,9 @@
 package com.ui
 
 import java.awt.{Point, Color, Graphics, Rectangle}
-import com.ui.character.element._
-import com.ui.character.InvaderMood
-import com.ui.character.Mood._
+import com.ui.invader.element._
+import com.ui.invader.InvaderArmyMood
+import com.ui.invader.Mood._
 
 
 object Invader {
@@ -11,7 +11,7 @@ object Invader {
     val INVADER_HEIGHT: Int = 8  * DisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
-class Invader(val topLeft:Point, val mood:InvaderMood = Normal) {
+class Invader(val topLeft:Point, val mood:InvaderArmyMood = Normal) {
     import Invader._
 
     private val x = topLeft.x

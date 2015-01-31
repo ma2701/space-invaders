@@ -1,5 +1,5 @@
 
-package com.ui.character
+package com.ui.invader
 
 import java.awt.{Point, Graphics}
 import org.scalatest.FunSuite

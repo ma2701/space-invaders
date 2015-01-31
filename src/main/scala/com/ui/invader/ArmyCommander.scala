@@ -1,9 +1,8 @@
-package com.ui.character
+package com.ui.invader
 
 import java.awt.Point
 import com.ui.Invader
-import com.ui.character.element.DisplayElement
-import com.ui.character.Mood.Normal
+import com.ui.invader.Mood.Normal
 
 object ArmyCommander {
     def ROW_CNT = 5
@@ -11,7 +10,7 @@ object ArmyCommander {
 
     def BUFFER_BETWEEN_SOLDIERS = 10 // pixels
 
-    def formAnArmy(startingPosition:Point, mood:InvaderMood=Normal):Seq[Invader] = {
+    def formAnArmy(startingPosition:Point, mood:InvaderArmyMood=Normal):Seq[Invader] = {
         val soldiers = new scala.collection.mutable.ListBuffer[Invader]()
 
         for( row <- 0 until  ROW_CNT) {
