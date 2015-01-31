@@ -2,6 +2,7 @@ package com.ui
 
 import org.jdesktop.layout._
 import javax.swing.JFrame
+import com.ui.panel.{ScorePanel, LivesPanel, GamePanel}
 
 class SpaceInvadersUI(val scorePanel:ScorePanel,
                       val gamePanel:GamePanel,

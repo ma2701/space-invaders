@@ -1,6 +1,7 @@
 package com.ui
 
 import org.scalatest.FunSuite
+import com.ui.panel.LivesPanel
 
 
 class LivesPanelTest extends FunSuite {

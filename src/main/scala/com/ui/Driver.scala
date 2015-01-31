@@ -1,5 +1,7 @@
 package com.ui
 
+import com.ui.panel.{ScorePanel, LivesPanel, GamePanel}
+
 object Driver extends App {
 
     override
