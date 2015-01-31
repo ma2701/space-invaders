@@ -18,32 +18,18 @@ class ArmyDirectionTest extends FunSuite with MockitoSugar {
         assert(new Point(5,5) == initialPoint )
 
         val leftEdge = makeNConsecutiveMoves(displayWindow,army.getBoundingBox, 5)
-        assert(new Point(0,5) == leftEdge)
+        assert(new Point(15,12) == leftEdge)
 
         val oneDown = ArmyDirection.whereToNext(displayWindow, army.getBoundingBox)
-        assert(new Point(0,6) == oneDown)
+        assert(new Point(20,12) == oneDown)
 
         val oneRight = ArmyDirection.whereToNext(displayWindow, army.getBoundingBox)
-        assert(new Point(1,6) == oneRight)
+        assert(new Point(25,12) == oneRight)
 
-        val rightEdge = makeNConsecutiveMoves(displayWindow,army.getBoundingBox,19)
-        assert(new Point(20,6) == rightEdge)
-//
-//        val rightEdgeOneDown = ArmyDirection.whereToNext(displayWidth,displayHeight)
-//        assert(new Point(20,5) == rightEdgeOneDown)
-//
-//        assert(new Point(0,5) == makeNConsecutiveMoves(displayWidth, displayHeight, 20))
-//
-//        val oneDown2 = ArmyDirection.whereToNext(displayWidth,displayHeight)
-//        assert(new Point(0,6) == oneDown2)
-//
-//        val rightEdge2= makeNConsecutiveMoves(displayWidth,displayHeight, 20)
-//        assert(new Point(20,6) == rightEdge2)
-//
-//        val oneDownThree = makeNConsecutiveMoves(displayWidth,displayHeight, (20*19) + 19)
+        val rightEdge = makeNConsecutiveMoves(displayWindow,army.getBoundingBox,48)
+        assert(new Point(250,5) == rightEdge)
 
-//        println(oneDownThree)
-
+        assert(new Point(245,5) == ArmyDirection.whereToNext(displayWindow, army.getBoundingBox))
     }
 
     private def makeNConsecutiveMoves(displayWindow:Rectangle,armyBoundingBox:Rectangle, n : Int ): Point = {
