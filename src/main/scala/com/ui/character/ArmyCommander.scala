@@ -3,6 +3,7 @@ package com.ui.character
 import java.awt.Point
 import com.ui.Invader
 import com.ui.character.element.DisplayElement
+import com.ui.character.Mood.Normal
 
 object ArmyCommander {
     def ROW_CNT = 5
@@ -10,12 +11,12 @@ object ArmyCommander {
 
     def BUFFER_BETWEEN_SOLDIERS = 10 // pixels
 
-    def formAnArmy(startingPosition:Point):Seq[Invader] = {
+    def formAnArmy(startingPosition:Point, mood:InvaderMood=Normal):Seq[Invader] = {
         val soldiers = new scala.collection.mutable.ListBuffer[Invader]()
 
         for( row <- 0 until  ROW_CNT) {
             for(col <- 0 until  COL_CNT){
-                val soldier = new Invader(new Point(0,0))
+                val soldier = new Invader(new Point(0,0), mood)
 
                 val position = calculateInvaderPos(row,col, startingPosition)
 

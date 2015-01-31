@@ -1,17 +1,18 @@
 package com.ui
 
-import javax.swing.{JLabel, JPanel}
+import javax.swing.JPanel
 
-import java.awt.{Rectangle, Point, Graphics, Font}
-import com.ui.util.{Random2DPoint}
-import com.ui.character.{ArmyDirection, ArmyCommander, InvaderArmy}
+import java.awt._
+import com.ui.character.{ArmyCommander, InvaderArmy}
+import com.ui.character.ArmyDirection._
 
 import com.ui.util.ThreadDelay._
+import com.ui.util.InvaderArmyMoveDelay._
 
 object GamePanel {
-    private val DELAY_IN_MILLIS = 10
+    private val DELAY_IN_MILLIS = 50
 
-    private val PREFERRED_WIDTH: Int  = 291
+    private val PREFERRED_WIDTH: Int  = 878
     private val PREFERRED_HEIGHT: Int = 600
 }
 
@@ -26,7 +27,7 @@ class GamePanel extends JPanel with Runnable {
     setFont(new Font("Waree", 1, 15))
     setName("mainPanel")
     setDoubleBuffered(true)
-
+    setBackground(Color.BLACK)
 
     setBorder(javax.swing.BorderFactory.createTitledBorder(" SI "))
 
@@ -46,13 +47,15 @@ class GamePanel extends JPanel with Runnable {
     override def paintComponent(g: Graphics): Unit = {
         super.paintComponent(g)
 
-        val point = ArmyDirection.whereToNext(
-            new Rectangle(0, 0, this.getWidth, this.getHeight / 2),
-            invaderArmy.getBoundingBox)
+        val displayWindowBoundingBox = new Rectangle(0, 0, this.getWidth, this.getHeight / 2)
 
-        invaderArmy = invaderArmy.moveTo(point)
-
-        invaderArmy.drawArmy(g)
+        if(isTimeToMoveArmy(System.currentTimeMillis())) {
+           val point = whereToNext(displayWindowBoundingBox,invaderArmy.getBoundingBox)
+            invaderArmy = invaderArmy.moveTo(point)
+            invaderArmy.drawArmy(g)
+        } else {
+            invaderArmy.drawArmy(g)
+        }
     }
 
     override def run(): Unit = {

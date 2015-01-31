@@ -3,8 +3,8 @@ package com.ui.character.element
 import java.awt.Rectangle
 
 object DisplayElement {
-    val DEFAULT_ELEMENT_WIDTH  = 2 // PIXELS
-    val DEFAULT_ELEMENT_HEIGHT = 2
+    val DEFAULT_ELEMENT_WIDTH  = 3 // PIXELS
+    val DEFAULT_ELEMENT_HEIGHT = 3
     
     def xOffset(x:Int , xOffset:Double):Int = x + (xOffset * DisplayElement.DEFAULT_ELEMENT_WIDTH ).toInt
     def yOffset(y:Int , yOffset:Double):Int = y + (yOffset * DisplayElement.DEFAULT_ELEMENT_HEIGHT ).toInt
@@ -24,11 +24,11 @@ import DisplayElement._
 abstract class Ears(x:Int , y:Int , xOffsetFromCentre:Double, yOffsetFromCentre:Double)
     extends DisplayElement(xOffset(x, xOffsetFromCentre),yOffset(y, yOffsetFromCentre) )
 
-object TopRightAntena{ val xOffset= 9; val yOffset= 0 }
+object TopRightAntena{ val xOffset= 8; val yOffset= 0 }
 case class TopRightAntena(invaderPosX:Int , invaderPosY:Int) extends Ears(
     invaderPosX, invaderPosY, TopRightAntena.xOffset, TopRightAntena.yOffset)
 
-object BottomRightAntena{val xOffset= 8;  val yOffset= 1}
+object BottomRightAntena{val xOffset= 7;  val yOffset= 1}
 case class BottomRightAntena(invaderPosX:Int , invaderPosY:Int) extends Ears(
     invaderPosX, invaderPosY, BottomRightAntena.xOffset, BottomRightAntena.yOffset)
 
@@ -64,23 +64,23 @@ case class LeftEye(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     yOffset(invaderPosY, LeftEye.yOffset),
     (DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
-object Nose{ val xOffset= 0; val yOffset= 4}
+object Nose{ val xOffset= 1; val yOffset= 4}
 case class Nose(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     xOffset(invaderPosX, Nose.xOffset),
     yOffset(invaderPosY, Nose.yOffset),
-    (11*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (9*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
-object UpperLip{ val xOffset= 0; val yOffset= 5}
+object UpperLip{ val xOffset= 2; val yOffset= 5}
 case class UpperLip(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     xOffset(invaderPosX, UpperLip.xOffset),
     yOffset(invaderPosY, UpperLip.yOffset),
-    (11*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (7*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
-object Lip{ val xOffset= 0; val yOffset=6}
+object Lip{ val xOffset= 2; val yOffset=6}
 case class Lip(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     xOffset(invaderPosX, Lip.xOffset),
     yOffset(invaderPosY, Lip.yOffset),
-    (11*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (7*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object Mouth{ val xOffset= 3; val yOffset= 6}
 case class Mouth(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
@@ -94,17 +94,30 @@ case class LowerLip(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     yOffset(invaderPosY, LowerLip.yOffset),
     (5*DisplayElement.DEFAULT_ELEMENT_WIDTH) , DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
-object LeftEar{ val xOffset= 1; val yOffset= 5}
+object LeftEar{ val xOffset= 0; val yOffset= 4}
 case class LeftEar(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     xOffset(invaderPosX, LeftEar.xOffset),
     yOffset(invaderPosY, LeftEar.yOffset),
-    (DisplayElement.DEFAULT_ELEMENT_WIDTH) , 2*DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (DisplayElement.DEFAULT_ELEMENT_WIDTH) , 3*DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
-object RightEar{ val xOffset= 9; val yOffset= 5}
+object LeftEarUp{ val xOffset= 0; val yOffset= 1}
+case class LeftEarUp(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
+    xOffset(invaderPosX, LeftEarUp.xOffset),
+    yOffset(invaderPosY, LeftEarUp.yOffset),
+    (DisplayElement.DEFAULT_ELEMENT_WIDTH) , 3*DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+
+object RightEar{ val xOffset= 10; val yOffset= 4}
 case class RightEar(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
     xOffset(invaderPosX, RightEar.xOffset),
     yOffset(invaderPosY, RightEar.yOffset),
-    (DisplayElement.DEFAULT_ELEMENT_WIDTH) , 2*DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (DisplayElement.DEFAULT_ELEMENT_WIDTH) , 3*DisplayElement.DEFAULT_ELEMENT_HEIGHT)
+
+
+object RightEarUp{ val xOffset= 10; val yOffset= 1}
+case class RightEarUp(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (
+    xOffset(invaderPosX, RightEarUp.xOffset),
+    yOffset(invaderPosY, RightEarUp.yOffset),
+    (DisplayElement.DEFAULT_ELEMENT_WIDTH) , 3*DisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object Chin{ val xOffset= 5; val yOffset= 7}
 case class Chin(invaderPosX:Int , invaderPosY:Int) extends DisplayElement (

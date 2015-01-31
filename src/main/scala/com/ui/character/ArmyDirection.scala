@@ -1,9 +1,9 @@
 package com.ui.character
 
 import java.awt.{Rectangle, Point}
-import com.ui.character._
 
 import com.ui.character.GeneralArmyDirection._
+import com.ui.character.Directions.{RightDirection, LeftDirection, UpDirection, DownDirection}
 
 object ArmyDirection {
     val movementInXDirection = 5
@@ -16,43 +16,37 @@ object ArmyDirection {
     private[this] var displayBoundingBox:Rectangle = _
 
     def whereToNext(displayWindow:Rectangle , armyBoundingBox:Rectangle ):Point = {
-        import com.ui.character.{UpDirection, DownDirection, LeftDirection, RightDirection }
         import GeneralArmyDirection._
         displayBoundingBox = new Rectangle(0,0, displayWindow.width, displayWindow.height)
 
-        if(isCalledForFirstTime) {
-
+        if(isCalledForFirstTime)
             setInitialPosition(displayWindow, armyBoundingBox)
-
-        } else {
-            if(direction == LeftDirection) {
-                if(hasReachedLeftWall) 
-                    moveUpOrDown
-                else 
-                    moveInXAxis(-movementInXDirection)
-            }
-            else if (direction == Down){
-                if(hasReachedBottomWall(armyBoundingBox, displayWindow) ) 
-                    UpDownDirection = Upward
-                moveLeftOrRight
-            }
-            else if(direction == Right) {
-                if(hasReachedRightWall(armyBoundingBox, displayWindow)) 
-                    moveUpOrDown
-                 else 
-                    moveInXAxis(movementInXDirection)                
-            } else {
-                if(hasReachedTopWall) 
-                    UpDownDirection = Downward
-                moveLeftOrRight
+        else
+            direction match {
+                case LeftDirection =>
+                    if(hasReachedLeftWall)
+                        moveUpOrDown
+                    else
+                        moveInXAxis(-movementInXDirection)
+                 case DownDirection =>
+                    if(hasReachedBottomWall(armyBoundingBox, displayWindow) )
+                        UpDownDirection = Upward
+                    moveLeftOrRight
+                case RightDirection =>
+                    if(hasReachedRightWall(armyBoundingBox, displayWindow))
+                        moveUpOrDown
+                    else
+                        moveInXAxis(movementInXDirection)
+                case UpDirection =>
+                    if(hasReachedTopWall)
+                        UpDownDirection = Downward
+                    moveLeftOrRight
 
             }
-        }
     }
 
 
     private def setInitialPosition(displayWindow: Rectangle, armyBoundingBox: Rectangle): Point = {
-        import MovementDirection._
 
         val x: Int = (displayWindow.width - armyBoundingBox.width) / 2
         val y: Int = (displayWindow.height - armyBoundingBox.height) / 2
@@ -61,7 +55,7 @@ object ArmyDirection {
 
         currentPosition = startPosition
         UpDownDirection = Downward
-        direction = Left
+        direction = LeftDirection
         currentPosition
     }
 
@@ -88,26 +82,22 @@ object ArmyDirection {
     private def isCalledForFirstTime: Boolean = startPosition == null
 
     private def moveDown:  Point  = {
-        import MovementDirection._
-        direction = Down
+        direction = DownDirection
         moveInYAxis(movementInYDirection)
     }
 
     private def moveUp:  Point  = {
-        import MovementDirection._
-        direction = Up
+        direction = UpDirection
         moveInYAxis(-movementInYDirection)
     }
 
     private def moveLeft: Point = {
-        import MovementDirection._
-        direction = Left
+        direction = LeftDirection
         moveInXAxis(-movementInXDirection)
     }
 
     private def moveRight: Point = {
-        import MovementDirection._
-        direction = Right
+        direction = RightDirection
         moveInXAxis(movementInXDirection)
     }
 
@@ -128,3 +118,4 @@ object ArmyDirection {
         currentPosition
     }
 }
+

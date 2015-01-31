@@ -2,9 +2,10 @@ package com.ui.character
 
 import java.awt.{Rectangle, Point, Graphics}
 import com.ui.Invader
+import com.ui.character.Mood.{Excited, Normal}
 
 
-class InvaderArmy(val army:Seq[Invader]) {
+class InvaderArmy(val army:Seq[Invader], val mood:InvaderMood=Normal) {
 
     def drawArmy(g: Graphics ) :Unit  = {
         army.foreach { invaderSoldier =>
@@ -13,7 +14,8 @@ class InvaderArmy(val army:Seq[Invader]) {
     }
 
     def moveTo(point:Point):InvaderArmy = {
-        new InvaderArmy(ArmyCommander.formAnArmy(point))
+        val newMood = if(mood == Normal) Excited else Normal
+        new InvaderArmy(ArmyCommander.formAnArmy(point,newMood), newMood)
     }
 
     /**

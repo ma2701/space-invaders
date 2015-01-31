@@ -29,7 +29,6 @@ class InvaderTest extends FunSuite with MockitoSugar {
         invader.draw(mockGraphics)
 
         verify(mockGraphics, times(16)).fillRect(anyInt(), anyInt(), anyInt(), anyInt())
-
     }
 }
 
