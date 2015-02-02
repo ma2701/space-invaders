@@ -42,18 +42,8 @@ class Invader(val topLeft:Point, val mood:InvaderArmyMood = Normal) {
     val chin                    = new Chin(x,y).getBoundingBox
 
     def moveTo(point:Point): Invader = new Invader(point, mood)
-    def moveTo(box:Rectangle): Invader = {
-        val centre =  new Point(DisplayElement.xOffset(box.x , 5.5),
-                                DisplayElement.yOffset(box.y , 4.5 )  )
 
-        moveTo(centre)
-    }
-
-    def boundingBox: Rectangle = new Rectangle(
-        DisplayElement.xOffset(x , -5.5) ,
-        DisplayElement.yOffset(y , -4.5 ) ,
-        INVADER_WIDTH,
-        INVADER_HEIGHT)
+    def boundingBox: Rectangle = new Rectangle(0 ,0, INVADER_WIDTH, INVADER_HEIGHT)
 
 
     def draw(g:Graphics) :Unit = {
