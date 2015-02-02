@@ -8,7 +8,7 @@ import com.ui.invader.InvaderArmyDirection._
 
 import com.ui.util.ThreadDelay._
 import com.ui.util.InvaderArmyMoveDelay._
-import com.ui.Barricades
+import com.ui.{Player, Barricades}
 
 object GamePanel {
     private val DELAY_IN_MILLIS = 2
@@ -24,6 +24,7 @@ class GamePanel extends JPanel with Runnable {
     private var animator: Thread = null
     private var invaderArmy      = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0, 0)))
     private var barricades :Barricades= _
+    private var player :Player= _
 
     setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
     setToolTipText("")
@@ -54,6 +55,7 @@ class GamePanel extends JPanel with Runnable {
         val displayWindowBoundingBox = new Rectangle(0, 0, this.getWidth, this.getHeight / 2)
 
         displayBarricades(g, new Point(this.getWidth/5, this.getHeight - (this.getHeight/5)))
+        displayPlayer(g,     new Point(this.getWidth/5, this.getHeight - (this.getHeight/9)))
 
         if (isTimeToMoveArmy(System.currentTimeMillis())) {
             val point = whereToNext(displayWindowBoundingBox, invaderArmy.getBoundingBox)
@@ -71,6 +73,12 @@ class GamePanel extends JPanel with Runnable {
         if(barricades==null)
             barricades = new Barricades(location)
         barricades.draw(g)
+    }
+
+    def displayPlayer(g:Graphics, location:Point) {
+        if(player==null)
+            player= new Player(location)
+        player.draw(g)
     }
 
     override
