@@ -3,12 +3,9 @@ package com.ui.panel
 import javax.swing.JPanel
 
 import java.awt._
-import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
 
 import com.ui.util.ThreadDelay._
 import com.ui.SpaceInvaderGame
-import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.shooter.Shooter
 
 object GamePanel {
     private val DELAY_IN_MILLIS = 2

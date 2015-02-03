@@ -8,8 +8,12 @@ class SpaceInvadersUI(val scorePanel:ScorePanel,
                       val gamePanel:GamePanel,
                       val livesPanel:LivesPanel) extends javax.swing.JFrame {
 
+    setResizable(false)
+
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+
     initAllComponents
+
     pack
 
 
