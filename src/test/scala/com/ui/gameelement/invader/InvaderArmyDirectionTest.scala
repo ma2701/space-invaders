@@ -1,5 +1,5 @@
 
-package com.ui.invader
+package com.ui.gameelement.invader
 
 import java.awt.{Rectangle, Point}
 import org.scalatest.FunSuite

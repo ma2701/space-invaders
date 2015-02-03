@@ -1,9 +1,9 @@
-package com.ui.invader
+package com.ui.gameelement.invader
 
 import java.awt.{Rectangle, Point}
 
-import com.ui.invader.Direction.{Right, Left, Up, Down}
-import com.ui.invader.GeneralArmyDirection.GeneralArmyDirection
+import com.ui.gameelement.invader.Direction.{Right, Left, Up, Down}
+import com.ui.gameelement.invader.GeneralArmyDirection.GeneralArmyDirection
 
 
 object InvaderArmyDirection {

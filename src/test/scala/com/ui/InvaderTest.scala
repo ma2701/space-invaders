@@ -5,6 +5,7 @@ import java.awt.{Point, Graphics}
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
 import org.mockito.Matchers._
+import com.ui.gameelement.invader.Invader
 
 class InvaderTest extends FunSuite with MockitoSugar {
 

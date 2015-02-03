@@ -1,11 +1,11 @@
-package com.ui
+package com.ui.gameelement.shooter
 
 import java.awt.{Color, Graphics, Rectangle, Point}
 
 
-class Player(val topLeft: Point) {
+class Shooter(val topLeft: Point) {
 
-    import player._
+    import com.ui.gameelement.shooter._
 
     private val x = topLeft.x
     private val y = topLeft.y

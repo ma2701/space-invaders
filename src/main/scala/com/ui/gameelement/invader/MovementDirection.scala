@@ -1,4 +1,4 @@
-package com.ui.invader
+package com.ui.gameelement.invader
 
 sealed trait MovementDirection
 

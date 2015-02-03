@@ -3,6 +3,7 @@ package com.ui
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import java.awt.{Rectangle, Point}
+import com.ui.gameelement.barricade.Barricade
 
 
 class BarricadeTest extends FunSuite with MockitoSugar {

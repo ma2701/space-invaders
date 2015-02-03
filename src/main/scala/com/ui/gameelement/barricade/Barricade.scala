@@ -1,11 +1,11 @@
-package com.ui
+package com.ui.gameelement.barricade
 
 import java.awt.{Color, Graphics, Rectangle, Point}
 
 
 class Barricade(val topLeft: Point) {
 
-    import barricade._
+    import com.ui.gameelement.barricade._
 
     private val x = topLeft.x
     private val y = topLeft.y

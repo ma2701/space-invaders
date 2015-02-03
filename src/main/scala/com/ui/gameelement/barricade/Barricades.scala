@@ -1,4 +1,4 @@
-package com.ui
+package com.ui.gameelement.barricade
 
 import java.awt.{Graphics, Point}
 

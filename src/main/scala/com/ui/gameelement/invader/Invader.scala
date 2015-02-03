@@ -1,14 +1,13 @@
-package com.ui
+package com.ui.gameelement.invader
 
 import java.awt.{Point, Color, Graphics, Rectangle}
-import com.ui.invader.element._
-import com.ui.invader.InvaderArmyMood
-import com.ui.invader.Mood._
+import com.ui.gameelement.element._
+import com.ui.gameelement.invader.Mood._
 
 
 object Invader {
-    val INVADER_WIDTH: Int  = 11 * DisplayElement.DEFAULT_ELEMENT_WIDTH
-    val INVADER_HEIGHT: Int = 8  * DisplayElement.DEFAULT_ELEMENT_HEIGHT
+    val INVADER_WIDTH: Int  = 11 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
+    val INVADER_HEIGHT: Int = 8  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
 class Invader(val topLeft:Point, val mood:InvaderArmyMood = Normal) {
