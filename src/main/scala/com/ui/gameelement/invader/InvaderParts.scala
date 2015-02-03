@@ -1,7 +1,7 @@
-package com.ui.gameelement.element
+package com.ui.gameelement.invader
 
-
-import SingleDisplayElement._
+import com.ui.gameelement.element.SingleDisplayElement
+import com.ui.gameelement.element.SingleDisplayElement._
 
 abstract class Antena(x: Int, y: Int, xOffsetFromCentre: Double, yOffsetFromCentre: Double)
     extends SingleDisplayElement(xOffset(x, xOffsetFromCentre), yOffset(y, yOffsetFromCentre))
