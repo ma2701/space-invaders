@@ -6,6 +6,14 @@ import java.awt._
 
 import com.ui.util.ThreadDelay._
 import com.ui.SpaceInvaderGame
+import java.awt.event.ActionEvent
+import java.awt.Color
+import java.awt.Graphics
+import java.awt.Graphics2D
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
 
 object GamePanel {
     private val DELAY_IN_MILLIS = 2
@@ -14,7 +22,7 @@ object GamePanel {
     private val PREFERRED_HEIGHT: Int = 600
 }
 
-class GamePanel extends JPanel with Runnable {
+class GamePanel extends JPanel with Runnable with ActionListener {
     import GamePanel._
 
     private var animator: Thread = null
@@ -83,5 +91,32 @@ class GamePanel extends JPanel with Runnable {
         mainCanvasLayout
         .setVerticalGroup(mainCanvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                           .add(0, PREFERRED_HEIGHT, java.lang.Short.MAX_VALUE))
+
+        setFocusable(true)
+        addKeyListener(new TAdapter())
+    }
+
+    override
+    def actionPerformed(e: ActionEvent): Unit = {
+
+    }
+
+    private class TAdapter extends KeyAdapter {
+
+       override
+       def keyReleased(e: KeyEvent) {
+            e.getKeyCode match {
+                case KeyEvent.VK_SPACE => println("stop firring...")
+                case _ => println("Done care what this is ...")
+            }
+        }
+
+        override
+        def keyPressed(e:KeyEvent) {
+            e.getKeyCode match {
+                case KeyEvent.VK_SPACE => println("FIREEEE")
+                case _ => println("Done care what this is ...")
+            }
+        }
     }
 }
