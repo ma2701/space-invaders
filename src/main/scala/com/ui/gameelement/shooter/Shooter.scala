@@ -1,14 +1,12 @@
 package com.ui.gameelement.shooter
 
 import java.awt.{Color, Graphics, Rectangle, Point}
+import com.ui.gameelement.Displayable
 
 
-class Shooter(val topLeft: Point) {
+class Shooter(topLeft: Point) extends Displayable(topLeft){
 
     import com.ui.gameelement.shooter._
-
-    private val x = topLeft.x
-    private val y = topLeft.y
 
     val parts = List[Rectangle] (
         TopSection(x, y).getBoundingBox,
@@ -16,21 +14,15 @@ class Shooter(val topLeft: Point) {
         MidSection(x, y).getBoundingBox,
         Bottom(x, y).getBoundingBox
     )
+    
+    def tipPosition:Point = {
+        val tip: Rectangle = parts(0)
+        
+        new Point(tip.getX.toInt,tip.getY.toInt)
+    }
 
-    def draw(g: Graphics): Unit = {
+    override def draw(g:Graphics):Unit = {
         g.setColor(Color.GREEN)
-        parts.foreach(drawBox(g, _))
+        super.draw(g)
     }
-
-    def boundingBox: Rectangle = {
-        val longestBlock = parts.sortWith( _.width > _.width)(0)
-        val width        = parts.map(_.height).sum
-
-        new Rectangle(x, y, longestBlock.getWidth.toInt, width)
-    }
-
-    private def drawBox(g: Graphics, rect: Rectangle): Unit = {
-        g.fillRect(rect.getX.toInt, rect.getY.toInt, rect.getWidth.toInt, rect.getHeight.toInt)
-    }
-
 }

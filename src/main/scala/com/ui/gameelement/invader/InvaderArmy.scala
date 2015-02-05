@@ -2,7 +2,6 @@ package com.ui.gameelement.invader
 
 import java.awt.{Rectangle, Point, Graphics}
 import com.ui.gameelement.invader.Mood.{Excited, Normal}
-import com.ui.gameelement.invader.Invader
 
 
 class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {

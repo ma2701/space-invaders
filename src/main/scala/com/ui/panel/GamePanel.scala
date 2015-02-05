@@ -6,10 +6,8 @@ import java.awt._
 
 import com.ui.util.ThreadDelay._
 import com.ui.SpaceInvaderGame
-import java.awt.event.ActionEvent
 import java.awt.Color
 import java.awt.Graphics
-import java.awt.Graphics2D
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyAdapter
@@ -114,7 +112,8 @@ class GamePanel extends JPanel with Runnable with ActionListener {
         override
         def keyPressed(e:KeyEvent) {
             e.getKeyCode match {
-                case KeyEvent.VK_SPACE => println("FIREEEE")
+                case KeyEvent.VK_SPACE =>
+                    spaceInvaderGame.getShooterPosition.map(spaceInvaderGame.shootSingleMissileFrom)
                 case _ => println("Done care what this is ...")
             }
         }
