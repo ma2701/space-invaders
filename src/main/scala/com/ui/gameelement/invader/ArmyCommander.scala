@@ -2,7 +2,6 @@ package com.ui.gameelement.invader
 
 import java.awt.Point
 import com.ui.gameelement.invader.Mood.Normal
-import com.ui.gameelement.invader.Invader
 
 object ArmyCommander {
     def ROW_CNT = 5

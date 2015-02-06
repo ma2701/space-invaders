@@ -1,14 +1,11 @@
 
 package com.ui.gameelement.invader
 
+import java.awt.Point
 import java.awt.{Point, Graphics}
-import org.scalatest.FunSuite
-import java.awt.{Point, Graphics}
-import org.scalatest.mock.MockitoSugar
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
-import com.ui.gameelement.invader.Invader
 
 class InvaderArmyTest extends FunSuite with MockitoSugar {
     val startingPoint: Point = new Point(11, 11)

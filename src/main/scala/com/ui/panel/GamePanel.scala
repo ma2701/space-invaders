@@ -91,7 +91,7 @@ class GamePanel extends JPanel with Runnable with ActionListener {
                           .add(0, PREFERRED_HEIGHT, java.lang.Short.MAX_VALUE))
 
         setFocusable(true)
-        addKeyListener(new TAdapter())
+        addKeyListener(new KeyBoardAdapter())
     }
 
     override
@@ -99,22 +99,17 @@ class GamePanel extends JPanel with Runnable with ActionListener {
 
     }
 
-    private class TAdapter extends KeyAdapter {
-
-       override
-       def keyReleased(e: KeyEvent) {
-            e.getKeyCode match {
-                case KeyEvent.VK_SPACE => println("stop firring...")
-                case _ => println("Done care what this is ...")
-            }
-        }
-
+    private class KeyBoardAdapter extends KeyAdapter {
         override
         def keyPressed(e:KeyEvent) {
             e.getKeyCode match {
                 case KeyEvent.VK_SPACE =>
                     spaceInvaderGame.getShooterPosition.map(spaceInvaderGame.shootSingleMissileFrom)
-                case _ => println("Done care what this is ...")
+                case KeyEvent.VK_RIGHT =>
+                    spaceInvaderGame.moveShooterRight(getWidth)
+                case KeyEvent.VK_LEFT  =>
+                    spaceInvaderGame.moveShooterLeft(getWidth)
+                case _ => Unit
             }
         }
     }

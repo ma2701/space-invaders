@@ -5,7 +5,7 @@ import java.awt.{Rectangle, Graphics, Point}
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyDirection._
 import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.shooter.Shooter
+import com.ui.gameelement.shooter.{ShooterDirection, Shooter}
 import scala.util.Try
 import com.ui.gameelement.missile.{MissileDirection, Missile}
 
@@ -53,13 +53,17 @@ class SpaceInvaderGame {
 
     def displayMissiles(g: Graphics) :Unit = {
         missiles = MissileDirection.move(missiles)
-
+        println(missiles.size)
         missiles foreach(_.draw(g))
     }
 
     def getShooterPosition: Option[Point] =  Try(shooter.tipPosition).toOption
 
-    def shootSingleMissileFrom(position:Point):Unit = {
-        missiles =  new Missile(position) :: missiles
-    }
+    def shootSingleMissileFrom(position:Point):Unit = missiles =  new Missile(position) :: missiles
+
+    def moveShooterLeft(screenWidth: Int):Unit  =
+        shooter = ShooterDirection.newLocationToLeft(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
+
+    def moveShooterRight(screenWidth: Int):Unit =
+        shooter = ShooterDirection.newLocationToRight(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
 }

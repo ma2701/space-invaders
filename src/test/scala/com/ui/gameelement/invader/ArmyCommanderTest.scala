@@ -4,7 +4,6 @@ import java.awt.Point
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import ArmyCommander.BUFFER_BETWEEN_SOLDIERS
-import com.ui.gameelement.invader.Invader
 
 class ArmyCommanderTest extends FunSuite with MockitoSugar {
 
