@@ -6,24 +6,25 @@ import com.ui.gameelement.Displayable
 
 class Shooter(topLeft: Point) extends Displayable(topLeft){
 
+    override val color = Color.GREEN
+
     val parts = List[Rectangle] (
         TopSection(x, y).getBoundingBox,
         TopSupport(x, y).getBoundingBox,
         MidSection(x, y).getBoundingBox,
         Bottom(x, y).getBoundingBox
     )
-    
+
     def tipPosition:Point = {
         val tip: Rectangle = parts(0)
-        
+
         new Point(tip.getX.toInt,tip.getY.toInt)
     }
 
     def moveTo(loc:Point) : Shooter = new Shooter(loc)
 
-    override
-    def draw(g:Graphics):Unit = {
-        g.setColor(Color.GREEN)
+    override def draw(g:Graphics):Unit = {
+        g.setColor(color)
         super.draw(g)
     }
 }

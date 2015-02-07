@@ -2,13 +2,12 @@ package com.ui.gameelement
 
 import java.awt.{Point, Color, Graphics, Rectangle}
 
-
 abstract class Displayable(val topLeft: Point){
+    val parts:List[Rectangle]
+    val color:Color
 
     protected val x = topLeft.x
     protected val y = topLeft.y
-
-    val parts:List[Rectangle]
 
     def draw(g: Graphics): Unit = {
         parts.foreach(drawBox(g, _))

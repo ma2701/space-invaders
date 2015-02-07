@@ -6,6 +6,8 @@ import com.ui.gameelement.Displayable
 
 class Barricade(topLeft: Point) extends Displayable(topLeft){
 
+    override val color = Color.GREEN
+
     import com.ui.gameelement.barricade._
 
     val parts = List[Rectangle] (
@@ -31,8 +33,9 @@ class Barricade(topLeft: Point) extends Displayable(topLeft){
         RightLegFive(x, y).getBoundingBox
     )
 
-    override def draw(g:Graphics):Unit = {
-        g.setColor(Color.GREEN)
+    override
+    def draw(g:Graphics):Unit = {
+        g.setColor(color)
         super.draw(g)
     }
 }
