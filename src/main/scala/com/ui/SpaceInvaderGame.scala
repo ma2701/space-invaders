@@ -51,9 +51,12 @@ class SpaceInvaderGame {
         shooter.draw(g)
     }
 
+    /**
+     * sets the current missiles (filtering the ones that out of screen)
+     * and draws the missiles
+     * */
     def displayMissiles(g: Graphics) :Unit = {
-        missiles = MissilePositionDirector.moveToNewPosition(missiles)
-        println(missiles.size)
+        missiles = MissilePositionDirector.moveToNewPosition(missiles).filter(_.head.y >= 0)
         missiles foreach(_.draw(g))
     }
 

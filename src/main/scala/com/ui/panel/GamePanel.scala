@@ -38,7 +38,6 @@ class GamePanel extends JPanel with Runnable with ActionListener {
 
     override
     def run(): Unit = {
-
         var beforeTime = System.currentTimeMillis()
 
         do {
