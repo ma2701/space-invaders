@@ -3,11 +3,12 @@ package com.ui
 import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
 import java.awt.{Rectangle, Graphics, Point}
 import com.ui.util.InvaderArmyMoveDelay._
-import com.ui.gameelement.invader.InvaderArmyDirection._
+import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.shooter.{ShooterDirection, Shooter}
+import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
+import com.ui.gameelement.shooter.ShooterPositionDirector._
 import scala.util.Try
-import com.ui.gameelement.missile.{MissileDirection, Missile}
+import com.ui.gameelement.missile.{MissilePositionDirector, Missile}
 
 
 class SpaceInvaderGame {
@@ -23,12 +24,11 @@ class SpaceInvaderGame {
         val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
 
         displayBarricades(g, new Point(screenWidth / 5, screenHeight - (screenHeight / 5)))
-        displayPlayer(g, new Point(screenWidth / 5, screenHeight - (screenHeight / 9)))
-
+        displayShooter(g,shooterInitialPosition(screenWidth,screenHeight))
         displayMissiles(g)
 
         if (isTimeToMoveArmy(System.currentTimeMillis())) {
-            val point = whereToNext(displayWindowBoundingBox, invaderArmy.getBoundingBox)
+            val point = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
 
             invaderArmy = invaderArmy.moveTo(point)
             invaderArmy.drawArmy(g)
@@ -45,14 +45,14 @@ class SpaceInvaderGame {
         barricades.draw(g)
     }
 
-    def displayPlayer(g: Graphics, location: Point) {
+    def displayShooter(g: Graphics, location: Point) {
         if (shooter == null)
             shooter = new Shooter(location)
         shooter.draw(g)
     }
 
     def displayMissiles(g: Graphics) :Unit = {
-        missiles = MissileDirection.move(missiles)
+        missiles = MissilePositionDirector.moveToNewPosition(missiles)
         println(missiles.size)
         missiles foreach(_.draw(g))
     }
@@ -61,9 +61,9 @@ class SpaceInvaderGame {
 
     def shootSingleMissileFrom(position:Point):Unit = missiles =  new Missile(position) :: missiles
 
-    def moveShooterLeft(screenWidth: Int):Unit  =
-        shooter = ShooterDirection.newLocationToLeft(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
+    def moveShooterLeft:Unit  =
+        shooter = ShooterPositionDirector.newPositionToLeft(shooter).map(shooter.moveTo).getOrElse(shooter)
 
     def moveShooterRight(screenWidth: Int):Unit =
-        shooter = ShooterDirection.newLocationToRight(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
+        shooter = ShooterPositionDirector.newPositionToRight(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
 }

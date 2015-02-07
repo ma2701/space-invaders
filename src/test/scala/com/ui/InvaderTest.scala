@@ -9,10 +9,6 @@ import com.ui.gameelement.invader.Invader
 
 class InvaderTest extends FunSuite with MockitoSugar {
 
-    test("can create instance") {
-        val oneInvader = new Invader(new Point(10, 10))
-    }
-
     test("can move an invader to position ") {
         val invader = new Invader(new Point(10, 10))
 

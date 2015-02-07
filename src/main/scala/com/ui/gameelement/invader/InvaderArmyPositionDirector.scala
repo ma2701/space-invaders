@@ -6,7 +6,7 @@ import com.ui.gameelement.invader.Direction.{Right, Left, Up, Down}
 import com.ui.gameelement.invader.GeneralArmyDirection.GeneralArmyDirection
 
 
-object InvaderArmyDirection {
+object InvaderArmyPositionDirector {
     val ONE_HOP_IN_X_DIRECTION = 5
     val ONE_HOP_IN_Y_DIRECTION = 7
 
@@ -16,7 +16,7 @@ object InvaderArmyDirection {
     private[this] var generalDirection  : GeneralArmyDirection = _
     private[this] var displayBoundingBox: Rectangle            = _
 
-    def whereToNext(displayWindow: Rectangle, armyBoundingBox: Rectangle): Point = {
+    def nextPosition(displayWindow: Rectangle, armyBoundingBox: Rectangle): Point = {
         import GeneralArmyDirection._
         displayBoundingBox = new Rectangle(0, 0, displayWindow.width, displayWindow.height)
 
@@ -47,7 +47,7 @@ object InvaderArmyDirection {
 
     private def setInitialPosition(displayWindow: Rectangle, armyBoundingBox: Rectangle): Point = {
 
-        val x: Int = (displayWindow.width - armyBoundingBox.width) / 2
+        val x: Int = (displayWindow.width  - armyBoundingBox.width) / 2
         val y: Int = (displayWindow.height - armyBoundingBox.height) / 2
 
         startPosition = new Point(x, y)

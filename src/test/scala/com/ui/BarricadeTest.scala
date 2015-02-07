@@ -12,7 +12,6 @@ class BarricadeTest extends FunSuite with MockitoSugar {
         val instance = new Barricade(new Point(0, 0))
     }
 
-
     test("can get the bounding box") {
         val instance = new Barricade(new Point(0, 0))
 

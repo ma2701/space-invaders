@@ -10,7 +10,6 @@ class Missile(val head: Point) extends Displayable(head) {
          Line(head.x, head.y).getBoundingBox
      )
 
-
     def moveTo(loc:Point): Missile = new Missile(loc)
 
     override

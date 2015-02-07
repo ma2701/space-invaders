@@ -4,16 +4,19 @@ import java.awt.Point
 
 // TODO: add tests for this....
 
-object ShooterDirection {
+object ShooterPositionDirector {
     val SINGLE_HOP_IN_X = 15
-
-    def newLocationToLeft(shooter:Shooter, screenWidth:Int):Option[Point] =
+    
+    def shooterInitialPosition(screenWidth:Int, screenHeight:Int ):Point =
+        new Point(screenWidth / 5, screenHeight - (screenHeight / 9))
+    
+    def newPositionToLeft(shooter:Shooter):Option[Point] =
         if(!hasReachedLeftEdgeOfScreen(shooter)) {
             Some(getNewLocationForShooter(shooter, -SINGLE_HOP_IN_X))
         } else None
 
 
-    def newLocationToRight(shooter:Shooter, screenWidth:Int):Option[Point]  =
+    def newPositionToRight(shooter:Shooter, screenWidth:Int):Option[Point]  =
         if(!hasReachedRightEdgeOfScreen(shooter, screenWidth)) {
             Some(getNewLocationForShooter(shooter, SINGLE_HOP_IN_X))
         } else None

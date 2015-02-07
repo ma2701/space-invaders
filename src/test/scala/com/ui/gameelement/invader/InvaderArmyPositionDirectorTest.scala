@@ -6,7 +6,7 @@ import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 
 
-class InvaderArmyDirectionTest extends FunSuite with MockitoSugar {
+class InvaderArmyPositionDirectorTest extends FunSuite with MockitoSugar {
 
     /**
      *
@@ -36,10 +36,10 @@ class InvaderArmyDirectionTest extends FunSuite with MockitoSugar {
 
     private def makeNConsecutiveMoves(displayWindow:Rectangle,armyBoundingBox:Rectangle, n : Int ): Point = {
         1 to n-1 foreach {i =>
-            InvaderArmyDirection.whereToNext(displayWindow, armyBoundingBox)
+            InvaderArmyPositionDirector.nextPosition(displayWindow, armyBoundingBox)
         }
 
-        InvaderArmyDirection.whereToNext(displayWindow, armyBoundingBox)
+        InvaderArmyPositionDirector.nextPosition(displayWindow, armyBoundingBox)
     }
 }
 

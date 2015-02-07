@@ -108,7 +108,7 @@ class GamePanel extends JPanel with Runnable with ActionListener {
                 case KeyEvent.VK_RIGHT =>
                     spaceInvaderGame.moveShooterRight(getWidth)
                 case KeyEvent.VK_LEFT  =>
-                    spaceInvaderGame.moveShooterLeft(getWidth)
+                    spaceInvaderGame.moveShooterLeft
                 case _ => Unit
             }
         }

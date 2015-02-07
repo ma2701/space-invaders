@@ -4,23 +4,22 @@ import org.scalatest.FunSuite
 import java.awt.Point
 
 
-class MissileDirectionTest extends FunSuite {
+class MissilePositionDirectorTest extends FunSuite {
     
     test("can an array of missles of size 0") {
         val missile = Nil
 
         assertResult(Nil) {
-            MissileDirection.move(missile)
+            MissilePositionDirector.moveToNewPosition(missile)
         }
     }
 
-
     test("can move an array of 1 missile") {
         val missile = List(new Missile(new Point(0,0)))
-        val missileMoved = MissileDirection.move(missile)
+        val missileMoved = MissilePositionDirector.moveToNewPosition(missile)
 
         assert(1== missileMoved.size )
-        assertResult(new Point(0, -MissileDirection.SINGLE_HOP_IN_Y)){
+        assertResult(new Point(0, -MissilePositionDirector.SINGLE_HOP_IN_Y)){
             missileMoved.head.head
         }
     }
