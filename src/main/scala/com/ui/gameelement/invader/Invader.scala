@@ -10,11 +10,16 @@ object Invader {
     val INVADER_HEIGHT: Int = 8  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
-class Invader(val topLeft:Point, val mood:InvaderArmyMood = Normal) {
+class Invader(val topLeft:Point,
+              val mood:InvaderArmyMood = Normal) {
+
     import Invader._
 
     private val x = topLeft.x
     private val y = topLeft.y
+
+    private var isDead     = false
+    private var isExploded = false
 
     val topRightAntena          = new TopRightAntena(x, y).getBoundingBox
     val bottomRightAntena       = new BottomRightAntena(x,y).getBoundingBox
@@ -42,15 +47,29 @@ class Invader(val topLeft:Point, val mood:InvaderArmyMood = Normal) {
 
     def moveTo(point:Point): Invader = new Invader(point, mood)
 
-    def boundingBox: Rectangle = new Rectangle(0 ,0, INVADER_WIDTH, INVADER_HEIGHT)
+    def markHitByMissile    =  isDead = true
+    def isHitByMissile      =  isDead == true
 
+    def boundingBox: Rectangle = new Rectangle(x ,y, INVADER_WIDTH, INVADER_HEIGHT)
 
     def draw(g:Graphics) :Unit = {
-        drawAntena(g)
-        drawFace(g)
+        if(isDead && !isExploded) {
+            drawExploded(g)
+            isExploded = true
+        } else if(isExploded) {
+               Unit
+        } else {
+            drawAntena(g)
+            drawFace(g)
+        }
     }
 
-    def drawFace(g: Graphics) {
+    private def drawExploded(g: Graphics) =  {
+        println("drawing expoded....")
+        new ExplodedInvader(topLeft).draw(g)
+    }
+
+    private def drawFace(g: Graphics) {
         g.setColor(Color.WHITE)
 
         drawBox(g, forehead)
@@ -75,7 +94,7 @@ class Invader(val topLeft:Point, val mood:InvaderArmyMood = Normal) {
         drawBox(g, chin)
     }
 
-    def drawAntena(g: Graphics) {
+    private def drawAntena(g: Graphics) {
         g.setColor(Color.WHITE)
         drawBox(g, topRightAntena)
         drawBox(g, bottomRightAntena)

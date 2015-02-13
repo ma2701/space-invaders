@@ -31,10 +31,12 @@ class SpaceInvaderGame {
             val point = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
 
             invaderArmy = invaderArmy.moveTo(point)
+            invaderArmy.markShotSoldiersHit(missiles)
             invaderArmy.drawArmy(g)
 
         } else {
 
+            invaderArmy.markShotSoldiersHit(missiles)
             invaderArmy.drawArmy(g)
         }
     }
