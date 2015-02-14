@@ -10,16 +10,14 @@ object Invader {
     val INVADER_HEIGHT: Int = 8  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
-class Invader(val topLeft:Point,
-              val mood:InvaderArmyMood = Normal) {
+case class Invader(val topLeft:Point,
+                   val mood:InvaderArmyMood = Normal,
+                   var isHit:Boolean = false) {
 
     import Invader._
 
-    private val x = topLeft.x
-    private val y = topLeft.y
-
-    private var isDead     = false
-    private var isExploded = false
+    protected val x = topLeft.x
+    protected val y = topLeft.y
 
     val topRightAntena          = new TopRightAntena(x, y).getBoundingBox
     val bottomRightAntena       = new BottomRightAntena(x,y).getBoundingBox
@@ -45,19 +43,16 @@ class Invader(val topLeft:Point,
 
     val chin                    = new Chin(x,y).getBoundingBox
 
-    def moveTo(point:Point): Invader = new Invader(point, mood)
+    def moveTo(point:Point): Invader = new Invader(point, mood , isHit)
 
-    def markHitByMissile    =  isDead = true
-    def isHitByMissile      =  isDead == true
+    def markHitByMissile    =  isHit = true
+    def isHitByMissile      =  isHit == true
 
     def boundingBox: Rectangle = new Rectangle(x ,y, INVADER_WIDTH, INVADER_HEIGHT)
 
     def draw(g:Graphics) :Unit = {
-        if(isDead && !isExploded) {
+        if(isHit) {
             drawExploded(g)
-            isExploded = true
-        } else if(isExploded) {
-               Unit
         } else {
             drawAntena(g)
             drawFace(g)
@@ -65,7 +60,6 @@ class Invader(val topLeft:Point,
     }
 
     private def drawExploded(g: Graphics) =  {
-        println("drawing expoded....")
         new ExplodedInvader(topLeft).draw(g)
     }
 
@@ -105,4 +99,11 @@ class Invader(val topLeft:Point,
     private def drawBox(g:Graphics, rect:Rectangle):Unit = {
         g.fillRect(rect.getX.toInt, rect.getY.toInt, rect.getWidth.toInt, rect.getHeight.toInt)
     }
+}
+
+
+class DarkInvader(val tl:Point) extends Invader(tl) {
+    override def draw(g:Graphics) :Unit = Unit
+    override def moveTo(point:Point): Invader = new DarkInvader(point)
+    override def boundingBox: Rectangle = new Rectangle(0 ,0, 0, 0)
 }

@@ -27,18 +27,23 @@ class SpaceInvaderGame {
         displayShooter(g,shooterInitialPosition(screenWidth,screenHeight))
         displayMissiles(g)
 
+        val shotSoldiersAndBulletsThatKilledThem = invaderArmy.markShotInvadersHit(missiles)
+
+        shotSoldiersAndBulletsThatKilledThem.foreach { t =>
+            t._2.markHitByMissile
+            missiles = missiles.filter( _==t._1)
+        }
+
         if (isTimeToMoveArmy(System.currentTimeMillis())) {
             val point = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
-
             invaderArmy = invaderArmy.moveTo(point)
-            invaderArmy.markShotSoldiersHit(missiles)
             invaderArmy.drawArmy(g)
-
         } else {
-
-            invaderArmy.markShotSoldiersHit(missiles)
             invaderArmy.drawArmy(g)
         }
+
+        invaderArmy = invaderArmy.makeInvadersInvisible(shotSoldiersAndBulletsThatKilledThem.collect{ case t => t._2 })
+
     }
 
     def displayBarricades(g: Graphics, location: Point) {

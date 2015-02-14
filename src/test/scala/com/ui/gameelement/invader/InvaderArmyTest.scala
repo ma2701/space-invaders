@@ -88,6 +88,33 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
 
         assert(invaderArmy.hasCollided(missiles(0), invaderArmy.army(0)))
     }
+
+    test("given a soldier then when darkify is called then invader army makes it invisible") {
+        val soldier= new Invader(new Point(0, 0))
+        val invaderArmy = new InvaderArmy(List(soldier))
+
+        val newArmy     = invaderArmy.makeInvadersInvisible(List(soldier))
+
+        assert(newArmy.army.size === 1)
+
+        assert(newArmy.army(0).isInstanceOf[DarkInvader])
+    }
+
+    test("given an unknown soldier then when darkify returns the same army with all the invaders intact") {
+
+        val soldier= new Invader(new Point(0, 0))
+        val lostSoldier= new Invader(new Point(55,55))
+
+        val invaderArmy = new InvaderArmy(List(soldier))
+
+        val newArmy     = invaderArmy.makeInvadersInvisible(List(lostSoldier))
+
+        assert(newArmy.army.size === 1)
+
+        assert(newArmy.army(0).isInstanceOf[Invader])
+    }
+
+
 }
 
 

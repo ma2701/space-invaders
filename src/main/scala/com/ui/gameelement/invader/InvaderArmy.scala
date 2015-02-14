@@ -19,12 +19,35 @@ class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {
         new InvaderArmy(ArmyCommander.formAnArmy(point, newMood), newMood)
     }
 
-    def markShotSoldiersHit(missiles:Seq[Missile]):Unit = {
-        missiles.foreach { missile =>
-            army.foreach { invader =>
-                if(hasCollided(missile , invader))  invader.markHitByMissile
+    def markShotInvadersHit(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
+        def findAHit(missile:Missile, soldiers:Seq[Invader]):Option[Invader]  = {
+            if(soldiers == Nil) None
+            else if(hasCollided(missile, soldiers.head)) Some(soldiers.head)
+            else findAHit(missile, soldiers.tail)
+        }
+
+        missiles.foldLeft(List[(Missile,Invader)]()) { (acc , missile) =>
+            findAHit(missile,army) match {
+                case Some(soldier) =>  (missile, soldier) :: acc
+                case None          => acc
             }
         }
+    }
+
+    def makeInvadersInvisible(invaders: Seq[Invader]): InvaderArmy = {
+       def putInvisibilityCloakOn(soldiers:Seq[Invader], acc:Seq[Invader]):Seq[Invader] = {
+           if(soldiers == Nil) acc
+           else putInvisibilityCloakOn(soldiers.tail , makeInvisible(soldiers.head, acc))
+       }
+        val newMood = if (mood == Normal) Excited else Normal
+        new InvaderArmy(putInvisibilityCloakOn(invaders, army), newMood)
+    }
+
+    private def makeInvisible(soldier: Invader, army:Seq[Invader]): Seq[Invader] =
+        army.map {
+        s =>
+            if (s == soldier) new DarkInvader(soldier.topLeft)
+            else s
     }
 
     def hasCollided(missile:Missile , soldier:Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)

@@ -4,7 +4,7 @@ import java.awt.{Color, Graphics, Rectangle, Point}
 import com.ui.gameelement.Displayable
 
 
-class Missile(val head: Point) extends Displayable(head) {
+case class Missile(val head: Point) extends Displayable(head) {
 
     override val color = Color.RED
 
