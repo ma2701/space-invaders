@@ -78,6 +78,27 @@ class ArmyCommanderTest extends FunSuite with MockitoSugar {
         }
     }
 
+    test("given a starting point(0,0) when calculateAllArmyPos is called then return a list of each individual invader position") {
+
+        val positions = ArmyCommander.allInvaderPositionsFromStartingPoint(new Point(0,0))
+
+        assert( ArmyCommander.COL_CNT * ArmyCommander.ROW_CNT === positions.size)
+
+        assertResult(new Point(0,0)) {
+            positions(0)
+        }
+    }
+
+    test("given a list of positions and an army then moveArmy will move the army to the positions given") {
+
+        val positions = ArmyCommander.allInvaderPositionsFromStartingPoint(new Point(10,10))
+        val invaders  = ArmyCommander.formAnArmy(startingPoint)
+
+        assertResult(new Point(10,10)){
+            ArmyCommander.moveArmy(invaders, positions)(0)
+        }
+    }
+
 }
 
 

@@ -3,6 +3,7 @@ package com.ui.gameelement.invader
 import java.awt.{Rectangle, Point, Graphics}
 import com.ui.gameelement.invader.Mood.{Excited, Normal}
 import com.ui.gameelement.missile.Missile
+import ArmyCommander._
 
 
 class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {
@@ -16,7 +17,8 @@ class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {
 
     def moveTo(point: Point): InvaderArmy = {
         val newMood = if (mood == Normal) Excited else Normal
-        new InvaderArmy(ArmyCommander.formAnArmy(point, newMood), newMood)
+        new InvaderArmy(
+            moveArmy(army, allInvaderPositionsFromStartingPoint(point)), newMood)
     }
 
     def markShotInvadersHit(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
