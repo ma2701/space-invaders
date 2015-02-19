@@ -4,7 +4,7 @@ import javax.swing.{JLabel, JPanel}
 import java.awt.Font
 
 
-class LivesPanel {
+class LivesPanel extends JPanel {
 
     val mainPanel = new JPanel()
 

@@ -1,7 +1,6 @@
 package com.ui.gameelement.invader
 
 import java.awt.Point
-import com.ui.gameelement.invader.Mood.Normal
 
 object ArmyCommander {
     def BUFFER_BETWEEN_SOLDIERS = 10 // pixels
@@ -9,7 +8,7 @@ object ArmyCommander {
     def ROW_CNT = 5
     def COL_CNT = 11
 
-    def formAnArmy(startingPosition:Point, mood:InvaderArmyMood=Normal):Seq[Invader] =
+    def formAnArmy(startingPosition:Point):Seq[Invader] =
         allInvaderPositionsFromStartingPoint(startingPosition)
         .map {
             position =>

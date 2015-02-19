@@ -6,7 +6,7 @@ import com.ui.gameelement.missile.Missile
 import ArmyCommander._
 
 
-class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {
+class InvaderArmy(val army: Seq[Invader]) {
 
     def drawArmy(g: Graphics): Unit = {
         army.foreach {
@@ -15,13 +15,12 @@ class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {
         }
     }
 
-    def moveTo(point: Point): InvaderArmy = {
-        val newMood = if (mood == Normal) Excited else Normal
+    def moveTo(point: Point): InvaderArmy =
         new InvaderArmy(
-            moveArmy(army, allInvaderPositionsFromStartingPoint(point)), newMood)
-    }
+            moveArmy(army, allInvaderPositionsFromStartingPoint(point)))
 
-    def markShotInvadersHit(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
+
+    def findShotInvadersAndTheMissiles(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
         def findAHit(missile:Missile, soldiers:Seq[Invader]):Option[Invader]  = {
             if(soldiers == Nil) None
             else if(hasCollided(missile, soldiers.head)) Some(soldiers.head)
@@ -36,19 +35,19 @@ class InvaderArmy(val army: Seq[Invader], val mood: InvaderArmyMood = Normal) {
         }
     }
 
-    def makeInvadersInvisible(invaders: Seq[Invader]): InvaderArmy = {
-       def putInvisibilityCloakOn(soldiers:Seq[Invader], acc:Seq[Invader]):Seq[Invader] = {
-           if(soldiers == Nil) acc
-           else putInvisibilityCloakOn(soldiers.tail , makeInvisible(soldiers.head, acc))
-       }
-        val newMood = if (mood == Normal) Excited else Normal
-        new InvaderArmy(putInvisibilityCloakOn(invaders, army), newMood)
+    def makeDeadInvadersInvisible(shotInvaders: Seq[Invader]): InvaderArmy = {
+        def putInvisibilityCloakOn(shotSoldiers: Seq[Invader], acc: Seq[Invader]): Seq[Invader] = {
+            if (shotSoldiers == Nil) acc
+            else putInvisibilityCloakOn(shotSoldiers.tail, makeInvisible(shotSoldiers.head, acc))
+        }
+
+        new InvaderArmy(putInvisibilityCloakOn(shotInvaders, army))
     }
 
     private def makeInvisible(soldier: Invader, army:Seq[Invader]): Seq[Invader] =
         army.map {
         s =>
-            if (s == soldier) new DarkInvader(soldier.topLeft)
+            if (s == soldier) new DeadInvader(soldier.topLeft)
             else s
     }
 

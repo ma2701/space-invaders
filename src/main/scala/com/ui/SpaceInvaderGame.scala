@@ -1,6 +1,6 @@
 package com.ui
 
-import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
+import com.ui.gameelement.invader.{Invader, DeadInvader, ArmyCommander, InvaderArmy}
 import java.awt.{Rectangle, Graphics, Point}
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
@@ -9,7 +9,6 @@ import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
 import com.ui.gameelement.shooter.ShooterPositionDirector._
 import scala.util.Try
 import com.ui.gameelement.missile.{MissilePositionDirector, Missile}
-
 
 class SpaceInvaderGame {
 
@@ -21,18 +20,16 @@ class SpaceInvaderGame {
 
 
     def updatedGameElements(screenWidth: Int, screenHeight: Int, g: Graphics): Unit = {
+
         val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
 
         displayBarricades(g, new Point(screenWidth / 5, screenHeight - (screenHeight / 5)))
         displayShooter(g,shooterInitialPosition(screenWidth,screenHeight))
         displayMissiles(g)
 
-        val shotSoldiersAndBulletsThatKilledThem = invaderArmy.markShotInvadersHit(missiles)
+        val deadInvaderMissileTuple = invaderArmy.findShotInvadersAndTheMissiles(missiles)
 
-        shotSoldiersAndBulletsThatKilledThem.foreach { t =>
-            t._2.markHitByMissile
-            missiles = missiles.filter( _==t._1)
-        }
+        markHitInvaders(deadInvaderMissileTuple)
 
         if (isTimeToMoveArmy(System.currentTimeMillis())) {
             val point = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
@@ -42,8 +39,9 @@ class SpaceInvaderGame {
             invaderArmy.drawArmy(g)
         }
 
-        invaderArmy = invaderArmy.makeInvadersInvisible(shotSoldiersAndBulletsThatKilledThem.collect{ case t => t._2 })
+        invaderArmy = invaderArmy.makeDeadInvadersInvisible(deadInvaderMissileTuple.collect{ case t => t._2 })
 
+        missiles    =  removeUsedMissiles(deadInvaderMissileTuple.collect{ case t => t._1 }).toList
     }
 
     def displayBarricades(g: Graphics, location: Point) {
@@ -59,7 +57,7 @@ class SpaceInvaderGame {
     }
 
     /**
-     * sets the current missiles (filtering the ones that out of screen)
+     * sets the current missiles removing the one that out of screen
      * and draws the missiles
      * */
     def displayMissiles(g: Graphics) :Unit = {
@@ -76,4 +74,16 @@ class SpaceInvaderGame {
 
     def moveShooterRight(screenWidth: Int):Unit =
         shooter = ShooterPositionDirector.newPositionToRight(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
+
+    def currentDeadInvaderCount:Int = invaderArmy.army.foldLeft(0){(acc, invader) => if(invader.isInstanceOf[DeadInvader]) acc+1 else acc }
+
+    def removeUsedMissiles(missilesHitTarget:Seq[Missile]):Seq[Missile] = missiles.diff(missilesHitTarget)
+
+
+    private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
+        shotSoldiersAndBulletsThatKilledThem.foreach {
+            t => t._2.markHitByMissile
+        }
+    }
+
 }

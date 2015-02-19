@@ -43,7 +43,8 @@ case class Invader(val topLeft:Point,
 
     val chin                    = new Chin(x,y).getBoundingBox
 
-    def moveTo(point:Point): Invader = new Invader(point, mood , isHit)
+    def moveTo(point:Point): Invader =
+        new Invader(point,  if(mood == Normal ) Excited else Normal, this.isHit )
 
     def markHitByMissile    =  isHit = true
     def isHitByMissile      =  isHit == true
@@ -102,8 +103,8 @@ case class Invader(val topLeft:Point,
 }
 
 
-class DarkInvader(val tl:Point) extends Invader(tl) {
+class DeadInvader(val tl:Point) extends Invader(tl) {
     override def draw(g:Graphics) :Unit = Unit
-    override def moveTo(point:Point): Invader = new DarkInvader(point)
+    override def moveTo(point:Point): Invader = new DeadInvader(point)
     override def boundingBox: Rectangle = new Rectangle(0 ,0, 0, 0)
 }
