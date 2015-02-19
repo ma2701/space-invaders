@@ -95,7 +95,7 @@ class ArmyCommanderTest extends FunSuite with MockitoSugar {
         val invaders  = ArmyCommander.formAnArmy(startingPoint)
 
         assertResult(new Point(10,10)){
-            ArmyCommander.moveArmy(invaders, positions)(0)
+            ArmyCommander.moveArmy(invaders, positions)(0).topLeft
         }
     }
 
