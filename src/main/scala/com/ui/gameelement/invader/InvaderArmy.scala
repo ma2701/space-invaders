@@ -1,7 +1,6 @@
 package com.ui.gameelement.invader
 
 import java.awt.{Rectangle, Point, Graphics}
-import com.ui.gameelement.invader.Mood.{Excited, Normal}
 import com.ui.gameelement.missile.Missile
 import ArmyCommander._
 

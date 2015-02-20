@@ -8,7 +8,7 @@ import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
 import com.ui.gameelement.shooter.ShooterPositionDirector._
 import scala.util.Try
-import com.ui.gameelement.missile.{MissilePositionDirector, Missile}
+import com.ui.gameelement.missile.{MissilesInFlight, Missile}
 
 class SpaceInvaderGame {
 
@@ -16,8 +16,7 @@ class SpaceInvaderGame {
     private var barricades: Barricades = _
     private var shooter   : Shooter    = _
 
-    private var missiles = List[Missile]()
-
+    private var missilesInFlight       = new MissilesInFlight()
 
     def updatedGameElements(screenWidth: Int, screenHeight: Int, g: Graphics): Unit = {
 
@@ -27,7 +26,7 @@ class SpaceInvaderGame {
         displayShooter(g, shooterInitialPosition(screenWidth, screenHeight))
         displayMissiles(g)
 
-        val deadInvaderMissileTuple = invaderArmy.findShotInvadersAndTheMissiles(missiles)
+        val deadInvaderMissileTuple = invaderArmy.findShotInvadersAndTheMissiles(missilesInFlight.missiles)
 
         markHitInvaders(deadInvaderMissileTuple)
 
@@ -43,9 +42,9 @@ class SpaceInvaderGame {
             case t => t._2
         })
 
-        missiles = removeUsedMissiles(deadInvaderMissileTuple.collect {
+        missilesInFlight = missilesInFlight.removeMissiles(deadInvaderMissileTuple.collect {
             case t => t._1
-        }).toList
+        })
     }
 
     def displayBarricades(g: Graphics, location: Point) {
@@ -65,13 +64,14 @@ class SpaceInvaderGame {
      * and draws the missiles
      **/
     def displayMissiles(g: Graphics): Unit = {
-        missiles = MissilePositionDirector.moveToNewPosition(missiles).filter(_.head.y >= 0)
-        missiles foreach (_.draw(g))
+        missilesInFlight = missilesInFlight.updatePosition.removeOffScreenMissile
+        missilesInFlight.draw(g)
     }
 
     def getShooterPosition: Option[Point] = Try(shooter.tipPosition).toOption
 
-    def shootSingleMissileFrom(position: Point): Unit = missiles = new Missile(position) :: missiles
+    def shootSingleMissileFrom(position: Point): Unit =
+        missilesInFlight = missilesInFlight.addToMissiles(new Missile(position))
 
     def moveShooterLeft: Unit =
         shooter = ShooterPositionDirector.newPositionToLeft(shooter).map(shooter.moveTo).getOrElse(shooter)
@@ -82,9 +82,6 @@ class SpaceInvaderGame {
     def currentDeadInvaderCount: Int = invaderArmy.army.foldLeft(0) {
         (acc, invader) => if (invader.isInstanceOf[DeadInvader]) acc + 1 else acc
     }
-
-    def removeUsedMissiles(missilesHitTarget: Seq[Missile]): Seq[Missile] = missiles.diff(missilesHitTarget)
-
 
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {
