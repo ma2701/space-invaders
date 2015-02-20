@@ -34,6 +34,8 @@ case class Invader(val topLeft:Point,
     val lip                     = new Lip(x,y).getBoundingBox
     val mouth                   = new Mouth(x,y).getBoundingBox
     val loweLip                 = new LowerLip(x,y).getBoundingBox
+    val loweLipOpenLeft         = new LowerLipOpenLeft(x,y).getBoundingBox
+    val loweLipOpenRight        = new LowerLipOpenRight(x,y).getBoundingBox
 
     val leftEar                 = new LeftEar(x,y).getBoundingBox
     val rightEar                = new RightEar(x,y).getBoundingBox
@@ -72,14 +74,16 @@ case class Invader(val topLeft:Point,
         drawBox(g, nose)
         drawBox(g, upperLip)
         drawBox(g, lip)
-        drawBox(g, loweLip)
-        
+
         if(mood == Normal) {
+            drawBox(g, loweLip)
             drawBox(g, leftEar)
             drawBox(g, rightEar)
         } else {
             drawBox(g, leftEarUp)
             drawBox(g, rightEarUp)
+            drawBox(g, loweLipOpenLeft)
+            drawBox(g, loweLipOpenRight)
         }
 
         g.setColor(Color.BLACK)

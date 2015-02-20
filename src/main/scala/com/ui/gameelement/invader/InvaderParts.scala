@@ -102,7 +102,6 @@ object Lip {
     val xOffset = 2;
     val yOffset = 6
 }
-
 case class Lip(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Lip.xOffset),
     yOffset(invaderPosY, Lip.yOffset),
@@ -112,7 +111,6 @@ object Mouth {
     val xOffset = 3;
     val yOffset = 6
 }
-
 case class Mouth(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Mouth.xOffset),
     yOffset(invaderPosY, Mouth.yOffset),
@@ -127,6 +125,26 @@ case class LowerLip(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayEle
     xOffset(invaderPosX, LowerLip.xOffset),
     yOffset(invaderPosY, LowerLip.yOffset),
     (5 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+
+object LowerLipOpenLeft {
+    val xOffset = 1;
+    val yOffset = 7
+}
+case class LowerLipOpenLeft(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
+    xOffset(invaderPosX, LowerLipOpenLeft.xOffset),
+    yOffset(invaderPosY, LowerLipOpenLeft.yOffset),
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+
+
+object LowerLipOpenRight {
+    val xOffset = 9;
+    val yOffset = 7
+}
+case class LowerLipOpenRight(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
+    xOffset(invaderPosX, LowerLipOpenRight.xOffset),
+    yOffset(invaderPosY, LowerLipOpenRight.yOffset),
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+
 
 object LeftEar {
     val xOffset = 0;
