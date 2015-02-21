@@ -33,8 +33,7 @@ class Barricade(topLeft: Point) extends Displayable(topLeft){
         RightLegFive(x, y).getBoundingBox
     )
 
-    override
-    def draw(g:Graphics):Unit = {
+    override def draw(g:Graphics):Unit = {
         g.setColor(color)
         super.draw(g)
     }

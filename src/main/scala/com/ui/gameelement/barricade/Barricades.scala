@@ -1,6 +1,6 @@
 package com.ui.gameelement.barricade
 
-import java.awt.{Graphics, Point}
+import java.awt.{Rectangle, Graphics, Point}
 import BarricadePositionDirector._
 
 class Barricades (val topLeft:Point) {
@@ -17,7 +17,17 @@ class Barricades (val topLeft:Point) {
         forthCover
     )
 
+    def moveTo(position:Point):Barricades = if(position!=this.topLeft) new Barricades(position) else this
+
     def draw(g:Graphics) :Unit = {
         covers.foreach(_.draw(g))
     }
+
+    def boundingBox:Rectangle= new Rectangle(
+        leftMostCover.topLeft.x,
+        leftMostCover.topLeft.y,
+        forthCover.topLeft.x + forthCover.boundingBox.width,
+        leftMostCover.boundingBox.height)
+
+
 }

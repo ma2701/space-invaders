@@ -4,7 +4,7 @@ import java.awt.Point
 
 object MissilePositionDirector {
 
-    val SINGLE_HOP_IN_Y = 3
+    val SINGLE_HOP_IN_Y = 1
 
     def newPositionForMissile(missile:Missile):Point =
         new Point(missile.head.getX.toInt , missile.head.getY.toInt - SINGLE_HOP_IN_Y)

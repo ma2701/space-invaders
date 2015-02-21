@@ -14,7 +14,7 @@ import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 
 object GamePanel {
-    private val DELAY_IN_MILLIS = 3
+    private val DELAY_IN_MILLIS = 2
 
     private val PREFERRED_WIDTH : Int = 878
     private val PREFERRED_HEIGHT: Int = 600

@@ -12,7 +12,9 @@ class MissilesInFlightTest extends FunSuite {
 
     test("can add a missile") {
         assertResult(1){
-            new MissilesInFlight().addToMissiles(new Missile(new Point(0,0))).getMissileCount
+            new MissilesInFlight()
+            .addToMissiles(new Missile(new Point(0,0)))
+            .getMissileCount
         }
     }
 

@@ -1,6 +1,7 @@
 package com.ui.gameelement.missile
 
 import java.awt.Graphics
+import com.ui.gameelement.barricade.Barricades
 
 class MissilesInFlight(val missiles: Seq[Missile] = Nil) {
 
@@ -31,5 +32,12 @@ class MissilesInFlight(val missiles: Seq[Missile] = Nil) {
     def getMissileCount: Int = missiles.size
 
     def draw(g: Graphics): Unit = missiles.foreach(_.draw(g))
+
+    def findMissilesBelowBarricades(barricades:Barricades):Seq[Missile] = {
+        val targetHeight = barricades.boundingBox.y + barricades.boundingBox.height
+        missiles.filter(_.head.y >= targetHeight)
+    }
+
+    def printAllMissilePositions:Unit = missiles.foreach(println)
 
 }

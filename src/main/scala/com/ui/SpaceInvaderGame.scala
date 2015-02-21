@@ -4,16 +4,20 @@ import com.ui.gameelement.invader.{Invader, DeadInvader, ArmyCommander, InvaderA
 import java.awt.{Rectangle, Graphics, Point}
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
-import com.ui.gameelement.barricade.Barricades
+import com.ui.gameelement.barricade.{Barricade, Barricades}
 import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
 import com.ui.gameelement.shooter.ShooterPositionDirector._
 import scala.util.Try
 import com.ui.gameelement.missile.{MissilesInFlight, Missile}
 
+object SpaceInvaderGame {
+    val DEBUG_MODE=true
+}
+
 class SpaceInvaderGame {
 
     private var invaderArmy            = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0, 0)))
-    private var barricades: Barricades = _
+    private var barricades             = new Barricades(new Point(0,0))
     private var shooter   : Shooter    = _
 
     private var missilesInFlight       = new MissilesInFlight()
@@ -22,38 +26,36 @@ class SpaceInvaderGame {
 
         val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
 
-        displayBarricades(g, new Point(screenWidth / 5, screenHeight - (screenHeight / 5)))
+        displayBarricades(g, new Point(screenWidth / 5, screenHeight - (screenHeight / 4)))
         displayShooter(g, shooterInitialPosition(screenWidth, screenHeight))
         displayMissiles(g)
 
         val deadInvaderMissileTuple = invaderArmy.findShotInvadersAndTheMissiles(missilesInFlight.missiles)
+        val hitBarricadesAndMissileTuple = invaderArmy.findHitBarricadesAndTheMissiles(missilesInFlight.missiles, barricades)
 
         markHitInvaders(deadInvaderMissileTuple)
 
         if (isTimeToMoveArmy(System.currentTimeMillis())) {
-            val point = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
+            val point   = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
             invaderArmy = invaderArmy.moveTo(point)
             invaderArmy.drawArmy(g)
         } else {
             invaderArmy.drawArmy(g)
         }
 
-        invaderArmy = invaderArmy.makeDeadInvadersInvisible(deadInvaderMissileTuple.collect {
-            case t => t._2
-        })
+        invaderArmy     = invaderArmy.makeDeadInvadersInvisible(deadInvaderMissileTuple.collect {case t => t._2 })
 
-        missilesInFlight = missilesInFlight.removeMissiles(deadInvaderMissileTuple.collect {
-            case t => t._1
-        })
+        missilesInFlight = missilesInFlight.removeMissiles(deadInvaderMissileTuple
+                                                           .collect {case t => t._1})
+                                                           .removeMissiles(hitBarricadesAndMissileTuple.collect{case t=> t._1})
     }
 
-    def displayBarricades(g: Graphics, location: Point) {
-        if (barricades == null)
-            barricades = new Barricades(location)
+    def displayBarricades(g: Graphics, location: Point): Unit =  {
+        barricades = barricades.moveTo(location)
         barricades.draw(g)
     }
 
-    def displayShooter(g: Graphics, location: Point) {
+    def displayShooter(g: Graphics, location: Point) : Unit = {
         if (shooter == null)
             shooter = new Shooter(location)
         shooter.draw(g)
@@ -86,6 +88,12 @@ class SpaceInvaderGame {
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {
             t => t._2.markHitByMissile
+        }
+    }
+
+    private def markHitBarricades(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Barricade)]) {
+        shotSoldiersAndBulletsThatKilledThem.foreach {
+            t => println(s"marking ${t._2} hit")
         }
     }
 

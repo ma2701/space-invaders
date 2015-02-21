@@ -3,6 +3,7 @@ package com.ui.gameelement.invader
 import java.awt.{Rectangle, Point, Graphics}
 import com.ui.gameelement.missile.Missile
 import ArmyCommander._
+import com.ui.gameelement.barricade.{Barricade, Barricades}
 
 
 class InvaderArmy(val army: Seq[Invader]) {
@@ -22,7 +23,7 @@ class InvaderArmy(val army: Seq[Invader]) {
     def findShotInvadersAndTheMissiles(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
         def findAHit(missile:Missile, soldiers:Seq[Invader]):Option[Invader]  = {
             if(soldiers == Nil) None
-            else if(hasCollided(missile, soldiers.head)) Some(soldiers.head)
+            else if (hasCollided(missile, soldiers.head)) Some(soldiers.head)
             else findAHit(missile, soldiers.tail)
         }
 
@@ -30,6 +31,24 @@ class InvaderArmy(val army: Seq[Invader]) {
             findAHit(missile,army) match {
                 case Some(soldier) =>  (missile, soldier) :: acc
                 case None          => acc
+            }
+        }
+    }
+
+    def findHitBarricadesAndTheMissiles(missiles:Seq[Missile], barricades:Barricades):Seq[(Missile, Barricade)] = {
+        def findAHit(missile:Missile, barricades:Seq[Barricade]):Option[Barricade]  = {
+            if(barricades == Nil) None
+            else if (hasCollided(missile, barricades.head)) {
+                println(s" missile ${missile} has collided with barricade ${barricades.head} has ")
+                Some(barricades.head)
+            }
+            else findAHit(missile, barricades.tail)
+        }
+
+        missiles.foldLeft(List[(Missile,Barricade)]()) { (acc , missile) =>
+            findAHit(missile,barricades.covers) match {
+                case Some(barricade) =>  (missile, barricade) :: acc
+                case None            => acc
             }
         }
     }
@@ -51,6 +70,8 @@ class InvaderArmy(val army: Seq[Invader]) {
     }
 
     def hasCollided(missile:Missile , soldier:Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)
+
+    def hasCollided(missile:Missile , barricade:Barricade): Boolean = barricade.boundingBox.intersects(missile.boundingBox)
 
     /**
      * each individual invader soldier's position
