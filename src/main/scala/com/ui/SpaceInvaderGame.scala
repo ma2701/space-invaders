@@ -11,10 +11,10 @@ import scala.util.Try
 import com.ui.gameelement.missile.{MissilesInFlight, Missile}
 
 object SpaceInvaderGame {
-    val DEBUG_MODE=true
+    val DEBUG_MODE = false
 }
 
-class SpaceInvaderGame {
+class SpaceInvaderGame() {
 
     private var invaderArmy            = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0, 0)))
     private var barricades             = new Barricades(new Point(0,0))

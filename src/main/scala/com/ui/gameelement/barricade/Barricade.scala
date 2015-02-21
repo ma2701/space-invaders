@@ -33,6 +33,13 @@ class Barricade(topLeft: Point) extends Displayable(topLeft){
         RightLegFive(x, y).getBoundingBox
     )
 
+    override def boundingBox: Rectangle = {
+        val longestBlock = parts.sortWith( _.width > _.width)(0)
+        val width        = parts.take(12).map(_.height).sum
+
+        new Rectangle(x, y, longestBlock.getWidth.toInt, width)
+    }
+
     override def draw(g:Graphics):Unit = {
         g.setColor(color)
         super.draw(g)

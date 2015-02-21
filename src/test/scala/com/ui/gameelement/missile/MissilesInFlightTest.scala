@@ -1,10 +1,13 @@
 package com.ui.gameelement.missile
 
+
+import java.awt.Point
 import org.scalatest.FunSuite
 import java.awt.Point
 
 
 class MissilesInFlightTest extends FunSuite {
+    val initialMissilePosition: Point = new Point(10, 10)
 
     test("can create instance") {
         new MissilesInFlight
@@ -21,24 +24,24 @@ class MissilesInFlightTest extends FunSuite {
     test("can remove a missile") {
         val missiles = List(
             new Missile(new Point(0, 0)),
-            new Missile(new Point(10, 10)))
+            new Missile(initialMissilePosition))
 
         val missilesInFlight= new MissilesInFlight(missiles).removeMissile(missiles(0))
 
         assertResult(1){
             missilesInFlight.getMissileCount
         }
-        assertResult(new Point(10, 10)){
+        assertResult(initialMissilePosition){
             missilesInFlight.missiles(0).topLeft
         }
     }
 
     test("can move all missiles to point x,y on screen") {
-        val missiles = List(new Missile(new Point(10, 10)))
+        val missiles = List(new Missile(initialMissilePosition))
 
         val missilesInFlight= new MissilesInFlight(missiles).updatePosition
 
-        assertResult(new Point(10, 7)){
+        assertResult(new Point(10, initialMissilePosition.y - MissilePositionDirector.SINGLE_HOP_IN_Y)){
             missilesInFlight.missiles(0).topLeft
         }
     }
