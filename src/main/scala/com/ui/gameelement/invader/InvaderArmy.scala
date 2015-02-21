@@ -39,7 +39,6 @@ class InvaderArmy(val army: Seq[Invader]) {
         def findAHit(missile:Missile, barricades:Seq[Barricade]):Option[Barricade]  = {
             if(barricades == Nil) None
             else if (hasCollided(missile, barricades.head)) {
-                println(s" missile ${missile} has collided with barricade ${barricades.head} has ")
                 Some(barricades.head)
             }
             else findAHit(missile, barricades.tail)
