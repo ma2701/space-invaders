@@ -1,37 +1,38 @@
 package com.ui
 
-import com.ui.gameelement.invader.{Invader, DeadInvader, ArmyCommander, InvaderArmy}
-import java.awt.{Color, Rectangle, Graphics, Point}
+import com.ui.gameelement.invader.{Invader, ArmyCommander, InvaderArmy}
+import java.awt._
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.gameelement.barricade.{Barricade, Barricades}
 import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
 import com.ui.gameelement.shooter.ShooterPositionDirector._
 import scala.util.Try
-import com.ui.gameelement.missile.{MissilesInFlight, Missile}
+import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
+import com.ui.gameelement.missile.Missile
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
 }
 
 class SpaceInvaderGame() {
-
-    private var invaderArmy            = new InvaderArmy(ArmyCommander.formAnArmy(new Point(0, 0)))
-    private var barricades             = new Barricades(new Point(0,0))
-    private var shooter   : Shooter    = _
-
+    private val initialPosition:Point = new Point(0,0)
+    
+    private var invaderArmy            = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
+    private var barricades             = new Barricades(initialPosition)
+    private var shooter                = new Shooter(initialPosition)
     private var missilesInFlight       = new MissilesInFlight()
 
-    def updatedGameElements(screenWidth: Int, screenHeight: Int, g: Graphics): Unit = {
+    def updatedGameElements(screenWidth: Int, screenHeight: Int): GameElements = {
 
         val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
 
-        displayBarricades(g, new Point(screenWidth / 5, screenHeight - (screenHeight / 4)))
-        displayShooter(g, shooterInitialPosition(screenWidth, screenHeight))
-        displayMissiles(g)
+        barricades       = updatedBarricadePosition(screenWidth, screenHeight)
+        shooter          = updateShooterPositionIfRequired(screenWidth, screenHeight)
+        missilesInFlight = updateMissilesPosition
 
-        val deadInvaderMissileTuple = invaderArmy.findShotInvadersAndTheMissiles(missilesInFlight.missiles)
+        val deadInvaderMissileTuple      = invaderArmy.findShotInvadersAndTheMissiles(missilesInFlight.missiles)
         val hitBarricadesAndMissileTuple = invaderArmy.findHitBarricadesAndTheMissiles(missilesInFlight.missiles, barricades)
 
         markHitInvaders(deadInvaderMissileTuple)
@@ -39,49 +40,39 @@ class SpaceInvaderGame() {
         if (isTimeToMoveArmy(now)) {
             val point   = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
             invaderArmy = invaderArmy.moveTo(point)
-            invaderArmy.drawArmy(g)
-        } else {
-            invaderArmy.drawArmy(g)
         }
 
         invaderArmy     = invaderArmy.makeDeadInvadersInvisible(deadInvaderMissileTuple.collect {case t => t._2 })
-
         missilesInFlight = missilesInFlight.removeMissiles(deadInvaderMissileTuple
                                                            .collect {case t => t._1})
                                                            .removeMissiles(hitBarricadesAndMissileTuple.collect{case t=> t._1})
 
-        displayTotalDeathCount(screenHeight, g)
+        GameElements(
+            invaderArmy,
+            missilesInFlight,
+            barricades,
+            shooter,
+            invaderArmy.allDeadInvaders.size )
     }
 
-    def displayBarricades(g: Graphics, location: Point): Unit =  {
-        barricades = barricades.moveTo(location)
-        barricades.draw(g)
+
+    def updatedBarricadePosition(screenWidth: Int, screenHeight: Int): Barricades = {
+        val barricadeLocation: Point = new Point(screenWidth / 5, screenHeight - (screenHeight / 4))
+        barricades.moveTo(barricadeLocation)
     }
 
-    def displayShooter(g: Graphics, location: Point) : Unit = {
-        if (shooter == null)
-            shooter = new Shooter(location)
-        shooter.draw(g)
+    def updateShooterPositionIfRequired(screenWidth: Int, screenHeight: Int) : Shooter =
+        shooter.topLeft match {
+        case p:Point if(p.x==0 && p.y==0) => shooter.moveTo(shooterInitialPosition(screenWidth, screenHeight))
+        case _                            => shooter
+
     }
 
     /**
      * sets the current missiles removing the one that out of screen
      * and draws the missiles
      **/
-    def displayMissiles(g: Graphics): Unit = {
-        missilesInFlight = missilesInFlight.updatePosition.removeOffScreenMissile
-        missilesInFlight.draw(g)
-    }
-
-    def displayTotalDeathCount(sh:Int, g: Graphics): Unit = {
-       invaderArmy.allDeadInvaders.size match {
-           case i if(i <= 10)=> g.setColor(Color.GREEN)
-           case i if(i <= 30)=> g.setColor(Color.ORANGE)
-           case i if(i > 30)=>  g.setColor(Color.RED)
-       }
-
-       g.drawString(s"Kill Count: ${invaderArmy.allDeadInvaders.size}",3, sh - 10)
-    }
+    def updateMissilesPosition: MissilesInFlight =  missilesInFlight.updatePosition.removeOffScreenMissile
 
     def getShooterPosition: Option[Point] = Try(shooter.tipPosition).toOption
 
@@ -95,10 +86,6 @@ class SpaceInvaderGame() {
 
     def moveShooterRight(screenWidth: Int): Unit =
         shooter = ShooterPositionDirector.newPositionToRight(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
-
-    def currentDeadInvaderCount: Int = invaderArmy.army.foldLeft(0) {
-        (acc, invader) => if (invader.isInstanceOf[DeadInvader]) acc + 1 else acc
-    }
 
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {

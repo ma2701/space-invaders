@@ -12,6 +12,10 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
+import com.ui.gameelement.barricade.Barricades
+import com.ui.gameelement.shooter.Shooter
+import com.ui.gameelement.missile.MissilesInFlight
+import com.ui.gameelement.invader.InvaderArmy
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
@@ -29,7 +33,17 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         super.paintComponent(g)
 
-        spaceInvaderGame.updatedGameElements(this.getWidth, this.getHeight, g)
+        val gameState = spaceInvaderGame.updatedGameElements(this.getWidth, this.getHeight)
+
+        displayBarricades(gameState.barricades, g)
+
+        displayShooter(gameState.shooter, g)
+
+        displayMissiles(gameState.missiles, g)
+
+        displayMissiles(gameState.invaderArmy, g)
+
+        displayTotalDeathCount(gameState.totalKilledInvaders, g)
     }
 
     override
@@ -107,5 +121,19 @@ object GamePanel extends JPanel with Runnable with ActionListener {
                 case _ => Unit
             }
         }
+    }
+
+    private def displayBarricades(barricades:Barricades, g:Graphics):Unit = barricades.draw(g)
+    private def displayShooter (shooter:Shooter, g:Graphics):Unit = shooter.draw(g)
+    private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit = missiles.draw(g)
+    private def displayMissiles (invaderArmy:InvaderArmy, g:Graphics):Unit = invaderArmy.draw(g)
+    private def displayTotalDeathCount(count:Int, g: Graphics): Unit = {
+        count match {
+            case i if(i <= 10)=> g.setColor(Color.GREEN)
+            case i if(i <= 30)=> g.setColor(Color.ORANGE)
+            case i if(i > 30)=>  g.setColor(Color.RED)
+        }
+
+        g.drawString(s"Kill Count: ${count}",3, this.getHeight - 10)
     }
 }

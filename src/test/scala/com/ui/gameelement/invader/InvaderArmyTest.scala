@@ -26,7 +26,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
         val armyOfOne = List(mockInvader)
         val invaderArmy = new InvaderArmy(armyOfOne)
 
-        invaderArmy.drawArmy(mockGraphics)
+        invaderArmy.draw(mockGraphics)
 
         verify(mockInvader).draw(mockGraphics)
     }

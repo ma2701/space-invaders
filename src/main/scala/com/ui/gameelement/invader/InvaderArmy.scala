@@ -8,7 +8,7 @@ import com.ui.gameelement.barricade.{Barricade, Barricades}
 
 class InvaderArmy(val army: Seq[Invader]) {
 
-    def drawArmy(g: Graphics): Unit = {
+    def draw(g: Graphics): Unit = {
         army.foreach {
             invaderSoldier =>
                 invaderSoldier.draw(g)
