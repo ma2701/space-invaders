@@ -10,7 +10,7 @@ object InvaderArmyPositionDirector {
     val ONE_HOP_IN_X_DIRECTION = 5
     val ONE_HOP_IN_Y_DIRECTION = 7
 
-    private[this] var startPosition     : Point                = _
+    private[this] var initialPosition   : Point                = new Point(0,0)
     private[this] var currentPosition   : Point                = _
     private[this] var direction         : MovementDirection    = _
     private[this] var generalDirection  : GeneralArmyDirection = _
@@ -20,7 +20,7 @@ object InvaderArmyPositionDirector {
         import GeneralArmyDirection._
         displayBoundingBox = new Rectangle(0, 0, displayWindow.width, displayWindow.height)
 
-        if (isCalledForFirstTime)
+        if (isInInitialState)
             setInitialPosition(displayWindow, armyBoundingBox)
         else
             direction match {
@@ -46,15 +46,14 @@ object InvaderArmyPositionDirector {
     }
 
     private def setInitialPosition(displayWindow: Rectangle, armyBoundingBox: Rectangle): Point = {
-
         val x: Int = (displayWindow.width  - armyBoundingBox.width) / 2
         val y: Int = (displayWindow.height - armyBoundingBox.height) / 2
 
-        startPosition = new Point(x, y)
-
-        currentPosition = startPosition
+        initialPosition = new Point(x, y)
         generalDirection = GeneralArmyDirection.Downward
         direction = Left
+
+        currentPosition = initialPosition
         currentPosition
     }
 
@@ -78,7 +77,8 @@ object InvaderArmyPositionDirector {
         }
     }
 
-    private def isCalledForFirstTime: Boolean = startPosition == null
+    private def isInInitialState: Boolean =
+        initialPosition == new Point(0,0)
 
     private def moveDown: Point = {
         direction = Down

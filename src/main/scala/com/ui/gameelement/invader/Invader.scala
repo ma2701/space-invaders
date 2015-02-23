@@ -6,8 +6,8 @@ import com.ui.gameelement.invader.Mood._
 
 
 object Invader {
-    val INVADER_WIDTH: Int  = 11 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
-    val INVADER_HEIGHT: Int = 8  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
+    val INVADER_WIDTH:  Int  = 11 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
+    val INVADER_HEIGHT: Int  = 8  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
 case class Invader(val topLeft:Point,
@@ -107,7 +107,7 @@ case class Invader(val topLeft:Point,
 }
 
 
-class DeadInvader(val tl:Point) extends Invader(tl) {
+class DeadInvader(tl:Point) extends Invader(tl) {
     override def draw(g:Graphics) :Unit = Unit
     override def moveTo(point:Point): Invader = new DeadInvader(point)
     override def boundingBox: Rectangle = new Rectangle(0 ,0, 0, 0)
