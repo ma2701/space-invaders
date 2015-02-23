@@ -22,6 +22,4 @@ class BarricadeTest extends FunSuite with MockitoSugar {
             instance.boundingBox
         }
     }
-
-
 }

@@ -1,7 +1,7 @@
 package com.ui
 
 import com.ui.gameelement.invader.{Invader, DeadInvader, ArmyCommander, InvaderArmy}
-import java.awt.{Rectangle, Graphics, Point}
+import java.awt.{Color, Rectangle, Graphics, Point}
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.gameelement.barricade.{Barricade, Barricades}
@@ -9,6 +9,7 @@ import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
 import com.ui.gameelement.shooter.ShooterPositionDirector._
 import scala.util.Try
 import com.ui.gameelement.missile.{MissilesInFlight, Missile}
+import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
@@ -35,7 +36,7 @@ class SpaceInvaderGame() {
 
         markHitInvaders(deadInvaderMissileTuple)
 
-        if (isTimeToMoveArmy(System.currentTimeMillis())) {
+        if (isTimeToMoveArmy(now)) {
             val point   = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
             invaderArmy = invaderArmy.moveTo(point)
             invaderArmy.drawArmy(g)
@@ -48,6 +49,8 @@ class SpaceInvaderGame() {
         missilesInFlight = missilesInFlight.removeMissiles(deadInvaderMissileTuple
                                                            .collect {case t => t._1})
                                                            .removeMissiles(hitBarricadesAndMissileTuple.collect{case t=> t._1})
+
+        displayTotalDeathCount(screenHeight, g)
     }
 
     def displayBarricades(g: Graphics, location: Point): Unit =  {
@@ -70,10 +73,22 @@ class SpaceInvaderGame() {
         missilesInFlight.draw(g)
     }
 
+    def displayTotalDeathCount(sh:Int, g: Graphics): Unit = {
+       invaderArmy.allDeadInvaders.size match {
+           case i if(i <= 10)=> g.setColor(Color.GREEN)
+           case i if(i <= 30)=> g.setColor(Color.ORANGE)
+           case i if(i > 30)=>  g.setColor(Color.RED)
+       }
+
+       g.drawString(s"Kill Count: ${invaderArmy.allDeadInvaders.size}",3, sh - 10)
+    }
+
     def getShooterPosition: Option[Point] = Try(shooter.tipPosition).toOption
 
     def shootSingleMissileFrom(position: Point): Unit =
-        missilesInFlight = missilesInFlight.addToMissiles(new Missile(position))
+        if(isTimeToShootOneMissile(now) ){
+            missilesInFlight = missilesInFlight.addToMissiles(new Missile(position))
+        }
 
     def moveShooterLeft: Unit =
         shooter = ShooterPositionDirector.newPositionToLeft(shooter).map(shooter.moveTo).getOrElse(shooter)
@@ -96,5 +111,7 @@ class SpaceInvaderGame() {
             t => println(s"marking ${t._2} hit")
         }
     }
+
+    private def now:Long  = System.currentTimeMillis()
 
 }

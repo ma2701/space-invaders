@@ -13,28 +13,23 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 
-object GamePanel {
+object GamePanel extends JPanel with Runnable with ActionListener {
+
     private val DELAY_IN_MILLIS = 2
 
     private val PREFERRED_WIDTH : Int = 878
     private val PREFERRED_HEIGHT: Int = 600
-}
-
-class GamePanel extends JPanel with Runnable with ActionListener {
-    import GamePanel._
 
     private var animator: Thread = null
     private val spaceInvaderGame = new SpaceInvaderGame
 
     setPanelAttributes
 
-    override
-    def paintComponent(g: Graphics): Unit = {
+    override def paintComponent(g: Graphics): Unit = {
 
         super.paintComponent(g)
 
         spaceInvaderGame.updatedGameElements(this.getWidth, this.getHeight, g)
-
     }
 
     override
@@ -54,9 +49,9 @@ class GamePanel extends JPanel with Runnable with ActionListener {
 
     private def sleep(beforeTime: Long) {
         try {
-            Thread.sleep(calculateThreadSleepTime(beforeTime, DELAY_IN_MILLIS));
+            Thread.sleep(calculateThreadSleepTime(beforeTime, DELAY_IN_MILLIS))
         } catch {
-            case e: InterruptedException => println("Interrupted: " + e.getMessage());
+            case e: InterruptedException => println("Interrupted: " + e.getMessage())
         }
     }
 

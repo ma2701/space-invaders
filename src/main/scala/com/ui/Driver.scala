@@ -1,12 +1,10 @@
 package com.ui
 
-import com.ui.panel.{ScorePanel, LivesPanel, GamePanel}
-
 object Driver extends App {
 
     override
     def main(args: Array[String]) :Unit =  {
-        val si = new SpaceInvadersUI( new ScorePanel, new GamePanel, new LivesPanel )
+        val si = new SpaceInvadersUI
 
         java.awt.EventQueue.invokeLater(new Runnable {
             def run {
