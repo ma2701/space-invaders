@@ -46,7 +46,10 @@ case class Invader(val topLeft:Point,
     val chin                    = new Chin(x,y).getBoundingBox
 
     def moveTo(point:Point): Invader =
-        new Invader(point,  if(mood == Normal ) Excited else Normal, this.isHit )
+        if(isHit)
+            new ExplodingInvader(topLeft)
+        else
+            new Invader(point,  if(mood == Normal ) Excited else Normal, this.isHit )
 
     def markHitByMissile    =  isHit = true
     def isHitByMissile      =  isHit == true
@@ -54,17 +57,11 @@ case class Invader(val topLeft:Point,
     def boundingBox: Rectangle = new Rectangle(x ,y, INVADER_WIDTH, INVADER_HEIGHT)
 
     def draw(g:Graphics) :Unit = {
-        if(isHit) {
-            drawExploded(g)
-        } else {
-            drawAntena(g)
-            drawFace(g)
-        }
+        drawAntena(g)
+        drawFace(g)
     }
 
-    private def drawExploded(g: Graphics) =  {
-        new ExplodedInvader(topLeft).draw(g)
-    }
+    def beenExplodingForTooLong(currentTime:Long):Boolean = false
 
     private def drawFace(g: Graphics) {
         g.setColor(Color.WHITE)
@@ -106,6 +103,19 @@ case class Invader(val topLeft:Point,
     }
 }
 
+class ExplodingInvader(tl:Point,
+                       val explosionTime:Long= System.currentTimeMillis())  extends Invader(tl) {
+
+    override def draw(g:Graphics) :Unit = new ExplodedInvader(topLeft).draw(g)
+    override def moveTo(point:Point): Invader = new ExplodingInvader(point, explosionTime)
+    override def boundingBox: Rectangle = new ExplodedInvader(topLeft).boundingBox
+
+    /**
+     * want to show an exploding invader only for one frame and then mark it dead. this is calculating
+     * if the explosion has been displayed on screen long enough
+     */
+    override def beenExplodingForTooLong(currentTime:Long):Boolean = (currentTime - explosionTime) >= 333
+}
 
 class DeadInvader(tl:Point) extends Invader(tl) {
     override def draw(g:Graphics) :Unit = Unit

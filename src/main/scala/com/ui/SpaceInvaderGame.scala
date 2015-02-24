@@ -32,17 +32,15 @@ class SpaceInvaderGame() {
         shooter          = updateShooterPositionIfRequired(screenWidth, screenHeight)
         missilesInFlight = updateMissilesPosition
 
-        val deadInvaderMissileTuple      = invaderArmy.findShotInvadersAndTheMissiles(missilesInFlight.missiles)
-        val hitBarricadesAndMissileTuple = invaderArmy.findHitBarricadesAndTheMissiles(missilesInFlight.missiles, barricades)
+        val deadInvaderMissileTuple      = invaderArmy.findShotInvaders(missilesInFlight.missiles)
+        val hitBarricadesAndMissileTuple = invaderArmy.findBarricadesHitWithMissiles(missilesInFlight.missiles, barricades)
 
         markHitInvaders(deadInvaderMissileTuple)
 
-        if (isTimeToMoveArmy(now)) {
-            val point   = nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox)
-            invaderArmy = invaderArmy.moveTo(point)
-        }
+        if (isTimeToMoveArmy(now))
+            invaderArmy = invaderArmy.moveTo(nextPosition(displayWindowBoundingBox, invaderArmy.getBoundingBox))
 
-        invaderArmy     = invaderArmy.makeDeadInvadersInvisible(deadInvaderMissileTuple.collect {case t => t._2 })
+        invaderArmy      = invaderArmy.makeDeadInvadersInvisible
         missilesInFlight = missilesInFlight.removeMissiles(deadInvaderMissileTuple
                                                            .collect {case t => t._1})
                                                            .removeMissiles(hitBarricadesAndMissileTuple.collect{case t=> t._1})
@@ -54,7 +52,6 @@ class SpaceInvaderGame() {
             shooter,
             invaderArmy.allDeadInvaders.size )
     }
-
 
     def updatedBarricadePosition(screenWidth: Int, screenHeight: Int): Barricades = {
         val barricadeLocation: Point = new Point(screenWidth / 5, screenHeight - (screenHeight / 4))

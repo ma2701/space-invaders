@@ -20,7 +20,7 @@ class InvaderArmy(val army: Seq[Invader]) {
             moveArmy(army, allInvaderPositionsFromStartingPoint(point)))
 
 
-    def findShotInvadersAndTheMissiles(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
+    def findShotInvaders(missiles:Seq[Missile]):Seq[(Missile, Invader)] = {
         def findAHit(missile:Missile, soldiers:Seq[Invader]):Option[Invader]  = {
             if(soldiers == Nil) None
             else if (hasCollided(missile, soldiers.head)) Some(soldiers.head)
@@ -35,7 +35,7 @@ class InvaderArmy(val army: Seq[Invader]) {
         }
     }
 
-    def findHitBarricadesAndTheMissiles(missiles:Seq[Missile], barricades:Barricades):Seq[(Missile, Barricade)] = {
+    def findBarricadesHitWithMissiles(missiles:Seq[Missile], barricades:Barricades):Seq[(Missile, Barricade)] = {
         def findAHit(missile:Missile, barricades:Seq[Barricade]):Option[Barricade]  = {
             if(barricades == Nil) None
             else if (hasCollided(missile, barricades.head)) {
@@ -52,21 +52,16 @@ class InvaderArmy(val army: Seq[Invader]) {
         }
     }
 
-    def makeDeadInvadersInvisible(shotInvaders: Seq[Invader]): InvaderArmy = {
-        def putInvisibilityCloakOn(shotSoldiers: Seq[Invader], acc: Seq[Invader]): Seq[Invader] = {
-            if (shotSoldiers == Nil) acc
-            else putInvisibilityCloakOn(shotSoldiers.tail, makeInvisible(shotSoldiers.head, acc))
-        }
+    def makeDeadInvadersInvisible(): InvaderArmy =
+        new InvaderArmy(army.map {
+            invader: Invader =>
+                if (invader.beenExplodingForTooLong(now))
+                    makeInvisible(invader)
+                else invader
+        })
 
-        new InvaderArmy(putInvisibilityCloakOn(shotInvaders, army))
-    }
 
-    private def makeInvisible(soldier: Invader, army:Seq[Invader]): Seq[Invader] =
-        army.map {
-        s =>
-            if (s == soldier) new DeadInvader(soldier.topLeft)
-            else s
-    }
+    private def makeInvisible(soldier: Invader):Invader =new DeadInvader(soldier.topLeft)
 
     def hasCollided(missile:Missile , soldier:Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)
 
@@ -88,4 +83,6 @@ class InvaderArmy(val army: Seq[Invader]) {
 
         new Rectangle(topLeftCorner.x, topLeftCorner.y, width, height)
     }
+
+    private def now:Long = System.currentTimeMillis()
 }
