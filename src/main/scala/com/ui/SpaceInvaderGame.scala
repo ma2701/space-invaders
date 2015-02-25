@@ -13,7 +13,7 @@ import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
 
 object SpaceInvaderGame {
-    val DEBUG_MODE = true
+    val DEBUG_MODE = false
 }
 
 class SpaceInvaderGame() {

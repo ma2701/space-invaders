@@ -2,9 +2,6 @@ package com.ui.gameelement.shooter
 
 import java.awt.{Color, Graphics, Rectangle, Point}
 import com.ui.gameelement.Displayable
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
-import java.io.IOException
 
 
 class Shooter(topLeft: Point) extends Displayable(topLeft){
@@ -28,15 +25,6 @@ class Shooter(topLeft: Point) extends Displayable(topLeft){
 
     override def draw(g:Graphics):Unit = {
         g.setColor(color)
-
-        var img:BufferedImage = null
-
-        try {
-            img = ImageIO.read(new java.io.File("src/main/resources/shooter.jpg"));
-        } catch {
-            case e:IOException => println(s"WHAAAA ${e.getMessage}")
-        }
-
-        g.drawImage(img,topLeft.x, topLeft.y, Color.BLACK, null )
+        super.draw(g)
     }
 }

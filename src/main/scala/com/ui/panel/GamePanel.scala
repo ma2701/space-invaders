@@ -19,7 +19,7 @@ import com.ui.gameelement.invader.InvaderArmy
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
-    private val DELAY_IN_MILLIS = 1
+    private val DELAY_IN_MILLIS = 2
 
     private val PREFERRED_WIDTH : Int = 878
     private val PREFERRED_HEIGHT: Int = 600
