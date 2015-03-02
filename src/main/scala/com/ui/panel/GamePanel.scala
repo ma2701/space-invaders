@@ -4,7 +4,7 @@ import javax.swing.JPanel
 
 import java.awt._
 
-import com.ui.util.ThreadDelay._
+import com.ui.util.MainThreadDelayUtil._
 import com.ui.SpaceInvaderGame
 import java.awt.Color
 import java.awt.Graphics
@@ -19,7 +19,7 @@ import com.ui.gameelement.invader.InvaderArmy
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
-    private val DELAY_IN_MILLIS = 2
+    private val SCREEN_REFRESH_RATE_IN_MILLIS = 2
 
     private val PREFERRED_WIDTH : Int = 878
     private val PREFERRED_HEIGHT: Int = 600
@@ -47,7 +47,9 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     }
 
     override
-    def run(): Unit = {
+    def run(): Unit = mainGameLoop
+
+    private def mainGameLoop: Unit = {
         var beforeTime = System.currentTimeMillis()
 
         do {
@@ -63,7 +65,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
     private def sleep(beforeTime: Long) {
         try {
-            Thread.sleep(calculateThreadSleepTime(beforeTime, DELAY_IN_MILLIS))
+            Thread.sleep(calculateThreadSleepTime(beforeTime, SCREEN_REFRESH_RATE_IN_MILLIS))
         } catch {
             case e: InterruptedException => println("Interrupted: " + e.getMessage())
         }
@@ -75,32 +77,6 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         animator = new Thread(this);
         animator.start();
-    }
-
-    private def setPanelAttributes {
-        setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
-        setToolTipText("")
-        setFont(new Font("Waree", 1, 15))
-        setName("mainPanel")
-        setDoubleBuffered(true)
-        setBackground(Color.BLACK)
-
-        setBorder(javax.swing.BorderFactory.createTitledBorder(" SI "))
-
-        val mainCanvasLayout = new org.jdesktop.layout.GroupLayout(this)
-        setLayout(mainCanvasLayout)
-
-        mainCanvasLayout
-        .setHorizontalGroup(mainCanvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(0, PREFERRED_WIDTH, java.lang.Short.MAX_VALUE))
-
-
-        mainCanvasLayout
-        .setVerticalGroup(mainCanvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                          .add(0, PREFERRED_HEIGHT, java.lang.Short.MAX_VALUE))
-
-        setFocusable(true)
-        addKeyListener(new KeyBoardAdapter())
     }
 
     override
@@ -135,5 +111,31 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         }
 
         g.drawString(s"Kill Count: ${count}",3, this.getHeight - 10)
+    }
+
+    private def setPanelAttributes {
+        setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
+        setToolTipText("")
+        setFont(new Font("Waree", 1, 15))
+        setName("mainPanel")
+        setDoubleBuffered(true)
+        setBackground(Color.BLACK)
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder(" SI "))
+
+        val mainCanvasLayout = new org.jdesktop.layout.GroupLayout(this)
+        setLayout(mainCanvasLayout)
+
+        mainCanvasLayout
+        .setHorizontalGroup(mainCanvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(0, PREFERRED_WIDTH, java.lang.Short.MAX_VALUE))
+
+
+        mainCanvasLayout
+        .setVerticalGroup(mainCanvasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                          .add(0, PREFERRED_HEIGHT, java.lang.Short.MAX_VALUE))
+
+        setFocusable(true)
+        addKeyListener(new KeyBoardAdapter())
     }
 }
