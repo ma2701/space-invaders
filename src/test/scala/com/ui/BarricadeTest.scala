@@ -15,8 +15,8 @@ class BarricadeTest extends FunSuite with MockitoSugar {
     test("can get the bounding box") {
         val instance = new Barricade(new Point(0, 0))
 
-        val expectedWidth  = instance.parts.sortWith( _.width > _.width)(0).width
-        val expectedHeight = instance.parts.take(12).map(_.height).sum
+        val expectedWidth  = instance.parts.sortWith( _.getBoundingBox.width > _.getBoundingBox.width)(0).getBoundingBox.width
+        val expectedHeight = instance.parts.take(12).map(_.getBoundingBox.height).sum
 
         assertResult(new Rectangle(0,0,expectedWidth,expectedHeight) ){
             instance.boundingBox

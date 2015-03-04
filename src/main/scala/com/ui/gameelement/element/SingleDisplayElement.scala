@@ -1,6 +1,6 @@
 package com.ui.gameelement.element
 
-import java.awt.Rectangle
+import java.awt.{Color, Rectangle}
 
 object SingleDisplayElement {
     val DEFAULT_ELEMENT_WIDTH = 3
@@ -12,11 +12,13 @@ object SingleDisplayElement {
     def yOffset(y: Int, yOffset: Double): Int = y + (yOffset * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT).toInt
 }
 
-abstract class SingleDisplayElement(posX: Int,
-                              posY: Int,
-                              width: Int = SingleDisplayElement.DEFAULT_ELEMENT_WIDTH,
-                              height: Int = SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT) {
+abstract class SingleDisplayElement(
+                                       posX: Int,
+                                       posY: Int,
+                                       width: Int = SingleDisplayElement.DEFAULT_ELEMENT_WIDTH,
+                                       height: Int = SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT) {
 
+    val color:Color
     def getBoundingBox: Rectangle = {
         new Rectangle(posX, posY, width, height)
     }

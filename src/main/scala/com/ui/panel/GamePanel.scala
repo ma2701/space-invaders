@@ -41,7 +41,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         displayMissiles(gameState.missiles, g)
 
-        displayMissiles(gameState.invaderArmy, g)
+        displayInvaderArmy(gameState.invaderArmy, g)
 
         displayTotalDeathCount(gameState.totalKilledInvaders, g)
     }
@@ -102,7 +102,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayBarricades(barricades:Barricades, g:Graphics):Unit = barricades.draw(g)
     private def displayShooter (shooter:Shooter, g:Graphics):Unit = shooter.draw(g)
     private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit = missiles.draw(g)
-    private def displayMissiles (invaderArmy:InvaderArmy, g:Graphics):Unit = invaderArmy.draw(g)
+    private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit = invaderArmy.draw(g)
     private def displayTotalDeathCount(count:Int, g: Graphics): Unit = {
         count match {
             case i if(i <= 10)=> g.setColor(Color.GREEN)

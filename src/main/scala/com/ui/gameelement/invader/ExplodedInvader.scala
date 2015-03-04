@@ -1,39 +1,32 @@
 package com.ui.gameelement.invader
 
-import java.awt.{Graphics, Color, Rectangle, Point}
+import java.awt.Point
 import com.ui.gameelement.Displayable
+import com.ui.gameelement.element.SingleDisplayElement
 
 class ExplodedInvader (topLeft: Point) extends Displayable(topLeft) {
-    override val color: Color = Color.RED
+    override val parts = List[SingleDisplayElement](
+        new TopRightDiagonalTop(x,y),
+        new TopRightDiagonalBottom(x,y),
+        new TopLeftDiagonalTop(x,y),
+        new TopLeftDiagonalBottom(x,y),
+        new MiddleRightDiagonalTop(x,y),
+        new MiddleRightDiagonalMiddle(x,y),
+        new MiddleRightDiagonalBottom(x,y),
 
-    override val parts = List(
-        new TopRightDiagonalTop(x,y).getBoundingBox,
-        new TopRightDiagonalBottom(x,y).getBoundingBox,
-        new TopLeftDiagonalTop(x,y).getBoundingBox,
-        new TopLeftDiagonalBottom(x,y).getBoundingBox,
-        new MiddleRightDiagonalTop(x,y).getBoundingBox,
-        new MiddleRightDiagonalMiddle(x,y).getBoundingBox,
-        new MiddleRightDiagonalBottom(x,y).getBoundingBox,
+        new MiddleLeftDiagonalTop(x,y),
+        new MiddleLeftDiagonalMiddle(x,y),
+        new MiddleLeftDiagonalBottom(x,y),
 
-        new MiddleLeftDiagonalTop(x,y).getBoundingBox,
-        new MiddleLeftDiagonalMiddle(x,y).getBoundingBox,
-        new MiddleLeftDiagonalBottom(x,y).getBoundingBox,
+        new MidSectionRight(x,y),
+        new MidSectionLeft(x,y),
+        new BottomRightDiagonalTop(x,y),
+        new BottomRightDiagonalMiddle(x,y),
+        new BottomRightDiagonalBottom(x,y),
 
-        new MidSectionRight(x,y).getBoundingBox,
-        new MidSectionLeft(x,y).getBoundingBox,
-        new BottomRightDiagonalTop(x,y).getBoundingBox,
-        new BottomRightDiagonalMiddle(x,y).getBoundingBox,
-        new BottomRightDiagonalBottom(x,y).getBoundingBox,
-
-        new BottomLeftDiagonalTop(x,y).getBoundingBox,
-        new BottomLeftDiagonalMiddle(x,y).getBoundingBox,
-        new BottomLeftDiagonalBottom(x,y).getBoundingBox
+        new BottomLeftDiagonalTop(x,y),
+        new BottomLeftDiagonalMiddle(x,y),
+        new BottomLeftDiagonalBottom(x,y)
 
     )
-
-    override
-    def draw(g: Graphics): Unit = {
-        g.setColor(color)
-        super.draw(g)
-    }
 }

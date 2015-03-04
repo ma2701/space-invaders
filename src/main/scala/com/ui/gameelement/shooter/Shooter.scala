@@ -1,30 +1,25 @@
 package com.ui.gameelement.shooter
 
-import java.awt.{Color, Graphics, Rectangle, Point}
+import java.awt.{Rectangle, Point}
 import com.ui.gameelement.Displayable
+import com.ui.gameelement.element.SingleDisplayElement
 
 
 class Shooter(topLeft: Point) extends Displayable(topLeft){
 
-    override val color = Color.GREEN
-
-    val parts = List[Rectangle] (
-        TopSection(x, y).getBoundingBox,
-        TopSupport(x, y).getBoundingBox,
-        MidSection(x, y).getBoundingBox,
-        Bottom(x, y).getBoundingBox
+    val parts = List[SingleDisplayElement] (
+        TopSection(x, y),
+        TopSupport(x, y),
+        MidSection(x, y),
+        Bottom(x, y)
     )
 
     def tipPosition:Point = {
-        val tip: Rectangle = parts(0)
+        val tip: Rectangle = parts(0).getBoundingBox
 
         new Point(tip.getX.toInt,tip.getY.toInt)
     }
 
     def moveTo(loc:Point) : Shooter = new Shooter(loc)
 
-    override def draw(g:Graphics):Unit = {
-        g.setColor(color)
-        super.draw(g)
-    }
 }

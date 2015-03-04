@@ -2,9 +2,13 @@ package com.ui.gameelement.invader
 
 import com.ui.gameelement.element.SingleDisplayElement
 import com.ui.gameelement.element.SingleDisplayElement._
+import java.awt.Color
+import java.awt.Color._
 
 abstract class Antena(x: Int, y: Int, xOffsetFromCentre: Double, yOffsetFromCentre: Double)
-    extends SingleDisplayElement(xOffset(x, xOffsetFromCentre), yOffset(y, yOffsetFromCentre))
+    extends SingleDisplayElement(xOffset(x, xOffsetFromCentre), yOffset(y, yOffsetFromCentre)){
+    override val color:Color = WHITE
+}
 
 object TopRightAntena {
     val xOffset = 8;
@@ -46,7 +50,10 @@ object Forehead {
 case class Forehead(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Forehead.xOffset),
     yOffset(invaderPosY, Forehead.yOffset),
-    (7 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (7 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT) {
+    override val color: Color = WHITE
+}
+
 
 object EyeSocket {
     val xOffset = 1;
@@ -56,7 +63,9 @@ object EyeSocket {
 case class EyeSocket(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, EyeSocket.xOffset),
     yOffset(invaderPosY, EyeSocket.yOffset),
-    (9 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (9 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object RightEye {
     val xOffset = 7;
@@ -66,7 +75,9 @@ object RightEye {
 case class RightEye(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, RightEye.xOffset),
     yOffset(invaderPosY, RightEye.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = BLACK
+}
 
 object LeftEye {
     val xOffset = 3;
@@ -76,7 +87,9 @@ object LeftEye {
 case class LeftEye(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, LeftEye.xOffset),
     yOffset(invaderPosY, LeftEye.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = BLACK
+}
 
 object Nose {
     val xOffset = 1;
@@ -86,7 +99,9 @@ object Nose {
 case class Nose(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Nose.xOffset),
     yOffset(invaderPosY, Nose.yOffset),
-    (9 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (9 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object UpperLip {
     val xOffset = 2;
@@ -96,7 +111,9 @@ object UpperLip {
 case class UpperLip(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, UpperLip.xOffset),
     yOffset(invaderPosY, UpperLip.yOffset),
-    (7 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (7 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object Lip {
     val xOffset = 2;
@@ -105,7 +122,9 @@ object Lip {
 case class Lip(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Lip.xOffset),
     yOffset(invaderPosY, Lip.yOffset),
-    (7 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (7 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object Mouth {
     val xOffset = 3;
@@ -114,7 +133,9 @@ object Mouth {
 case class Mouth(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Mouth.xOffset),
     yOffset(invaderPosY, Mouth.yOffset),
-    (5 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (5 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = BLACK
+}
 
 object LowerLip {
     val xOffset = 3;
@@ -124,7 +145,9 @@ object LowerLip {
 case class LowerLip(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, LowerLip.xOffset),
     yOffset(invaderPosY, LowerLip.yOffset),
-    (5 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (5 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object LowerLipOpenLeft {
     val xOffset = 1;
@@ -133,7 +156,9 @@ object LowerLipOpenLeft {
 case class LowerLipOpenLeft(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, LowerLipOpenLeft.xOffset),
     yOffset(invaderPosY, LowerLipOpenLeft.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 
 object LowerLipOpenRight {
@@ -143,7 +168,9 @@ object LowerLipOpenRight {
 case class LowerLipOpenRight(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, LowerLipOpenRight.xOffset),
     yOffset(invaderPosY, LowerLipOpenRight.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 
 object LeftEar {
@@ -154,7 +181,9 @@ object LeftEar {
 case class LeftEar(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, LeftEar.xOffset),
     yOffset(invaderPosY, LeftEar.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object LeftEarUp {
     val xOffset = 0;
@@ -163,7 +192,9 @@ object LeftEarUp {
 case class LeftEarUp(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, LeftEarUp.xOffset),
     yOffset(invaderPosY, LeftEarUp.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object RightEar {
     val xOffset = 10;
@@ -173,7 +204,9 @@ object RightEar {
 case class RightEar(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, RightEar.xOffset),
     yOffset(invaderPosY, RightEar.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 
 object RightEarUp {
@@ -184,7 +217,9 @@ object RightEarUp {
 case class RightEarUp(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, RightEarUp.xOffset),
     yOffset(invaderPosY, RightEarUp.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), 3 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = WHITE
+}
 
 object Chin {
     val xOffset = 5;
@@ -194,4 +229,6 @@ object Chin {
 case class Chin(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement(
     xOffset(invaderPosX, Chin.xOffset),
     yOffset(invaderPosY, Chin.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = BLACK
+}

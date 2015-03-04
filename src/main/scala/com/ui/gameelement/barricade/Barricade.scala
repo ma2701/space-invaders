@@ -1,47 +1,40 @@
 package com.ui.gameelement.barricade
 
-import java.awt.{Color, Graphics, Rectangle, Point}
+import java.awt.{Rectangle, Point}
 import com.ui.gameelement.Displayable
+import com.ui.gameelement.element.SingleDisplayElement
 
 
 class Barricade(topLeft: Point) extends Displayable(topLeft){
-
-    override val color = Color.GREEN
-
     import com.ui.gameelement.barricade._
 
-    val parts = List[Rectangle] (
-        TopSection(x, y).getBoundingBox,
-        TopSectionTwo(x, y).getBoundingBox,
-        TopSectionThree(x, y).getBoundingBox,
+    val parts = List[SingleDisplayElement] (
+        TopSection(x, y),
+        TopSectionTwo(x, y),
+        TopSectionThree(x, y),
 
-        MidSectionOne(x, y).getBoundingBox,
-        MidSectionTwo(x, y).getBoundingBox,
-        MidSectionThree(x, y).getBoundingBox,
-        MidSectionFour(x, y).getBoundingBox,
+        MidSectionOne(x, y),
+        MidSectionTwo(x, y),
+        MidSectionThree(x, y),
+        MidSectionFour(x, y),
 
-        LeftLegOne(x, y).getBoundingBox,
-        LeftLegTwo(x, y).getBoundingBox,
-        LeftLegThree(x, y).getBoundingBox,
-        LeftLegFour(x, y).getBoundingBox,
-        LeftLegFive(x, y).getBoundingBox,
+        LeftLegOne(x, y),
+        LeftLegTwo(x, y),
+        LeftLegThree(x, y),
+        LeftLegFour(x, y),
+        LeftLegFive(x, y),
 
-        RightLegOne(x, y).getBoundingBox,
-        RightLegTwo(x, y).getBoundingBox,
-        RightLegThree(x, y).getBoundingBox,
-        RightLegFour(x, y).getBoundingBox,
-        RightLegFive(x, y).getBoundingBox
+        RightLegOne(x, y),
+        RightLegTwo(x, y),
+        RightLegThree(x, y),
+        RightLegFour(x, y),
+        RightLegFive(x, y)
     )
 
     override def boundingBox: Rectangle = {
-        val longestBlock = parts.sortWith( _.width > _.width)(0)
-        val width        = parts.take(12).map(_.height).sum
+        val longestBlock = parts.sortWith( _.getBoundingBox.width > _.getBoundingBox.width)(0)
+        val width        = parts.take(12).map(_.getBoundingBox.height).sum
 
-        new Rectangle(x, y, longestBlock.getWidth.toInt, width)
-    }
-
-    override def draw(g:Graphics):Unit = {
-        g.setColor(color)
-        super.draw(g)
+        new Rectangle(x, y, longestBlock.getBoundingBox.getWidth.toInt, width)
     }
 }

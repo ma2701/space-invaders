@@ -2,7 +2,10 @@ package com.ui.gameelement.missile
 
 import com.ui.gameelement.element.SingleDisplayElement
 import com.ui.gameelement.element.SingleDisplayElement._
+import java.awt.Color
 
 
 case class Line(topX: Int, topY: Int) extends SingleDisplayElement(
-    topX,topY, DEFAULT_ELEMENT_WIDTH, 3* DEFAULT_ELEMENT_HEIGHT)
+    topX,topY, DEFAULT_ELEMENT_WIDTH, 3* DEFAULT_ELEMENT_HEIGHT){
+    override val color: Color = Color.RED
+}
