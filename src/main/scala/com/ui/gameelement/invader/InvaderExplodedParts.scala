@@ -5,6 +5,31 @@ import com.ui.gameelement.element.SingleDisplayElement._
 import java.awt.Color
 import java.awt.Color._
 
+trait InvaderExplodedParts {
+    def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
+        new TopRightDiagonalTop(x,y),
+        new TopRightDiagonalBottom(x,y),
+        new TopLeftDiagonalTop(x,y),
+        new TopLeftDiagonalBottom(x,y),
+        new MiddleRightDiagonalTop(x,y),
+        new MiddleRightDiagonalMiddle(x,y),
+        new MiddleRightDiagonalBottom(x,y),
+
+        new MiddleLeftDiagonalTop(x,y),
+        new MiddleLeftDiagonalMiddle(x,y),
+        new MiddleLeftDiagonalBottom(x,y),
+
+        new MidSectionRight(x,y),
+        new MidSectionLeft(x,y),
+        new BottomRightDiagonalTop(x,y),
+        new BottomRightDiagonalMiddle(x,y),
+        new BottomRightDiagonalBottom(x,y),
+
+        new BottomLeftDiagonalTop(x,y),
+        new BottomLeftDiagonalMiddle(x,y),
+        new BottomLeftDiagonalBottom(x,y))
+}
+
 abstract class RedDisplayElement(x: Int, y: Int, xOffsetFromCentre: Double, yOffsetFromCentre: Double)
     extends SingleDisplayElement(xOffset(x, xOffsetFromCentre), yOffset(y, yOffsetFromCentre)){
     override val color:Color = RED

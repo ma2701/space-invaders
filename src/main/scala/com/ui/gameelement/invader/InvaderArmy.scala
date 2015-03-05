@@ -1,6 +1,7 @@
 package com.ui.gameelement.invader
 
 import java.awt.{Rectangle, Point, Graphics}
+import com.ui.gameelement.invader.types.{Invader, DeadInvader}
 import com.ui.gameelement.missile.Missile
 import ArmyCommander._
 import com.ui.gameelement.barricade.{Barricade, Barricades}
@@ -61,7 +62,7 @@ class InvaderArmy(val army: Seq[Invader]) {
         })
 
 
-    private def makeInvisible(soldier: Invader):Invader =new DeadInvader(soldier.topLeft)
+    private def makeInvisible(soldier: Invader):Invader = new DeadInvader(soldier.topLeft)
 
     def hasCollided(missile:Missile , soldier:Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)
 

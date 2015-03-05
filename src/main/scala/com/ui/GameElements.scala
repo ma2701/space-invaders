@@ -7,8 +7,8 @@ import com.ui.gameelement.shooter.Shooter
 
 
 case class GameElements(
-                                invaderArmy:InvaderArmy,
-                                missiles:MissilesInFlight,
-                                barricades:Barricades,
-                                shooter:Shooter,
-                                totalKilledInvaders:Int)
+                         invaderArmy: InvaderArmy,
+                         missiles: MissilesInFlight,
+                         barricades: Barricades,
+                         shooter: Shooter,
+                         totalKilledInvaders: Int)

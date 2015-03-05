@@ -3,6 +3,7 @@ package com.ui.gameelement.invader
 
 import java.awt.Point
 import java.awt.{Point, Graphics}
+import com.ui.gameelement.invader.types.{Invader, ExplodingInvader, DeadInvader}
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._

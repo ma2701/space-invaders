@@ -1,6 +1,7 @@
 package com.ui
 
-import com.ui.gameelement.invader.{Invader, ArmyCommander, InvaderArmy}
+import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
 import java.awt._
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._

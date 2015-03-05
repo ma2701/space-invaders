@@ -5,14 +5,9 @@ import com.ui.gameelement.Displayable
 import com.ui.gameelement.element.SingleDisplayElement
 
 
-class Shooter(topLeft: Point) extends Displayable(topLeft){
+class Shooter(topLeft: Point) extends Displayable(topLeft) with ShooterParts {
 
-    val parts = List[SingleDisplayElement] (
-        TopSection(x, y),
-        TopSupport(x, y),
-        MidSection(x, y),
-        Bottom(x, y)
-    )
+    val parts:List[SingleDisplayElement] = parts(x,y)
 
     def tipPosition:Point = {
         val tip: Rectangle = parts(0).getBoundingBox

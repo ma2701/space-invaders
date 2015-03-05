@@ -1,6 +1,7 @@
 package com.ui.gameelement.invader
 
 import java.awt.Point
+import com.ui.gameelement.invader.types.Invader
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import ArmyCommander.BUFFER_BETWEEN_SOLDIERS

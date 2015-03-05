@@ -2,6 +2,8 @@ package com.ui.gameelement.invader
 
 import java.awt.Point
 
+import com.ui.gameelement.invader.types.Invader
+
 object ArmyCommander {
     def BUFFER_BETWEEN_SOLDIERS = 10 // pixels
 

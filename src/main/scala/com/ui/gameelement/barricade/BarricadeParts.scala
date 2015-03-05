@@ -2,9 +2,33 @@ package com.ui.gameelement.barricade
 
 import com.ui.gameelement.element.SingleDisplayElement
 import com.ui.gameelement.element.SingleDisplayElement._
-import java.awt.Color
+import java.awt.{Point, Color}
 import java.awt.Color._
 
+trait BarricadeParts {
+    def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
+        TopSection(x, y),
+        TopSectionTwo(x, y),
+        TopSectionThree(x, y),
+
+        MidSectionOne(x, y),
+        MidSectionTwo(x, y),
+        MidSectionThree(x, y),
+        MidSectionFour(x, y),
+
+        LeftLegOne(x, y),
+        LeftLegTwo(x, y),
+        LeftLegThree(x, y),
+        LeftLegFour(x, y),
+        LeftLegFive(x, y),
+
+        RightLegOne(x, y),
+        RightLegTwo(x, y),
+        RightLegThree(x, y),
+        RightLegFour(x, y),
+        RightLegFive(x, y)
+    )
+}
 
 abstract class GreenDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
     extends SingleDisplayElement(x, y, xOffsetFromCentre, yOffsetFromCentre){

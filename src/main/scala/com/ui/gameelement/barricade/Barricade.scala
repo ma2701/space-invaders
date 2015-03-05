@@ -1,35 +1,14 @@
 package com.ui.gameelement.barricade
 
-import java.awt.{Rectangle, Point}
+import java.awt.{Point, Rectangle}
+
 import com.ui.gameelement.Displayable
 import com.ui.gameelement.element.SingleDisplayElement
 
 
-class Barricade(topLeft: Point) extends Displayable(topLeft){
-    import com.ui.gameelement.barricade._
+class Barricade(topLeft: Point) extends Displayable(topLeft) with BarricadeParts {
 
-    val parts = List[SingleDisplayElement] (
-        TopSection(x, y),
-        TopSectionTwo(x, y),
-        TopSectionThree(x, y),
-
-        MidSectionOne(x, y),
-        MidSectionTwo(x, y),
-        MidSectionThree(x, y),
-        MidSectionFour(x, y),
-
-        LeftLegOne(x, y),
-        LeftLegTwo(x, y),
-        LeftLegThree(x, y),
-        LeftLegFour(x, y),
-        LeftLegFive(x, y),
-
-        RightLegOne(x, y),
-        RightLegTwo(x, y),
-        RightLegThree(x, y),
-        RightLegFour(x, y),
-        RightLegFive(x, y)
-    )
+    val parts : List[SingleDisplayElement] = parts(x,y)
 
     override def boundingBox: Rectangle = {
         val longestBlock = parts.sortWith( _.getBoundingBox.width > _.getBoundingBox.width)(0)

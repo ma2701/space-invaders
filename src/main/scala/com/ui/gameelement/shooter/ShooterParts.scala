@@ -6,6 +6,15 @@ import java.awt.Color
 import java.awt.Color._
 
 
+trait ShooterParts {
+    def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
+        TopSection(x, y),
+        TopSupport(x, y),
+        MidSection(x, y),
+        Bottom(x, y)
+    )
+}
+
 abstract class GreenDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
     extends SingleDisplayElement(x, y,xOffsetFromCentre,  yOffsetFromCentre){
     override val color:Color = GREEN
