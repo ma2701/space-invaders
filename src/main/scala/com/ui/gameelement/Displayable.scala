@@ -1,8 +1,8 @@
 package com.ui.gameelement
 
-import java.awt.{Point, Color, Graphics, Rectangle}
+import java.awt.{Point, Graphics, Rectangle}
 import com.ui.SpaceInvaderGame
-import com.ui.gameelement.element.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement
 
 abstract class Displayable(val topLeft: Point){
     val parts:List[SingleDisplayElement]
@@ -21,16 +21,21 @@ abstract class Displayable(val topLeft: Point){
 
     def boundingBox: Rectangle = {
         val longestBlock = parts.sortWith( _.getBoundingBox.width > _.getBoundingBox.width)(0)
-        val width        = parts.map(_.getBoundingBox.height).sum
+        val height       = parts.map(_.getBoundingBox.height).sum
 
-        new Rectangle(x, y, longestBlock.getBoundingBox.getWidth.toInt, width)
+
+        new Rectangle(x, y, longestBlock.getBoundingBox.getWidth.toInt, height)
     }
 
     protected def drawBox(g: Graphics, displayElement: SingleDisplayElement): Unit = {
         g.setColor(displayElement.color)
-        g.fillRect(displayElement.getBoundingBox.x,
-            displayElement.getBoundingBox.y, displayElement.getBoundingBox.width, displayElement.getBoundingBox.height)
+
+        g.fillRect(
+            displayElement.getBoundingBox.x,
+            displayElement.getBoundingBox.y,
+            displayElement.getBoundingBox.width,
+            displayElement.getBoundingBox.height)
     }
 
-    override def toString:String = s"position: ${this.topLeft} bounding box: ${boundingBox}"
+    override def toString:String = s"${this.getClass.getName}: position: ${this.topLeft} bounding box: ${boundingBox}"
 }

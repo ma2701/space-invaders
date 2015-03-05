@@ -1,7 +1,7 @@
 package com.ui.gameelement.invader
 
-import com.ui.gameelement.element.SingleDisplayElement
-import com.ui.gameelement.element.SingleDisplayElement._
+import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement._
 import java.awt.Color
 import java.awt.Color._
 
@@ -211,31 +211,3 @@ case class BottomLeftDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends 
     xOffset(invaderPosX, BottomLeftDiagonalBottom.xOffset),
     yOffset(invaderPosY, BottomLeftDiagonalBottom.yOffset),
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
-
-
-
-case class InvaderExploded(x:Int, y:Int) {
-    val parts = List (
-    new TopRightDiagonalTop(x,y).getBoundingBox,
-    new TopRightDiagonalBottom(x,y).getBoundingBox,
-    new TopLeftDiagonalTop(x,y).getBoundingBox,
-    new TopLeftDiagonalBottom(x,y).getBoundingBox,
-    new MiddleRightDiagonalTop(x,y).getBoundingBox,
-    new MiddleRightDiagonalMiddle(x,y).getBoundingBox,
-    new MiddleRightDiagonalBottom(x,y).getBoundingBox,
-
-    new MiddleLeftDiagonalTop(x,y).getBoundingBox,
-    new MiddleLeftDiagonalMiddle(x,y).getBoundingBox,
-    new MiddleLeftDiagonalBottom(x,y).getBoundingBox,
-
-    new MidSectionRight(x,y).getBoundingBox,
-    new MidSectionLeft(x,y).getBoundingBox,
-    new BottomRightDiagonalTop(x,y).getBoundingBox,
-    new BottomRightDiagonalMiddle(x,y).getBoundingBox,
-    new BottomRightDiagonalBottom(x,y).getBoundingBox,
-
-    new BottomLeftDiagonalTop(x,y).getBoundingBox,
-    new BottomLeftDiagonalMiddle(x,y).getBoundingBox,
-    new BottomLeftDiagonalBottom(x,y).getBoundingBox
-    )
-}

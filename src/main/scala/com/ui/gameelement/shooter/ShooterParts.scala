@@ -1,7 +1,7 @@
 package com.ui.gameelement.shooter
 
-import com.ui.gameelement.element.SingleDisplayElement
-import com.ui.gameelement.element.SingleDisplayElement._
+import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement._
 import java.awt.Color
 import java.awt.Color._
 

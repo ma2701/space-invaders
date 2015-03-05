@@ -3,8 +3,8 @@ package com.ui.gameelement.invader
 import java.awt.Point
 
 import com.ui.gameelement.Displayable
-import com.ui.gameelement.element.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement
 
-class ExcitedInvader (topLeft: Point) extends Displayable(topLeft) with ExcitedInvaderParts {
+class InvaderDisplayItem (topLeft: Point) extends Displayable(topLeft) with InvaderParts {
     override val parts:List[SingleDisplayElement] = parts(x,y)
 }

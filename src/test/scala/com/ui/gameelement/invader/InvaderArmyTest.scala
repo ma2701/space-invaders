@@ -3,7 +3,7 @@ package com.ui.gameelement.invader
 
 import java.awt.Point
 import java.awt.{Point, Graphics}
-import com.ui.gameelement.invader.types.{Invader, ExplodingInvader, DeadInvader}
+import com.ui.gameelement.invader.types.{Invader, ExplodedInvader, DeadInvader}
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
@@ -91,7 +91,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
     }
 
     test("given one exploding invader when exploding to long enough then makeDeadInvadersInvisible will make it invisible") {
-        val soldier= new ExplodingInvader(new Point(0, 0), System.currentTimeMillis() - 1000)
+        val soldier= new ExplodedInvader(new Point(0, 0), System.currentTimeMillis() - 1000)
         val invaderArmy = new InvaderArmy(List(soldier))
 
         val newArmy     = invaderArmy.makeDeadInvadersInvisible

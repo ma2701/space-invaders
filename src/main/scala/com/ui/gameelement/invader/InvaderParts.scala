@@ -1,7 +1,7 @@
 package com.ui.gameelement.invader
 
-import com.ui.gameelement.element.SingleDisplayElement
-import com.ui.gameelement.element.SingleDisplayElement._
+import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement._
 import java.awt.Color
 import java.awt.Color._
 
@@ -27,7 +27,6 @@ trait InvaderParts {
     new RightEar(x, y),
     new Chin(x, y)
   )
-
 }
 
 trait ExcitedInvaderParts {
@@ -48,10 +47,6 @@ trait ExcitedInvaderParts {
     new Mouth(x, y),
     new LowerLipOpenLeft(x, y),
     new LowerLipOpenRight(x, y),
-
-    new LeftEar(x, y),
-    new RightEar(x, y),
-
     new LeftEarUp(x, y),
     new RightEarUp(x, y),
 

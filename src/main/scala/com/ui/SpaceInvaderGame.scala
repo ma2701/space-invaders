@@ -87,7 +87,7 @@ class SpaceInvaderGame() {
 
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {
-            t => t._2.markHitByMissile
+            t =>t._2.markHitByMissile
         }
     }
 

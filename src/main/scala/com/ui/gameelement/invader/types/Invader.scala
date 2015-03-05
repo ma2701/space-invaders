@@ -3,37 +3,39 @@ package com.ui.gameelement.invader.types
 import java.awt.{Graphics, Point, Rectangle}
 
 import com.ui.gameelement.Displayable
-import com.ui.gameelement.element._
+import com.ui.gameelement.displayelement._
 import com.ui.gameelement.invader.InvaderParts
 
 
 object Invader {
-  val INVADER_WIDTH: Int = 11 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
+  val INVADER_WIDTH: Int  = 11 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
   val INVADER_HEIGHT: Int = 8 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
 case class Invader(tl: Point,
                    var isHit: Boolean = false) extends Displayable(tl) with InvaderParts {
 
-  import com.ui.gameelement.invader.types.Invader._
-
   override val parts: List[SingleDisplayElement] = parts(x, y)
 
-  def moveTo(point: Point): Invader =
+    /**
+     * if this one is hit by a missile then when moving turn it into an exploded invader (well it's hit so it should explode..)
+     * else return an excited invader. This will make the invader animated on the screen
+     *
+     * @param point: the location to move this invader to
+     * @return     : new  invader at a new location
+     */
+   def moveTo(point: Point): Invader =
     if (isHit)
-      new ExplodingInvader(topLeft)
+      new ExplodedInvader(topLeft)
     else
-      new ExcitingInvader(point, this.isHit)
+      new ExcitedInvader(point, isHit)
 
   def markHitByMissile = isHit = true
 
   def isHitByMissile = isHit == true
 
-  override def boundingBox: Rectangle = new Rectangle(x, y, INVADER_WIDTH, INVADER_HEIGHT)
+  override def boundingBox: Rectangle = new Rectangle(x,y,Invader.INVADER_WIDTH, Invader.INVADER_HEIGHT)
 
   def beenExplodingForTooLong(currentTime: Long): Boolean = false
 
-  protected def drawBox(g: Graphics, rect: Rectangle): Unit = {
-    g.fillRect(rect.getX.toInt, rect.getY.toInt, rect.getWidth.toInt, rect.getHeight.toInt)
-  }
 }

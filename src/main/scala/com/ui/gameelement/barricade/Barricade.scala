@@ -3,7 +3,7 @@ package com.ui.gameelement.barricade
 import java.awt.{Point, Rectangle}
 
 import com.ui.gameelement.Displayable
-import com.ui.gameelement.element.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement
 
 
 class Barricade(topLeft: Point) extends Displayable(topLeft) with BarricadeParts {

@@ -1,9 +1,9 @@
-package com.ui.gameelement.element
+package com.ui.gameelement.displayelement
 
 import java.awt.{Color, Rectangle}
 
 object SingleDisplayElement {
-    val DEFAULT_ELEMENT_WIDTH = 3
+    val DEFAULT_ELEMENT_WIDTH  = 4
     // PIXELS
     val DEFAULT_ELEMENT_HEIGHT = 3
 

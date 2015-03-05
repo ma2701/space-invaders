@@ -2,7 +2,7 @@ package com.ui.gameelement.shooter
 
 import java.awt.{Rectangle, Point}
 import com.ui.gameelement.Displayable
-import com.ui.gameelement.element.SingleDisplayElement
+import com.ui.gameelement.displayelement.SingleDisplayElement
 
 
 class Shooter(topLeft: Point) extends Displayable(topLeft) with ShooterParts {
