@@ -34,7 +34,10 @@ class SpaceInvaderGame() {
         barricades       = updatedBarricadePosition(screenWidth, screenHeight)
         shooter          = updateShooterPositionIfRequired(screenWidth, screenHeight)
         missilesInFlight = updateMissilesPosition
+        droppingBombs    = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBombs)
         droppingBombs    = updateBombsPosition(screenHeight)
+
+        println(droppingBombs.getBombCount)
 
         val deadInvaderMissileTuple      = invaderArmy.findShotInvaders(missilesInFlight.missiles)
         val hitBarricadesAndMissileTuple = invaderArmy.findBarricadesHitWithMissiles(missilesInFlight.missiles, barricades)

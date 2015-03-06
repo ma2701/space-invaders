@@ -4,8 +4,7 @@ import java.awt.{Rectangle, Point}
 import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement.SingleDisplayElement
 
-
-class Shooter(topLeft: Point) extends Displayable(topLeft) with ShooterParts {
+case class Shooter(tplft: Point) extends Displayable(tplft) with ShooterParts {
 
     val parts:List[SingleDisplayElement] = parts(x,y)
 

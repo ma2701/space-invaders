@@ -3,6 +3,7 @@ package com.ui.gameelement.invader.types
 import java.awt.{Graphics, Point, Rectangle}
 
 import com.ui.gameelement.invader.ExplodedInvaderDisplayItem
+import com.ui.util.RandomNumberGenerator
 
 class ExplodedInvader(tl:Point,
                        val explosionTime:Long= System.currentTimeMillis()) extends Invader(tl)  {
@@ -16,4 +17,6 @@ class ExplodedInvader(tl:Point,
      * if the explosion has been displayed on screen long enough
      */
     override def beenExplodingForTooLong(currentTime:Long):Boolean = (currentTime - explosionTime) >= 333
+
+    override def feelLikeDroppingABomb: Boolean = false
 }

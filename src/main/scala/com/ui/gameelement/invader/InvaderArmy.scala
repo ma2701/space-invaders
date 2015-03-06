@@ -5,6 +5,7 @@ import com.ui.gameelement.invader.types.{Invader, DeadInvader}
 import com.ui.gameelement.missile.Missile
 import ArmyCommander._
 import com.ui.gameelement.barricade.{Barricade, Barricades}
+import com.ui.gameelement.bomb.Bomb
 
 
 class InvaderArmy(val army: Seq[Invader]) {
@@ -61,8 +62,15 @@ class InvaderArmy(val army: Seq[Invader]) {
                 else invader
         })
 
-
-    private def makeInvisible(soldier: Invader):Invader = new DeadInvader(soldier.topLeft)
+    def dropRandomBombs:Seq[Bomb] = {
+        army.foldLeft(Seq[Bomb]()) { (acc , invader) =>
+            if(invader.feelLikeDroppingABomb) {
+                new Bomb(new Point(100,100)) +: acc
+            }else {
+                acc
+            }
+        }
+    }
 
     def hasCollided(missile:Missile , soldier:Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)
 
@@ -86,4 +94,6 @@ class InvaderArmy(val army: Seq[Invader]) {
     }
 
     private def now:Long = System.currentTimeMillis()
+
+    private def makeInvisible(soldier: Invader):Invader = new DeadInvader(soldier.topLeft)
 }

@@ -112,6 +112,14 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
         assert(newArmy.army(0).isInstanceOf[Invader])
     }
 
+    test("given an army of all dead invader soldiers then call to dropRandomBombs returns empty array of bombs..the dead can't shoot ") {
+        val deadInvader= new DeadInvader(new Point(0, 0))
+        val invaderArmy = new InvaderArmy(List(deadInvader))
+
+        assertResult(Nil){
+            invaderArmy.dropRandomBombs
+        }
+    }
 
 }
 

@@ -12,4 +12,16 @@ class RandomNumberGeneratorTest extends FunSuite {
         assert(rand.next(range).isInstanceOf[Int])
     }
 
+    test("given a random number generator then can generate random boolean values") {
+        val rand = new RandomNumberGenerator
+
+        val vals = 1.to(100).map { i =>
+            rand.randomTrueOrFalse
+        }
+
+        assertResult(100){
+            vals.filter(_ ==true).size+vals.filter( _ ==false).size
+        }
+    }
+
 }

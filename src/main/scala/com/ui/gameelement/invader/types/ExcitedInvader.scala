@@ -13,4 +13,5 @@ class ExcitedInvader(tl:Point, isHit:Boolean) extends Invader(tl, isHit) {
             new Invader(point, super.isHitByMissile )
 
     override def draw(g:Graphics) :Unit = new ExcitedInvaderDisplayItem(topLeft).draw(g)
+
 }

@@ -6,7 +6,7 @@ import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement.SingleDisplayElement
 
 
-class Bomb(topLeft: Point) extends Displayable(topLeft) with BombParts {
+case class Bomb(tplft: Point) extends Displayable(tplft) with BombParts {
 
     val parts : List[SingleDisplayElement] = parts(x,y)
 

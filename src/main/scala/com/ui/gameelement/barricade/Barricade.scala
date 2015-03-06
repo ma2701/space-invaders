@@ -6,7 +6,7 @@ import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement.SingleDisplayElement
 
 
-class Barricade(topLeft: Point) extends Displayable(topLeft) with BarricadeParts {
+case class Barricade(tplft: Point) extends Displayable(tplft) with BarricadeParts {
 
     val parts : List[SingleDisplayElement] = parts(x,y)
 
