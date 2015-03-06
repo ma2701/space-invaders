@@ -10,7 +10,7 @@ class MissilePositionDirectorTest extends FunSuite {
         val missile = new Missile(new Point(0,0))
 
         assertResult(new Point(0,0 - MissilePositionDirector.SINGLE_HOP_IN_Y)) {
-            MissilePositionDirector.newPositionForMissile(missile)
+            MissilePositionDirector.nextPosition(missile)
         }
     }
 }

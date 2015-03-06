@@ -12,6 +12,7 @@ import scala.util.Try
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
+import com.ui.gameelement.bomb.DroppingBombs
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
@@ -24,6 +25,7 @@ class SpaceInvaderGame() {
     private var barricades             = new Barricades(initialPosition)
     private var shooter                = new Shooter(initialPosition)
     private var missilesInFlight       = new MissilesInFlight()
+    private var droppingBombs          = new DroppingBombs()
 
     def updatedGameElements(screenWidth: Int, screenHeight: Int): GameElements = {
 
@@ -32,6 +34,7 @@ class SpaceInvaderGame() {
         barricades       = updatedBarricadePosition(screenWidth, screenHeight)
         shooter          = updateShooterPositionIfRequired(screenWidth, screenHeight)
         missilesInFlight = updateMissilesPosition
+        droppingBombs    = updateBombsPosition(screenHeight)
 
         val deadInvaderMissileTuple      = invaderArmy.findShotInvaders(missilesInFlight.missiles)
         val hitBarricadesAndMissileTuple = invaderArmy.findBarricadesHitWithMissiles(missilesInFlight.missiles, barricades)
@@ -71,6 +74,8 @@ class SpaceInvaderGame() {
      * and draws the missiles
      **/
     def updateMissilesPosition: MissilesInFlight =  missilesInFlight.updatePosition.removeOffScreenMissile
+
+    def updateBombsPosition(windowHeight:Int ): DroppingBombs  =  droppingBombs.updatePosition.removeOffScreenBombs(windowHeight)
 
     def getShooterPosition: Option[Point] = Try(shooter.tipPosition).toOption
 

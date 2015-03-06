@@ -2,7 +2,7 @@ package com.ui.gameelement.barricade
 
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import java.awt.{Point, Color}
+import java.awt.Color
 import java.awt.Color._
 
 trait BarricadeParts {

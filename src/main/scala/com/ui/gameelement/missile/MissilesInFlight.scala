@@ -16,7 +16,7 @@ class MissilesInFlight(val missiles: Seq[Missile] = Nil) {
         new MissilesInFlight(
             missiles.foldRight(Seq[Missile]()) {
                 (missile, acc) =>
-                    val loc = MissilePositionDirector.newPositionForMissile(missile)
+                    val loc = MissilePositionDirector.nextPosition(missile)
                     missile.moveTo(loc) +: acc
             }
         )

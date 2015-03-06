@@ -111,6 +111,8 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
 
         assert(newArmy.army(0).isInstanceOf[Invader])
     }
+
+
 }
 
 
