@@ -101,10 +101,10 @@ class InvaderArmy(val army: Seq[Invader]) {
     def allDeadInvaders: Seq[Invader] = army.filter(_.isInstanceOf[DeadInvader])
 
     def getBoundingBox: Rectangle = {
-        val topLeftSoldier = army(0)
-        val topLeftCorner = topLeftSoldier.topLeft
-        val width = topLeftSoldier.boundingBox.width * ArmyCommander.COL_CNT
-        val height = topLeftSoldier.boundingBox.height * ArmyCommander.ROW_CNT
+        val topLeftMostSoldier = army(0)
+        val topLeftCorner = topLeftMostSoldier.topLeft
+        val width  = armyWidth(Invader.INVADER_WIDTH  )
+        val height = armyHeight(Invader.INVADER_HEIGHT)
 
         new Rectangle(topLeftCorner.x, topLeftCorner.y, width, height)
     }

@@ -5,55 +5,6 @@ import com.ui.gameelement.displayelement.SingleDisplayElement._
 import java.awt.Color
 import java.awt.Color._
 
-trait InvaderParts {
-  def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
-    new TopRightAntena(x, y),
-    new BottomRightAntena(x, y),
-
-    new TopLeftAntena(x, y),
-    new BottomLeftAntena(x, y),
-
-    new Forehead(x, y),
-    new EyeSocket(x, y),
-    new RightEye(x, y),
-    new LeftEye(x, y),
-    new Nose(x, y),
-    new UpperLip(x, y),
-    new Lip(x, y),
-    new Mouth(x, y),
-    new LowerLip(x, y),
-
-    new LeftEar(x, y),
-    new RightEar(x, y),
-    new Chin(x, y)
-  )
-}
-
-trait ExcitedInvaderParts {
-  def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
-    new TopRightAntena(x, y),
-    new BottomRightAntena(x, y),
-
-    new TopLeftAntena(x, y),
-    new BottomLeftAntena(x, y),
-
-    new Forehead(x, y),
-    new EyeSocket(x, y),
-    new RightEye(x, y),
-    new LeftEye(x, y),
-    new Nose(x, y),
-    new UpperLip(x, y),
-    new Lip(x, y),
-    new Mouth(x, y),
-    new LowerLipOpenLeft(x, y),
-    new LowerLipOpenRight(x, y),
-    new LeftEarUp(x, y),
-    new RightEarUp(x, y),
-
-    new Chin(x, y)
-  )
-}
-
 abstract class Antena(x: Int, y: Int, xOffsetFromCentre: Double, yOffsetFromCentre: Double)
   extends SingleDisplayElement(xOffset(x, xOffsetFromCentre), yOffset(y, yOffsetFromCentre)) {
   override val color: Color = WHITE
@@ -285,4 +236,53 @@ case class Chin(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement
   yOffset(invaderPosY, Chin.yOffset),
   (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT) {
   override val color: Color = BLACK
+}
+
+trait InvaderParts {
+    def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
+        new TopRightAntena(x, y),
+        new BottomRightAntena(x, y),
+
+        new TopLeftAntena(x, y),
+        new BottomLeftAntena(x, y),
+
+        new Forehead(x, y),
+        new EyeSocket(x, y),
+        new RightEye(x, y),
+        new LeftEye(x, y),
+        new Nose(x, y),
+        new UpperLip(x, y),
+        new Lip(x, y),
+        new Mouth(x, y),
+        new LowerLip(x, y),
+
+        new LeftEar(x, y),
+        new RightEar(x, y),
+        new Chin(x, y)
+    )
+}
+
+trait ExcitedInvaderParts {
+    def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
+        new TopRightAntena(x, y),
+        new BottomRightAntena(x, y),
+
+        new TopLeftAntena(x, y),
+        new BottomLeftAntena(x, y),
+
+        new Forehead(x, y),
+        new EyeSocket(x, y),
+        new RightEye(x, y),
+        new LeftEye(x, y),
+        new Nose(x, y),
+        new UpperLip(x, y),
+        new Lip(x, y),
+        new Mouth(x, y),
+        new LowerLipOpenLeft(x, y),
+        new LowerLipOpenRight(x, y),
+        new LeftEarUp(x, y),
+        new RightEarUp(x, y),
+
+        new Chin(x, y)
+    )
 }

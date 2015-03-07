@@ -1,7 +1,6 @@
 
 package com.ui.gameelement.invader
 
-import java.awt.Point
 import java.awt.{Point, Graphics}
 import com.ui.gameelement.invader.types.{Invader, ExplodedInvader, DeadInvader}
 import org.scalatest.FunSuite
@@ -58,6 +57,9 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
 
         assertResult(startingPoint.x) {
             invaderArmy.getBoundingBox.getX
+        }
+        assertResult(ArmyCommander.armyWidth(Invader.INVADER_WIDTH)) {
+            invaderArmy.getBoundingBox.width
         }
     }
 

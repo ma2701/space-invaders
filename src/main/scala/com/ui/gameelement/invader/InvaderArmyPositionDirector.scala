@@ -58,7 +58,7 @@ object InvaderArmyPositionDirector {
     }
 
     private def hasReachedRightWall(armyBoundingBox: Rectangle, displayWindow: Rectangle): Boolean =
-        currentPosition.x + armyBoundingBox.x > displayWindow.width
+        currentPosition.x + armyBoundingBox.width > displayWindow.width
 
     private def moveUpOrDown: Point = {
         import GeneralArmyDirection._

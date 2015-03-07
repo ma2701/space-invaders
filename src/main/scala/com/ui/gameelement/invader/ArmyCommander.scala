@@ -37,4 +37,10 @@ object ArmyCommander {
             invaderPositionTuple =>
                 invaderPositionTuple._1.moveTo(invaderPositionTuple._2)
         }
+    
+    def totalHorizontalBufferSize:Int = BUFFER_BETWEEN_SOLDIERS * COL_CNT
+    def totalVerticalBufferSize:Int   = BUFFER_BETWEEN_SOLDIERS * ROW_CNT
+
+    def armyWidth(singleSoldierWidth:Int)   = singleSoldierWidth  *COL_CNT + totalHorizontalBufferSize
+    def armyHeight(singleSoldierHeight:Int) = singleSoldierHeight *ROW_CNT + totalVerticalBufferSize
 }
