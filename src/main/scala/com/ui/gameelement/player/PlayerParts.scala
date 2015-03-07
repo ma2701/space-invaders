@@ -1,4 +1,4 @@
-package com.ui.gameelement.shooter
+package com.ui.gameelement.player
 
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.displayelement.SingleDisplayElement._
@@ -6,7 +6,7 @@ import java.awt.Color
 import java.awt.Color._
 
 
-trait ShooterParts {
+trait PlayerParts {
     def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
         TopSection(x, y),
         TopSupport(x, y),

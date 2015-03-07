@@ -6,8 +6,8 @@ import java.awt._
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.gameelement.barricade.{Barricade, Barricades}
-import com.ui.gameelement.shooter.{ShooterPositionDirector, Shooter}
-import com.ui.gameelement.shooter.ShooterPositionDirector._
+import com.ui.gameelement.player.{PlayerPositionDirector, Player}
+import com.ui.gameelement.player.PlayerPositionDirector._
 import scala.util.Try
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
@@ -23,7 +23,7 @@ class SpaceInvaderGame() {
     
     private var invaderArmy            = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
     private var barricades             = new Barricades(initialPosition)
-    private var shooter                = new Shooter(initialPosition)
+    private var player                 = new Player(initialPosition)
     private var missilesInFlight       = new MissilesInFlight()
     private var droppingBombs          = new DroppingBombs()
 
@@ -32,12 +32,10 @@ class SpaceInvaderGame() {
         val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
 
         barricades       = updatedBarricadePosition(screenWidth, screenHeight)
-        shooter          = updateShooterPositionIfRequired(screenWidth, screenHeight)
+        player           = updatePlayerPositionIfRequired(screenWidth, screenHeight)
         missilesInFlight = updateMissilesPosition
-        droppingBombs    = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBombs)
+        droppingBombs    = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.tipPosition))
         droppingBombs    = updateBombsPosition(screenHeight)
-
-        println(droppingBombs.getBombCount)
 
         val deadInvaderMissileTuple      = invaderArmy.findShotInvaders(missilesInFlight.missiles)
         val hitBarricadesAndMissileTuple = invaderArmy.findBarricadesHitWithMissiles(missilesInFlight.missiles, barricades)
@@ -56,7 +54,7 @@ class SpaceInvaderGame() {
             invaderArmy,
             missilesInFlight,
             barricades,
-            shooter,
+            player,droppingBombs,
             invaderArmy.allDeadInvaders.size )
     }
 
@@ -65,10 +63,10 @@ class SpaceInvaderGame() {
         barricades.moveTo(barricadeLocation)
     }
 
-    def updateShooterPositionIfRequired(screenWidth: Int, screenHeight: Int) : Shooter =
-        shooter.topLeft match {
-        case p:Point if(p.x==0 && p.y==0) => shooter.moveTo(shooterInitialPosition(screenWidth, screenHeight))
-        case _                            => shooter
+    def updatePlayerPositionIfRequired(screenWidth: Int, screenHeight: Int) : Player =
+        player.topLeft match {
+        case p:Point if(p.x==0 && p.y==0) => player.moveTo(playerInitialPosition(screenWidth, screenHeight))
+        case _                            => player
 
     }
 
@@ -80,18 +78,18 @@ class SpaceInvaderGame() {
 
     def updateBombsPosition(windowHeight:Int ): DroppingBombs  =  droppingBombs.updatePosition.removeOffScreenBombs(windowHeight)
 
-    def getShooterPosition: Option[Point] = Try(shooter.tipPosition).toOption
+    def getPlayerPosition: Option[Point] = Try(player.tipPosition).toOption
 
     def shootSingleMissileFrom(position: Point): Unit =
         if(isTimeToShootOneMissile(now) ){
             missilesInFlight = missilesInFlight.addToMissiles(new Missile(position))
         }
 
-    def moveShooterLeft: Unit =
-        shooter = ShooterPositionDirector.newPositionToLeft(shooter).map(shooter.moveTo).getOrElse(shooter)
+    def movePlayerLeft: Unit =
+        player = PlayerPositionDirector.newPositionToLeft(player).map(player.moveTo).getOrElse(player)
 
-    def moveShooterRight(screenWidth: Int): Unit =
-        shooter = ShooterPositionDirector.newPositionToRight(shooter, screenWidth).map(shooter.moveTo).getOrElse(shooter)
+    def movePlayerRight(screenWidth: Int): Unit =
+        player = PlayerPositionDirector.newPositionToRight(player, screenWidth).map(player.moveTo).getOrElse(player)
 
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {

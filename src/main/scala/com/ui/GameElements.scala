@@ -3,12 +3,14 @@ package com.ui
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.shooter.Shooter
+import com.ui.gameelement.player.Player
+import com.ui.gameelement.bomb.DroppingBombs
 
 
 case class GameElements(
                          invaderArmy: InvaderArmy,
                          missiles: MissilesInFlight,
                          barricades: Barricades,
-                         shooter: Shooter,
+                         player: Player,
+                         bombs:DroppingBombs,
                          totalKilledInvaders: Int)

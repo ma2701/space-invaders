@@ -13,9 +13,10 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.shooter.Shooter
+import com.ui.gameelement.player.Player
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
+import com.ui.gameelement.bomb.DroppingBombs
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
@@ -37,9 +38,11 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         displayBarricades(gameState.barricades, g)
 
-        displayShooter(gameState.shooter, g)
+        displayShooter(gameState.player, g)
 
         displayMissiles(gameState.missiles, g)
+
+        displayBombs(gameState.bombs, g)
 
         displayInvaderArmy(gameState.invaderArmy, g)
 
@@ -89,19 +92,20 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         def keyPressed(e:KeyEvent) {
             e.getKeyCode match {
                 case KeyEvent.VK_SPACE =>
-                    spaceInvaderGame.getShooterPosition.map(spaceInvaderGame.shootSingleMissileFrom)
+                    spaceInvaderGame.getPlayerPosition.map(spaceInvaderGame.shootSingleMissileFrom)
                 case KeyEvent.VK_RIGHT =>
-                    spaceInvaderGame.moveShooterRight(getWidth)
+                    spaceInvaderGame.movePlayerRight(getWidth)
                 case KeyEvent.VK_LEFT  =>
-                    spaceInvaderGame.moveShooterLeft
+                    spaceInvaderGame.movePlayerLeft
                 case _ => Unit
             }
         }
     }
 
     private def displayBarricades(barricades:Barricades, g:Graphics):Unit = barricades.draw(g)
-    private def displayShooter (shooter:Shooter, g:Graphics):Unit = shooter.draw(g)
+    private def displayShooter (shooter:Player, g:Graphics):Unit = shooter.draw(g)
     private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit = missiles.draw(g)
+    private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit = invaderArmy.draw(g)
     private def displayTotalDeathCount(count:Int, g: Graphics): Unit = {
         count match {

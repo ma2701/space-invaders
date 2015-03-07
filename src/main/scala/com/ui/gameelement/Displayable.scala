@@ -27,6 +27,8 @@ abstract class Displayable(val topLeft: Point){
         new Rectangle(x, y, longestBlock.getBoundingBox.getWidth.toInt, height)
     }
 
+    def midPoint:Point = new Point(x+(boundingBox.width/2), y+(boundingBox.height/2))
+
     protected def drawBox(g: Graphics, displayElement: SingleDisplayElement): Unit = {
         g.setColor(displayElement.color)
 
