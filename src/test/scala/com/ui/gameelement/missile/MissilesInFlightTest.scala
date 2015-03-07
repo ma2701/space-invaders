@@ -17,7 +17,7 @@ class MissilesInFlightTest extends FunSuite {
         assertResult(1){
             new MissilesInFlight()
             .addToMissiles(new Missile(new Point(0,0)))
-            .getMissileCount
+            .missileCount
         }
     }
 
@@ -29,7 +29,7 @@ class MissilesInFlightTest extends FunSuite {
         val missilesInFlight= new MissilesInFlight(missiles).removeMissile(missiles(0))
 
         assertResult(1){
-            missilesInFlight.getMissileCount
+            missilesInFlight.missileCount
         }
         assertResult(initialMissilePosition){
             missilesInFlight.missiles(0).topLeft

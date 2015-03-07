@@ -17,6 +17,7 @@ import com.ui.gameelement.player.Player
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.bomb.DroppingBombs
+import com.ui.gameelement.GameElementPositionDirector
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
@@ -34,19 +35,19 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         super.paintComponent(g)
 
-        val gameState = spaceInvaderGame.updatedGameElements(this.getWidth, this.getHeight)
+        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionDirector(this.getWidth, this.getHeight))
 
         displayBarricades(gameState.barricades, g)
 
         displayShooter(gameState.player, g)
 
-        displayMissiles(gameState.missiles, g)
+        displayMissiles(gameState.missilesInFlight, g)
 
-        displayBombs(gameState.bombs, g)
+        displayBombs(gameState.droppingBombs, g)
 
         displayInvaderArmy(gameState.invaderArmy, g)
 
-        displayTotalDeathCount(gameState.totalKilledInvaders, g)
+        displayTotalDeathCount(spaceInvaderGame.invaderKillCount, g)
     }
 
     override

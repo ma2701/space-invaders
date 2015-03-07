@@ -29,7 +29,7 @@ class MissilesInFlight(val missiles: Seq[Missile] = Nil) {
 
     def addToMissiles(missile: Missile): MissilesInFlight = new MissilesInFlight(missile +: missiles)
 
-    def getMissileCount: Int = missiles.size
+    def missileCount: Int = missiles.size
 
     def draw(g: Graphics): Unit = missiles.foreach(_.draw(g))
 

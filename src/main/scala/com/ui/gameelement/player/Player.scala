@@ -8,7 +8,7 @@ case class Player(tplft: Point) extends Displayable(tplft) with PlayerParts {
 
     val parts:List[SingleDisplayElement] = parts(x,y)
 
-    def tipPosition:Point = {
+    def shootingTipPosition:Point = {
         val tip: Rectangle = parts(0).getBoundingBox
 
         new Point(tip.getX.toInt,tip.getY.toInt)

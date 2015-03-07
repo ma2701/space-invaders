@@ -10,13 +10,12 @@ object PlayerPositionDirector {
     
     def newPositionToLeft(player:Player):Option[Point] =
         if(!hasReachedLeftEdgeOfScreen(player)) {
-            Some(getNewLocationForShooter(player, -SINGLE_HOP_IN_X))
+            Some(getNewPositionForPlayer(player, -SINGLE_HOP_IN_X))
         } else None
-
 
     def newPositionToRight(player:Player, screenWidth:Int):Option[Point]  =
         if(!hasReachedRightEdgeOfScreen(player, screenWidth)) {
-            Some(getNewLocationForShooter(player, SINGLE_HOP_IN_X))
+            Some(getNewPositionForPlayer(player, SINGLE_HOP_IN_X))
         } else None
 
     private def hasReachedRightEdgeOfScreen(player: Player, screenWidth: Int): Boolean =
@@ -24,7 +23,7 @@ object PlayerPositionDirector {
 
     private def hasReachedLeftEdgeOfScreen(player: Player): Boolean = player.topLeft.x - SINGLE_HOP_IN_X < 0
 
-    private def getNewLocationForShooter(player:Player, dir:Int ):Point = new Point(player.topLeft.x + dir, player.topLeft.y)
+    private def getNewPositionForPlayer(player:Player, dir:Int ):Point = new Point(player.topLeft.x + dir, player.topLeft.y)
 
 }
 

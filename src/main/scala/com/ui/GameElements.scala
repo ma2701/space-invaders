@@ -9,8 +9,7 @@ import com.ui.gameelement.bomb.DroppingBombs
 
 case class GameElements(
                          invaderArmy: InvaderArmy,
-                         missiles: MissilesInFlight,
+                         missilesInFlight: MissilesInFlight,
                          barricades: Barricades,
                          player: Player,
-                         bombs:DroppingBombs,
-                         totalKilledInvaders: Int)
+                         droppingBombs:DroppingBombs)
