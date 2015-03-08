@@ -17,63 +17,35 @@ class CollisionDetection {
             false)
     }
     
-    private def findShotInvaders(missiles: Seq[Missile], army:Seq[Invader]):Seq[(Missile, Invader)] = {
-        def findAHit(missile: Missile, soldiers: Seq[Invader]): Option[Invader] = {
-            if (soldiers == Nil) None
-            else if (hasCollided(missile, soldiers.head)) Some(soldiers.head)
-            else findAHit(missile, soldiers.tail)
-        }
+    private def findShotInvaders(missiles: Seq[Missile], army:Seq[Invader]):Seq[(Missile, Invader)] =
+        findCollidedItems(missiles, army)
 
-        missiles.foldLeft(List[(Missile, Invader)]()) {
-            (acc, missile) =>
-                findAHit(missile, army) match {
-                    case Some(soldier) => (missile, soldier) :: acc
-                    case None => acc
-                }
-        }
-    }
+    private def findBarricadesHitWithMissiles(missiles: Seq[Missile], barricades: Barricades): Seq[(Missile, Barricade)] =
+        findCollidedItems(missiles, barricades.covers)
 
-    private def findBarricadesHitWithMissiles(missiles: Seq[Missile], barricades: Barricades): Seq[(Missile, Barricade)] = {
-        def findAHit(missile: Missile, barricades: Seq[Barricade]): Option[Barricade] = {
-            if (barricades == Nil) None
-            else if (hasCollided(missile, barricades.head)) {
-                Some(barricades.head)
+    
+    private def findBarricadesHitWithBombs(bombs: Seq[Bomb], barricades: Barricades): Seq[(Bomb, Barricade)] =
+        findCollidedItems(bombs, barricades.covers)
+
+    private def findCollidedItems[T <:Displayable, A<:Displayable](items: Seq[T], otherItems:Seq[A]): Seq[(T, A)] = {
+        def findAHit(item: T, listOfOtherItems: Seq[A]): Option[A] = {
+            if (listOfOtherItems == Nil) None
+            else if (hasCollided(item, listOfOtherItems.head)) {
+                Some(listOfOtherItems.head)
             }
-            else findAHit(missile, barricades.tail)
+            else findAHit(item, listOfOtherItems.tail)
         }
 
-        missiles.foldLeft(List[(Missile, Barricade)]()) {
-            (acc, missile) =>
-                findAHit(missile, barricades.covers) match {
-                    case Some(barricade) => (missile, barricade) :: acc
+        items.foldLeft(List[(T, A)]()) {
+            (acc:List[(T, A)], item:T) =>
+                findAHit(item, otherItems) match {
+                    case Some(otherItem) => (item, otherItem) :: acc
                     case None => acc
                 }
         }
     }
     
-    private def findBarricadesHitWithBombs(bombs: Seq[Bomb], barricades: Barricades): Seq[(Bomb, Barricade)] = {
-        def findAHit(bomb: Bomb, barricades: Seq[Barricade]): Option[Barricade] = {
-            if (barricades == Nil) None
-            else if (hasCollided(bomb, barricades.head)) {
-                Some(barricades.head)
-            }
-            else findAHit(bomb, barricades.tail)
-        }
-
-        bombs.foldLeft(List[(Bomb, Barricade)]()) {
-            (acc, missile) =>
-                findAHit(missile, barricades.covers) match {
-                    case Some(barricade) => (missile, barricade) :: acc
-                    case None => acc
-                }
-        }
-    }
-    
-    private def hasCollided(missile: Missile, soldier: Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)
-
-    private def hasCollided(missile: Missile, barricade: Barricade): Boolean = barricade.boundingBox.intersects(missile.boundingBox)
-
-    private def hasCollided(bomb: Bomb, barricade: Barricade): Boolean = barricade.boundingBox.intersects(bomb.boundingBox)
+    private def hasCollided[T <: Displayable,A <:Displayable](item:T, anotherItem:A):Boolean = item.boundingBox.intersects(anotherItem.boundingBox)
 }
 
 
