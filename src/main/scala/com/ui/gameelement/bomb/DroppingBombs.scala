@@ -23,7 +23,7 @@ class DroppingBombs(val bombs: Seq[Bomb] = Nil) {
     def removeMissile(bomb: Bomb): DroppingBombs =
         new DroppingBombs(bombs.filterNot(_ == bomb))
 
-    def removeMissiles(bombToBeRemoved: Seq[Bomb]): DroppingBombs =
+    def removeBombs(bombToBeRemoved: Seq[Bomb]): DroppingBombs =
         new DroppingBombs(this.bombs.diff(bombToBeRemoved))
 
     def addToDroppingBombs(bomb: Option[Bomb]): DroppingBombs = bomb.map {

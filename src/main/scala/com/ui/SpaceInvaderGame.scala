@@ -3,20 +3,18 @@ package com.ui
 import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
 import java.awt._
-import com.ui.util.InvaderArmyMoveDelay._
-import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.gameelement.barricade.{Barricade, Barricades}
 import com.ui.gameelement.player.{PlayerPositionDirector, Player}
-import com.ui.gameelement.player.PlayerPositionDirector._
 import scala.util.Try
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
-import com.ui.gameelement.bomb.DroppingBombs
-import com.ui.gameelement.{CollisionDetection, GameElementPositionDirector}
+import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
+import com.ui.gameelement.{CollidedElements, GameElementPositionDirector}
+import com.ui.gameelement.CollisionDetection._
 
 object SpaceInvaderGame {
-    val DEBUG_MODE = true
+    val DEBUG_MODE = false
 }
 
 class SpaceInvaderGame() {
@@ -41,17 +39,17 @@ class SpaceInvaderGame() {
 
         droppingBombs    = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
 
-        val collidedElements = new CollisionDetection().detectAllCollidedElements(GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs))
+        val collidedElements = detectCollisions(GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs))
 
         markHitInvaders(collidedElements.shotInvaders)
 
         invaderArmy      = invaderArmy.makeDeadInvadersInvisible
-        missilesInFlight = missilesInFlight.removeMissiles(collidedElements.shotInvaders
-                                                           .collect {case t => t._1})
-                                                           .removeMissiles(collidedElements.hitBarricadesByMissiles.collect{case t=> t._1})
 
-        droppingBombs    = droppingBombs.removeMissiles(collidedElements.hitBarricadesByBombs.collect{case t=> t._1})
-                           .removeMissiles(collidedElements.hitBarricadesByBombs.collect{case t=> t._1})
+        missilesInFlight = missilesInFlight
+                           .removeMissiles(firstElementInListOfTuples(collidedElements.shotInvaders))
+                           .removeMissiles(firstElementInListOfTuples(collidedElements.hitBarricadesByMissiles))
+
+        droppingBombs    = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
 
         GameElements(
             invaderArmy,
@@ -86,6 +84,13 @@ class SpaceInvaderGame() {
         shotSoldiersAndBulletsThatKilledThem.foreach {
             t => println(s"marking ${t._2} hit")
         }
+    }
+
+    private def bombsToBeRemovedOffScreen(collidedElements: CollidedElements): Seq[Bomb] =
+        firstElementInListOfTuples(collidedElements.hitBarricadesByBombs)
+
+    private def firstElementInListOfTuples[E,T](list: Seq[(E,T)]):Seq[E] = list.collect{
+        case t=>t._1
     }
 
     private def now:Long  = System.currentTimeMillis()

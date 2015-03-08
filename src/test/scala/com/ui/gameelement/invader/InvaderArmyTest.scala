@@ -63,34 +63,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
         }
     }
 
-    /**
-     * "not quite" in this context means the bounding boxes are touching but have not intersected yet
-     */
-    test("given a missile that has not quite collided with a soldier then hasCollided returns false") {
-        val invaderArmy = new InvaderArmy(List(new Invader(new Point(0,0))))
 
-        val missiles = List(new Missile(new Point(3,27)))
-
-        assertResult(false) {
-            invaderArmy.hasCollided(missiles(0), invaderArmy.army(0))
-        }
-    }
-
-    test("given a missile that has collided with a soldier then hasCollided returns true") {
-        val invaderArmy = new InvaderArmy(List(new Invader(new Point(0,0))))
-
-        val missiles = List(new Missile(new Point(0,0)))
-
-        assert(invaderArmy.hasCollided(missiles(0), invaderArmy.army(0)))
-    }
-
-    test("given a missile that has just collided with a soldier then hasCollided returns true") {
-        val invaderArmy = new InvaderArmy(List(new Invader(new Point(0,0))))
-
-        val missiles = List(new Missile(new Point(26,0)))
-
-        assert(invaderArmy.hasCollided(missiles(0), invaderArmy.army(0)))
-    }
 
     test("given one exploding invader when exploding to long enough then makeDeadInvadersInvisible will make it invisible") {
         val soldier= new ExplodedInvader(new Point(0, 0), System.currentTimeMillis() - 1000)

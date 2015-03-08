@@ -7,27 +7,27 @@ import com.ui.GameElements
 import com.ui.gameelement.bomb.Bomb
 
 
-class CollisionDetection {
-    
-    def detectAllCollidedElements(gameElements: GameElements): CollidedElements = {
+object CollisionDetection {
+
+    def detectCollisions(gameElements: GameElements): CollidedElements =
         CollidedElements(
             findShotInvaders(gameElements.missilesInFlight.missiles, gameElements.invaderArmy.army),
             findBarricadesHitWithMissiles(gameElements.missilesInFlight.missiles, gameElements.barricades),
             findBarricadesHitWithBombs(gameElements.droppingBombs.bombs, gameElements.barricades),
             false)
-    }
-    
-    private def findShotInvaders(missiles: Seq[Missile], army:Seq[Invader]):Seq[(Missile, Invader)] =
+
+    private def findShotInvaders(missiles: Seq[Missile], army: Seq[Invader]): Seq[(Missile, Invader)] =
         findCollidedItems(missiles, army)
 
     private def findBarricadesHitWithMissiles(missiles: Seq[Missile], barricades: Barricades): Seq[(Missile, Barricade)] =
         findCollidedItems(missiles, barricades.covers)
 
-    
+
     private def findBarricadesHitWithBombs(bombs: Seq[Bomb], barricades: Barricades): Seq[(Bomb, Barricade)] =
         findCollidedItems(bombs, barricades.covers)
 
-    private def findCollidedItems[T <:Displayable, A<:Displayable](items: Seq[T], otherItems:Seq[A]): Seq[(T, A)] = {
+    private def findCollidedItems[T <: Displayable, A <: Displayable](items: Seq[T], otherItems: Seq[A]): Seq[(T, A)] = {
+
         def findAHit(item: T, listOfOtherItems: Seq[A]): Option[A] = {
             if (listOfOtherItems == Nil) None
             else if (hasCollided(item, listOfOtherItems.head)) {
@@ -37,15 +37,17 @@ class CollisionDetection {
         }
 
         items.foldLeft(List[(T, A)]()) {
-            (acc:List[(T, A)], item:T) =>
+            (acc: List[(T, A)], item: T) =>
                 findAHit(item, otherItems) match {
                     case Some(otherItem) => (item, otherItem) :: acc
                     case None => acc
                 }
         }
+
     }
-    
-    private def hasCollided[T <: Displayable,A <:Displayable](item:T, anotherItem:A):Boolean = item.boundingBox.intersects(anotherItem.boundingBox)
+
+    def hasCollided[T <: Displayable, A <: Displayable](item: T, anotherItem: A): Boolean =
+        item.boundingBox.intersects(anotherItem.boundingBox)
 }
 
 

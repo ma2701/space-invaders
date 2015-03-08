@@ -22,41 +22,6 @@ class InvaderArmy(val army: Seq[Invader]) {
         new InvaderArmy(
             moveArmy(army, allInvaderPositionsFromStartingPoint(point)))
 
-
-    def findShotInvaders(missiles: Seq[Missile]): Seq[(Missile, Invader)] = {
-        def findAHit(missile: Missile, soldiers: Seq[Invader]): Option[Invader] = {
-            if (soldiers == Nil) None
-            else if (hasCollided(missile, soldiers.head)) Some(soldiers.head)
-            else findAHit(missile, soldiers.tail)
-        }
-
-        missiles.foldLeft(List[(Missile, Invader)]()) {
-            (acc, missile) =>
-                findAHit(missile, army) match {
-                    case Some(soldier) => (missile, soldier) :: acc
-                    case None => acc
-                }
-        }
-    }
-
-    def findBarricadesHitWithMissiles(missiles: Seq[Missile], barricades: Barricades): Seq[(Missile, Barricade)] = {
-        def findAHit(missile: Missile, barricades: Seq[Barricade]): Option[Barricade] = {
-            if (barricades == Nil) None
-            else if (hasCollided(missile, barricades.head)) {
-                Some(barricades.head)
-            }
-            else findAHit(missile, barricades.tail)
-        }
-
-        missiles.foldLeft(List[(Missile, Barricade)]()) {
-            (acc, missile) =>
-                findAHit(missile, barricades.covers) match {
-                    case Some(barricade) => (missile, barricade) :: acc
-                    case None => acc
-                }
-        }
-    }
-
     def makeDeadInvadersInvisible(): InvaderArmy =
         new InvaderArmy(army.map {
             invader: Invader =>
@@ -71,7 +36,6 @@ class InvaderArmy(val army: Seq[Invader]) {
                 Some(new Bomb(head.midPoint))
             case _ => None
         }
-
 
     /**
      * the army is made aware of where the player is. Only the invader soldiers that are
@@ -88,10 +52,6 @@ class InvaderArmy(val army: Seq[Invader]) {
                 invader.midPoint.x >= range.min && invader.midPoint.x <= range.max
         }
     }
-
-    def hasCollided(missile: Missile, soldier: Invader): Boolean = soldier.boundingBox.intersects(missile.boundingBox)
-
-    def hasCollided(missile: Missile, barricade: Barricade): Boolean = barricade.boundingBox.intersects(missile.boundingBox)
 
     /**
      * each individual invader soldier's position

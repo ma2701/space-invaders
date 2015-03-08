@@ -19,7 +19,7 @@ import com.ui.GameElements
  * this class is responsible for moving game elements on the screen. It updates their positions
  * based on their current position. 
  * All game elements are positioned relative to the screen width and height. 
- * Originally all game elements are positioned at (0,0) position on the screen a call to
+ * Originally all game elements are positioned at (0,0) on the screen a call to
  * updatePositionsOfGameElements() repositions everything
  * 
  * Each game element has a its own (game_element)PositionDirector. This class simply
