@@ -5,6 +5,7 @@ import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.barricade.{Barricades, Barricade}
 import com.ui.GameElements
 import com.ui.gameelement.bomb.Bomb
+import com.ui.gameelement.player.Player
 
 
 object CollisionDetection {
@@ -14,7 +15,7 @@ object CollisionDetection {
             findShotInvaders(gameElements.missilesInFlight.missiles, gameElements.invaderArmy.army),
             findBarricadesHitWithMissiles(gameElements.missilesInFlight.missiles, gameElements.barricades),
             findBarricadesHitWithBombs(gameElements.droppingBombs.bombs, gameElements.barricades),
-            false
+            isPlayerHit(gameElements.player, gameElements.droppingBombs.bombs)
         )
 
     private def findShotInvaders(missiles: Seq[Missile], army: Seq[Invader]): Seq[(Missile, Invader)] =
@@ -26,6 +27,10 @@ object CollisionDetection {
 
     private def findBarricadesHitWithBombs(bombs: Seq[Bomb], barricades: Barricades): Seq[(Bomb, Barricade)] =
         findCollidedItems(bombs, barricades.covers)
+
+    private def isPlayerHit(player:Player, bombs:Seq[Bomb]):Boolean =
+        (!bombs.isEmpty) && hasCollided(bombs.reverse.head, player)
+
 
     private def findCollidedItems[T <: Displayable, A <: Displayable](items: Seq[T], otherItems: Seq[A]): Seq[(T, A)] = {
 

@@ -41,6 +41,9 @@ class SpaceInvaderGame() {
 
         val collidedElements = detectCollisions(GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs))
 
+        if(collidedElements.isPlayerShot)
+            return GameElements(invaderArmy, missilesInFlight, barricades, player.copy(isHit = true), droppingBombs)
+
         markHitInvaders(collidedElements.shotInvaders)
 
         invaderArmy      = invaderArmy.makeDeadInvadersInvisible

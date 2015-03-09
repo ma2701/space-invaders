@@ -4,7 +4,7 @@ import java.awt.{Rectangle, Point}
 import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement.SingleDisplayElement
 
-case class Player(tplft: Point) extends Displayable(tplft) with PlayerParts {
+case class Player(tplft: Point, isHit:Boolean = false) extends Displayable(tplft) with PlayerParts {
 
     val parts:List[SingleDisplayElement] = parts(x,y)
 

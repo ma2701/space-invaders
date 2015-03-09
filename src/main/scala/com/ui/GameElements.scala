@@ -12,4 +12,5 @@ case class GameElements(
                          missilesInFlight: MissilesInFlight,
                          barricades: Barricades,
                          player: Player,
-                         droppingBombs:DroppingBombs)
+                         droppingBombs:DroppingBombs
+                       )

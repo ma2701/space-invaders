@@ -37,6 +37,9 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionDirector(getWidth, getHeight))
 
+        if(gameState.player.isHit)
+            System.exit(0)
+
         displayBarricades(gameState.barricades, g)
 
         displayShooter(gameState.player, g)
@@ -116,6 +119,12 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         }
 
         g.drawString(s"Kill Count: ${count}",3, this.getHeight - 10)
+    }
+
+    private def displayGameOver(g:Graphics) {
+        g.setColor(Color.RED)
+        g.drawString("GAME OVER", this.getHeight/2 , this.getWidth /2 )
+
     }
 
     private def setPanelAttributes {

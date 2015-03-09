@@ -3,7 +3,7 @@ package com.ui.gameelement.player
 import java.awt.Point
 
 object PlayerPositionDirector {
-    val SINGLE_HOP_IN_X = 15
+    val SINGLE_HOP_IN_X = 20
     
     def playerInitialPosition(screenWidth:Int, screenHeight:Int ):Point =
         new Point(screenWidth / 5, screenHeight - (screenHeight / 9))

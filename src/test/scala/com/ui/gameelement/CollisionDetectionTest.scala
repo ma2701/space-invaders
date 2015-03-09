@@ -37,6 +37,25 @@ class CollisionDetectionTest extends FunSuite {
 
     }
 
+    test("given a collision detector when player is hit then isPlayerShot set to true"){
+        val invaderArmy = new InvaderArmy(ArmyCommander.formAnArmy(startingPosition))
+        val barricades  = new Barricades(startingPosition)
+        val missiles    = new MissilesInFlight(List(new Missile(startingPosition)))
+        val bombs       = new DroppingBombs(List(new Bomb(startingPosition)))
+        val player      = new Player(startingPosition)
+
+        val positionManager = new GameElementPositionDirector(screenWidth, screenHeight)
+        val gameElementsWithUpdatedPositions = positionManager.updatePositionOfGameElements(GameElements(invaderArmy, missiles, barricades,player, bombs))
+
+        val playerPosition  = gameElementsWithUpdatedPositions.player.topLeft
+        val bombHittingPlayer = new Bomb(playerPosition)
+
+        val newPositions  = gameElementsWithUpdatedPositions.copy(droppingBombs = new DroppingBombs(Seq(bombHittingPlayer)))
+        val collidedElements = detectCollisions(newPositions)
+
+        assert(collidedElements.isPlayerShot)
+    }
+
     /**
      * "not quite" in this context means the bounding boxes are touching but have not intersected yet
      */
