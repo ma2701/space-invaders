@@ -1,15 +1,13 @@
-space-invaders
-==========
-# fun with scala
+space-invaders, fun with scala
+==============================
 
-Required tools
-==========
+<h3>Required tools</h3>
+
 scala 2.10
 
 sbt 0.13.2
 
-To generate and run executable jar
-=======================
+<h3>To generate and run executable jar</h3>
 ```
 sbt> assembly
 ```
