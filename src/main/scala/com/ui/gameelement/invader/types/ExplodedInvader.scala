@@ -18,5 +18,6 @@ class ExplodedInvader(tl:Point,
      */
     override def beenExplodingForTooLong(currentTime:Long):Boolean = (currentTime - explosionTime) >= 333
 
+    // if the invader has been hit with a missile then it can not drop a bomb
     override def feelLikeDroppingABomb: Boolean = false
 }

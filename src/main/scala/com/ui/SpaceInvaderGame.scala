@@ -56,7 +56,8 @@ class SpaceInvaderGame() {
             missilesInFlight,
             barricades,
             player,
-            droppingBombs)
+            droppingBombs
+        )
     }
 
     def invaderKillCount: Int = invaderArmy.allDeadInvaders.size

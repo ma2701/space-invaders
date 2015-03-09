@@ -3,9 +3,9 @@ package com.ui.gameelement.invader
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.displayelement.SingleDisplayElement._
 import java.awt.Color
-import java.awt.Color._
+import java.awt.Color.RED
 
-trait InvaderExplodedParts {
+trait ExplodedInvaderParts {
     def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
         new TopRightDiagonalTop(x,y),
         new TopRightDiagonalBottom(x,y),
@@ -30,13 +30,13 @@ trait InvaderExplodedParts {
         new BottomLeftDiagonalBottom(x,y))
 }
 
-abstract class RedDisplayElement(x: Int, y: Int, xOffsetFromCentre: Double, yOffsetFromCentre: Double)
-    extends SingleDisplayElement(xOffset(x, xOffsetFromCentre), yOffset(y, yOffsetFromCentre)){
+abstract class RedDisplayElement(x: Int, y: Int, width: Int, height: Int)
+    extends SingleDisplayElement(x,y, width, height){
     override val color:Color = RED
 }
 
 object TopRightDiagonalTop{
-    val xOffset = 6;
+    val xOffset = 7;
     val yOffset = 0
 }
 case class TopRightDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -45,7 +45,7 @@ case class TopRightDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDi
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object TopRightDiagonalBottom{
-    val xOffset = 5;
+    val xOffset = 6;
     val yOffset = 1
 }
 case class TopRightDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -55,7 +55,7 @@ case class TopRightDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends Re
 
 // top left diag
 object TopLeftDiagonalTop{
-    val xOffset = 2;
+    val xOffset = 3;
     val yOffset = 0
 }
 case class TopLeftDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -64,7 +64,7 @@ case class TopLeftDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDis
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object TopLeftDiagonalBottom{
-    val xOffset = 3;
+    val xOffset = 4;
     val yOffset = 1
 }
 case class TopLeftDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -77,7 +77,7 @@ case class TopLeftDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends Red
 
 // middle right diag
 object MiddleRightDiagonalTop{
-    val xOffset = 8;
+    val xOffset = 9;
     val yOffset = 1
 }
 case class MiddleRightDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -86,7 +86,7 @@ case class MiddleRightDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends Re
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object MiddleRightDiagonalMiddle{
-    val xOffset = 7;
+    val xOffset = 8;
     val yOffset = 2
 }
 case class MiddleRightDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -95,7 +95,7 @@ case class MiddleRightDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object MiddleRightDiagonalBottom{
-    val xOffset = 6;
+    val xOffset = 7;
     val yOffset = 3
 }
 case class MiddleRightDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -105,7 +105,7 @@ case class MiddleRightDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends
 
 // middle left diag
 object MiddleLeftDiagonalTop{
-    val xOffset = 0;
+    val xOffset = 1;
     val yOffset = 1
 }
 case class MiddleLeftDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -114,7 +114,7 @@ case class MiddleLeftDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends Red
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object MiddleLeftDiagonalMiddle{
-    val xOffset = 1;
+    val xOffset = 2;
     val yOffset = 2
 }
 case class MiddleLeftDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -123,7 +123,7 @@ case class MiddleLeftDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends 
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object MiddleLeftDiagonalBottom{
-    val xOffset = 2;
+    val xOffset = 3;
     val yOffset = 3
 }
 case class MiddleLeftDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
@@ -132,34 +132,31 @@ case class MiddleLeftDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends 
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 
-
-
-
 // mid section right
 object MidSectionRight{
-    val xOffset = 8;
-    val yOffset = 3
+    val xOffset = 9;
+    val yOffset = 4
 }
 case class MidSectionRight(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, MidSectionRight.xOffset),
     yOffset(invaderPosY, MidSectionRight.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (2* SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object MidSectionLeft{
     val xOffset = 0;
-    val yOffset = 3
+    val yOffset = 4
 }
 case class MidSectionLeft(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, MidSectionLeft.xOffset),
     yOffset(invaderPosY, MidSectionLeft.yOffset),
-    (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
+    (2*SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 
 
-// middle right diag
+// bottom right diag
 object BottomRightDiagonalTop{
-    val xOffset = 6;
-    val yOffset = 4
+    val xOffset = 7;
+    val yOffset = 5
 }
 case class BottomRightDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, BottomRightDiagonalTop.xOffset),
@@ -167,8 +164,8 @@ case class BottomRightDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends Re
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object BottomRightDiagonalMiddle{
-    val xOffset = 7;
-    val yOffset = 5
+    val xOffset = 8;
+    val yOffset = 6
 }
 case class BottomRightDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, BottomRightDiagonalMiddle.xOffset),
@@ -176,8 +173,8 @@ case class BottomRightDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object BottomRightDiagonalBottom{
-    val xOffset = 8;
-    val yOffset = 6
+    val xOffset = 9;
+    val yOffset = 7
 }
 case class BottomRightDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, BottomRightDiagonalBottom.xOffset),
@@ -186,8 +183,8 @@ case class BottomRightDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends
 
 // middle left diag
 object BottomLeftDiagonalTop{
-    val xOffset = 2;
-    val yOffset = 4
+    val xOffset = 3;
+    val yOffset = 5
 }
 case class BottomLeftDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, BottomLeftDiagonalTop.xOffset),
@@ -195,8 +192,8 @@ case class BottomLeftDiagonalTop(invaderPosX: Int, invaderPosY: Int) extends Red
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object BottomLeftDiagonalMiddle{
-    val xOffset = 1;
-    val yOffset = 5
+    val xOffset = 2;
+    val yOffset = 6
 }
 case class BottomLeftDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, BottomLeftDiagonalMiddle.xOffset),
@@ -204,8 +201,8 @@ case class BottomLeftDiagonalMiddle(invaderPosX: Int, invaderPosY: Int) extends 
     (SingleDisplayElement.DEFAULT_ELEMENT_WIDTH), SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT)
 
 object BottomLeftDiagonalBottom{
-    val xOffset = 0;
-    val yOffset = 6
+    val xOffset = 1;
+    val yOffset = 7
 }
 case class BottomLeftDiagonalBottom(invaderPosX: Int, invaderPosY: Int) extends RedDisplayElement(
     xOffset(invaderPosX, BottomLeftDiagonalBottom.xOffset),

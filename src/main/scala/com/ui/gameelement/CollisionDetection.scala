@@ -14,7 +14,8 @@ object CollisionDetection {
             findShotInvaders(gameElements.missilesInFlight.missiles, gameElements.invaderArmy.army),
             findBarricadesHitWithMissiles(gameElements.missilesInFlight.missiles, gameElements.barricades),
             findBarricadesHitWithBombs(gameElements.droppingBombs.bombs, gameElements.barricades),
-            false)
+            false
+        )
 
     private def findShotInvaders(missiles: Seq[Missile], army: Seq[Invader]): Seq[(Missile, Invader)] =
         findCollidedItems(missiles, army)
@@ -43,7 +44,6 @@ object CollisionDetection {
                     case None => acc
                 }
         }
-
     }
 
     def hasCollided[T <: Displayable, A <: Displayable](item: T, anotherItem: A): Boolean =

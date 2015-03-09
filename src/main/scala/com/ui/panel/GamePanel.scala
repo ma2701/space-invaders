@@ -35,7 +35,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         super.paintComponent(g)
 
-        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionDirector(this.getWidth, this.getHeight))
+        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionDirector(getWidth, getHeight))
 
         displayBarricades(gameState.barricades, g)
 
