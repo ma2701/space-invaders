@@ -2,14 +2,16 @@ space-invaders
 ==========
 # fun with scala
 
-
+Required tools
+==========
+scala 2.10
 sbt 0.13.2
 
-to run the tests
-sbt> test
+To generate and run executable jar
+=======================
+sbt> assembly
 
-to run the game
+java -jar target/scala-2.10/SI.jar
+
+to run the game from within sbt
 sbt> run Driver
-
-
-
