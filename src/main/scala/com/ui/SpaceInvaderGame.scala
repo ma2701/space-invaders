@@ -10,65 +10,60 @@ import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
-import com.ui.gameelement.{CollidedElements, GameElementPositionDirector}
+import com.ui.gameelement.{CollidedElements, GameElementPositionManager}
 import com.ui.gameelement.CollisionDetection._
+import com.ui.ScoreCalculation._
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
 }
 
 class SpaceInvaderGame() {
-    private val initialPosition:Point = new Point(0,0)
-    
-    private var invaderArmy            = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
-    private var barricades             = new Barricades(initialPosition)
-    private var player                 = new Player(initialPosition)
-    private var missilesInFlight       = new MissilesInFlight()
-    private var droppingBombs          = new DroppingBombs()
+    private val initialPosition: Point = new Point(0, 0)
 
-    def updatedGameElements(positionMngr:GameElementPositionDirector): GameElements = {
+    private var invaderArmy      = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
+    private var barricades       = new Barricades(initialPosition)
+    private var player           = new Player(initialPosition)
+    private var missilesInFlight = new MissilesInFlight()
+    private var droppingBombs    = new DroppingBombs()
 
-        val gameElements        = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
-        val updatedGameElements = positionMngr.updatePositionOfGameElements(gameElements)
+    def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
 
-        barricades       = updatedGameElements.barricades
-        player           = updatedGameElements.player
-        missilesInFlight = updatedGameElements.missilesInFlight
-        droppingBombs    = updatedGameElements.droppingBombs
-        invaderArmy      = updatedGameElements.invaderArmy
+        val gameElements = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
+        val updatedPositions = positionMngr.updatePositionOfGameElements(gameElements)
 
-        droppingBombs    = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
+        updateElementsOnScreen(updatedPositions)
+
+        droppingBombs = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
 
         val collidedElements = detectCollisions(GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs))
 
-        if(collidedElements.isPlayerShot)
-            return GameElements(invaderArmy, missilesInFlight, barricades, player.copy(isHit = true), droppingBombs)
-
         markHitInvaders(collidedElements.shotInvaders)
 
-        invaderArmy      = invaderArmy.makeDeadInvadersInvisible
+        invaderArmy = invaderArmy.makeDeadInvadersInvisible
 
         missilesInFlight = missilesInFlight
                            .removeMissiles(firstElementInListOfTuples(collidedElements.shotInvaders))
                            .removeMissiles(firstElementInListOfTuples(collidedElements.hitBarricadesByMissiles))
 
-        droppingBombs    = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
+        droppingBombs = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
 
-        GameElements(
-            invaderArmy,
-            missilesInFlight,
-            barricades,
-            player,
-            droppingBombs
-        )
+        val elements = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
+        val pntThisRound: Int = calculatePoints(shotInvaders(collidedElements))
+
+        if (collidedElements.isPlayerShot)
+            GameState(elements.copy(player = player.copy(isHit = true)), pntThisRound)
+        else
+            GameState(elements, pntThisRound)
     }
+
 
     def invaderKillCount: Int = invaderArmy.allDeadInvaders.size
 
     def getPlayerPosition: Option[Point] = Try(player.shootingTipPosition).toOption
 
     def shootSingleMissileFrom(position: Point): Unit =
-        if(isTimeToShootOneMissile(now) ){
+        if (isTimeToShootOneMissile(now)) {
             missilesInFlight = missilesInFlight.addToMissiles(new Missile(position))
         }
 
@@ -80,7 +75,7 @@ class SpaceInvaderGame() {
 
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {
-            t =>t._2.markHitByMissile
+            t => t._2.markHitByMissile
         }
     }
 
@@ -90,13 +85,28 @@ class SpaceInvaderGame() {
         }
     }
 
+    private def shotInvaders(collidedElements: CollidedElements): Seq[Invader] =
+        secondElementInListOfTuples(collidedElements.shotInvaders)
+
     private def bombsToBeRemovedOffScreen(collidedElements: CollidedElements): Seq[Bomb] =
         firstElementInListOfTuples(collidedElements.hitBarricadesByBombs)
 
-    private def firstElementInListOfTuples[E,T](list: Seq[(E,T)]):Seq[E] = list.collect{
-        case t=>t._1
+    private def firstElementInListOfTuples[E, T](list: Seq[(E, T)]): Seq[E] = list.collect {
+        case t => t._1
     }
 
-    private def now:Long  = System.currentTimeMillis()
+    private def secondElementInListOfTuples[E, T](list: Seq[(E, T)]): Seq[T] = list.collect {
+        case t => t._2
+    }
+
+    private def updateElementsOnScreen(updatedGameElements: GameElements)= {
+        barricades = updatedGameElements.barricades
+        player = updatedGameElements.player
+        missilesInFlight = updatedGameElements.missilesInFlight
+        droppingBombs = updatedGameElements.droppingBombs
+        invaderArmy = updatedGameElements.invaderArmy
+    }
+
+    private def now: Long = System.currentTimeMillis()
 
 }

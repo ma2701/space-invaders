@@ -10,4 +10,6 @@ class DeadInvader(tl:Point) extends Invader(tl) {
     override def boundingBox: Rectangle = new Rectangle(0 ,0, 0, 0)
 
     override def feelLikeDroppingABomb: Boolean = false
+
+    override def pointsWorth = 0
 }

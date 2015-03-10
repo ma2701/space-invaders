@@ -5,7 +5,7 @@ import javax.swing.JPanel
 import java.awt._
 
 import com.ui.util.MainThreadDelayUtil._
-import com.ui.SpaceInvaderGame
+import com.ui.{GameLogic, SpaceInvaderGame}
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.event.ActionEvent
@@ -17,17 +17,18 @@ import com.ui.gameelement.player.Player
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.bomb.DroppingBombs
-import com.ui.gameelement.GameElementPositionDirector
+import com.ui.gameelement.GameElementPositionManager
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
     private val SCREEN_REFRESH_RATE_IN_MILLIS = 2
 
-    private val PREFERRED_WIDTH : Int = 878
-    private val PREFERRED_HEIGHT: Int = 600
+    private[this] val PREFERRED_WIDTH : Int = 878
+    private[this] val PREFERRED_HEIGHT: Int = 600
+    private[this] var animator: Thread = null
+    private[this] var gameLogic:GameLogic = new GameLogic()
 
-    private var animator: Thread = null
-    private val spaceInvaderGame = new SpaceInvaderGame
+    private[this] var spaceInvaderGame = new SpaceInvaderGame
 
     setPanelAttributes
 
@@ -35,22 +36,27 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         super.paintComponent(g)
 
-        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionDirector(getWidth, getHeight))
+        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionManager(getWidth, getHeight))
 
-        if(gameState.player.isHit)
-            System.exit(0)
+        ScorePanel.updateScore(gameLogic.currentScore)
 
-        displayBarricades(gameState.barricades, g)
+        if(gameState.elements.player.isHit) {
+            gameLogic = gameLogic.playerShotOnce.setScore(gameState.score)
+        } else {
+            gameLogic = gameLogic.setScore(gameState.score)
+        }
 
-        displayShooter(gameState.player, g)
+        ScorePanel.updateScore(gameLogic.currentScore)
 
-        displayMissiles(gameState.missilesInFlight, g)
+        displayBarricades(gameState.elements.barricades, g)
 
-        displayBombs(gameState.droppingBombs, g)
+        displayShooter(gameState.elements.player, g)
 
-        displayInvaderArmy(gameState.invaderArmy, g)
+        displayMissiles(gameState.elements.missilesInFlight, g)
 
-        displayTotalDeathCount(spaceInvaderGame.invaderKillCount, g)
+        displayBombs(gameState.elements.droppingBombs, g)
+
+        displayInvaderArmy(gameState.elements.invaderArmy, g)
     }
 
     override
@@ -67,7 +73,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
             beforeTime = System.currentTimeMillis()
 
-        } while (true)
+        } while (!gameLogic.isGameOver)
     }
 
     private def sleep(beforeTime: Long) {
@@ -111,15 +117,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit = missiles.draw(g)
     private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit = invaderArmy.draw(g)
-    private def displayTotalDeathCount(count:Int, g: Graphics): Unit = {
-        count match {
-            case i if(i <= 10)=> g.setColor(Color.GREEN)
-            case i if(i <= 30)=> g.setColor(Color.ORANGE)
-            case i if(i > 30)=>  g.setColor(Color.RED)
-        }
 
-        g.drawString(s"Kill Count: ${count}",3, this.getHeight - 10)
-    }
 
     private def displayGameOver(g:Graphics) {
         g.setColor(Color.RED)

@@ -1,7 +1,7 @@
 package com.ui.panel
 
 import javax.swing.{JLabel, JPanel}
-import java.awt.{Graphics, Font}
+import java.awt.{Color, Graphics, Font}
 
 object ScorePanel extends JPanel {
 
@@ -12,6 +12,7 @@ object ScorePanel extends JPanel {
  
  
      val score = new JLabel
+     score.setForeground(Color.RED)
      score.setText("")
      score.getAccessibleContext.setAccessibleName("score")
 

@@ -1,6 +1,6 @@
 package com.ui.gameelement.invader.types
 
-import java.awt.{Graphics, Point, Rectangle}
+import java.awt.{Point, Rectangle}
 
 import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement._
@@ -40,4 +40,6 @@ case class Invader(tl: Point,
     def beenExplodingForTooLong(currentTime: Long): Boolean = false
 
     def feelLikeDroppingABomb: Boolean = new RandomNumberGenerator().randomTrueOrFalse
+
+    def pointsWorth = 20
 }

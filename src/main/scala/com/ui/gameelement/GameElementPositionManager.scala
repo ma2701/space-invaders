@@ -26,7 +26,7 @@ import com.ui.GameElements
  * asks the relevant director for an updated position and then moves the game element to that position...
  */
 
-class GameElementPositionDirector(screenWidth:Int, screenHeight:Int ) {
+class GameElementPositionManager(screenWidth:Int, screenHeight:Int ) {
     private val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
 
     def updatePositionOfGameElements(elements:GameElements): GameElements = {
