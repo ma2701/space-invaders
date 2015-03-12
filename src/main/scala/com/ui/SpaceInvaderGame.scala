@@ -47,18 +47,17 @@ class SpaceInvaderGame() {
                            .removeMissiles(firstElementInListOfTuples(collidedElements.hitBarricadesByMissiles))
 
         droppingBombs = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
+        player        = if(collidedElements.isPlayerShot) player.copy(isHit = true) else player
 
         val elements = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
         val pntThisRound: Int = calculatePoints(shotInvaders(collidedElements))
 
-        if (collidedElements.isPlayerShot)
-            GameState(elements.copy(player = player.copy(isHit = true)), pntThisRound)
-        else
-            GameState(elements, pntThisRound)
+        GameState(elements, pntThisRound)
     }
 
+    def invaderKillCount: Int      = invaderArmy.allDeadInvaders.size
 
-    def invaderKillCount: Int = invaderArmy.allDeadInvaders.size
+    def isTimeToResetGame: Boolean = invaderArmy.isEveryoneDead || player.isHit
 
     def getPlayerPosition: Option[Point] = Try(player.shootingTipPosition).toOption
 
