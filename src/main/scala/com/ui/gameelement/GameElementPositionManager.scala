@@ -27,7 +27,7 @@ import com.ui.GameElements
  */
 
 class GameElementPositionManager(screenWidth:Int, screenHeight:Int ) {
-    private val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, screenHeight / 2)
+    private val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, (3* screenHeight)/4 )
 
     def updatePositionOfGameElements(elements:GameElements): GameElements = {
 

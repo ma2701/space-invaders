@@ -7,8 +7,8 @@ import com.ui.gameelement.invader.GeneralArmyDirection.GeneralArmyDirection
 
 
 object InvaderArmyPositionDirector {
-    val ONE_HOP_IN_X_DIRECTION = 5
-    val ONE_HOP_IN_Y_DIRECTION = 7
+    val ONE_HOP_IN_X_DIRECTION = 15
+    val ONE_HOP_IN_Y_DIRECTION = 20
 
     private[this] var initialPosition   : Point                = new Point(0,0)
     private[this] var currentPosition   : Point                = _

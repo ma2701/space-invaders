@@ -22,3 +22,15 @@ To run the game from within sbt:
 ```
 sbt> run Driver
 ```
+
+TODO:
+
+1) move invader army lower so that it gets very close to the barricades
+2) fix the player game element to look more like the original game
+3) implement different invader types with different points
+4) display "game over" when game is over
+5) implement mystery invader in red with surprise point assigned to it.
+6) implement game pausing
+7) implement exploded player - display it before resetting the game for another round
+8) implement variable velocity for invader army
+
