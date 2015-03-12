@@ -21,7 +21,7 @@ abstract class GreenDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffs
 }
 
 object TopSection {
-    val xOffset = 4;
+    val xOffset = 8;
     val yOffset = 0
 }
 case class TopSection(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
@@ -31,34 +31,34 @@ case class TopSection(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     DEFAULT_ELEMENT_HEIGHT)
 
 object TopSupport {
-    val xOffset = 2;
+    val xOffset = 7;
     val yOffset = 1
 }
 
 case class TopSupport(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, TopSupport.xOffset),
     yOffset(topLeftY, TopSupport.yOffset),
-    (5* DEFAULT_ELEMENT_WIDTH),DEFAULT_ELEMENT_HEIGHT)
+    (3* DEFAULT_ELEMENT_WIDTH),3*DEFAULT_ELEMENT_HEIGHT)
 
 
 
 object MidSection{
     val xOffset = 1;
-    val yOffset = 2
+    val yOffset = 3
 }
 
 case class MidSection  (topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, MidSection .xOffset),
     yOffset(topLeftY, MidSection.yOffset),
-    (7 * DEFAULT_ELEMENT_WIDTH),DEFAULT_ELEMENT_HEIGHT)
+    (15* DEFAULT_ELEMENT_WIDTH),DEFAULT_ELEMENT_HEIGHT)
 
 
 object Bottom {
     val xOffset = 0;
-    val yOffset = 3
+    val yOffset = 4
 }
 
 case class Bottom  (topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, Bottom .xOffset),
     yOffset(topLeftY, Bottom.yOffset),
-    (9 * DEFAULT_ELEMENT_WIDTH), 2* DEFAULT_ELEMENT_HEIGHT)
+    (17 * DEFAULT_ELEMENT_WIDTH), 5 * DEFAULT_ELEMENT_HEIGHT)
