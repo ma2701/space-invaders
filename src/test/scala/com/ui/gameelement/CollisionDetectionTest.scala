@@ -8,7 +8,7 @@ import com.ui.gameelement.missile.{Missile, MissilesInFlight}
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
 import com.ui.gameelement.player.Player
 import com.ui.GameElements
-import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.invader.types.CrabInvader
 import com.ui.gameelement.CollisionDetection._
 
 
@@ -60,7 +60,7 @@ class CollisionDetectionTest extends FunSuite {
      * "not quite" in this context means the bounding boxes are touching but have not intersected yet
      */
     test("given a missile that has not quite collided with a soldier then hasCollided returns false") {
-        val invaderArmy = new InvaderArmy(List(new Invader(new Point(0,0))))
+        val invaderArmy = new InvaderArmy(List(new CrabInvader(new Point(0,0))))
 
         val missiles = List(new Missile(new Point(3,27)))
 
@@ -70,7 +70,7 @@ class CollisionDetectionTest extends FunSuite {
     }
 
     test("given a missile that has collided with a soldier then hasCollided returns true") {
-        val invaderArmy = new InvaderArmy(List(new Invader(new Point(0,0))))
+        val invaderArmy = new InvaderArmy(List(new CrabInvader(new Point(0,0))))
 
         val missiles = List(new Missile(new Point(0,0)))
 
@@ -79,7 +79,7 @@ class CollisionDetectionTest extends FunSuite {
 
     test("given a missile that has just collided with a soldier then hasCollided returns true") {
 
-        val invaderArmy = new InvaderArmy(List(new Invader(new Point(0,0))))
+        val invaderArmy = new InvaderArmy(List(new CrabInvader(new Point(0,0))))
 
         val missiles = List(new Missile(new Point(26,0)))
 

@@ -2,17 +2,16 @@
 package com.ui.gameelement.invader
 
 import java.awt.{Point, Graphics}
-import com.ui.gameelement.invader.types.{Invader, ExplodedInvader, DeadInvader}
+import com.ui.gameelement.invader.types.{CrabInvader, Invader, ExplodedInvader, DeadInvader}
 import org.scalatest.FunSuite
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
-import com.ui.gameelement.missile.Missile
 
 class InvaderArmyTest extends FunSuite with MockitoSugar {
     val startingPoint: Point = new Point(11, 11)
 
     test("can create an instance") {
-        val armyOfOne = List(new Invader(startingPoint))
+        val armyOfOne = List(new CrabInvader(startingPoint))
 
         new InvaderArmy(armyOfOne)
     }
@@ -77,7 +76,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
     }
 
     test("given all soldiers have not been hit with missile then  makeDeadInvadersInvisible has no effect") {
-        val soldier= new Invader(new Point(0, 0))
+        val soldier= new CrabInvader(new Point(0, 0))
         val invaderArmy = new InvaderArmy(List(soldier))
 
         val newArmy     = invaderArmy.makeDeadInvadersInvisible
@@ -104,6 +103,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
 
         assertResult(5){ soldiersAbove.size    }
     }
+
 }
 
 

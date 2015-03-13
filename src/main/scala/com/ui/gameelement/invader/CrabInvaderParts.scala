@@ -238,7 +238,7 @@ case class Chin(invaderPosX: Int, invaderPosY: Int) extends SingleDisplayElement
   override val color: Color = BLACK
 }
 
-trait InvaderParts {
+trait CrabInvaderParts {
     def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
         new TopRightAntena(x, y),
         new BottomRightAntena(x, y),
@@ -262,7 +262,7 @@ trait InvaderParts {
     )
 }
 
-trait ExcitedInvaderParts {
+trait ExcitedCrabInvaderParts {
     def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
         new TopRightAntena(x, y),
         new BottomRightAntena(x, y),

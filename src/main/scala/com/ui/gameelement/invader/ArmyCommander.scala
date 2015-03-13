@@ -2,7 +2,7 @@ package com.ui.gameelement.invader
 
 import java.awt.Point
 
-import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.invader.types.{OctopusInvader, CrabInvader, Invader}
 
 object ArmyCommander {
     def BUFFER_BETWEEN_SOLDIERS = 10 // pixels
@@ -12,9 +12,12 @@ object ArmyCommander {
 
     def formAnArmy(startingPosition:Point):Seq[Invader] =
         allInvaderPositionsFromStartingPoint(startingPosition)
+        .zipWithIndex
         .map {
-            position =>
-                new Invader(position)
+            positionIndexTuple => positionIndexTuple._2 match {
+                case i if(i<22) => CrabInvader(positionIndexTuple._1)
+                case i if(i>=22) => OctopusInvader(positionIndexTuple._1)
+            }
         }
 
     def calculateInvaderPos(row:Int, col:Int, startingPoint:Point):Point = {

@@ -4,7 +4,6 @@ import java.awt.{Point, Rectangle}
 
 import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement._
-import com.ui.gameelement.invader.InvaderParts
 import com.ui.util.RandomNumberGenerator
 
 
@@ -13,11 +12,8 @@ object Invader {
     val INVADER_HEIGHT: Int = 8 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
-case class Invader(tl: Point,
-                   var isHit: Boolean = false) extends Displayable(tl) with InvaderParts {
-
-    override val parts: List[SingleDisplayElement] = parts(x, y)
-
+abstract class Invader(topLeft: Point,
+                   var isHit: Boolean = false) extends Displayable(topLeft)  {
     /**
      * if this one is hit by a missile then when moving turn it into an exploded invader (well it's hit so it should explode..)
      * else return an excited invader. This will make the invader animated on the screen
@@ -29,17 +25,19 @@ case class Invader(tl: Point,
         if (isHit)
             new ExplodedInvader(topLeft)
         else
-            new ExcitedInvader(point, isHit)
+            getInstanceAtPoint(point, isHit)
 
     def markHitByMissile = isHit = true
 
     def isHitByMissile = isHit == true
 
-    override def boundingBox: Rectangle = new Rectangle(x, y, Invader.INVADER_WIDTH, Invader.INVADER_HEIGHT)
+    override def boundingBox: Rectangle = new Rectangle(topLeft.x, topLeft.y, Invader.INVADER_WIDTH, Invader.INVADER_HEIGHT)
 
     def beenExplodingForTooLong(currentTime: Long): Boolean = false
 
     def feelLikeDroppingABomb: Boolean = new RandomNumberGenerator().randomTrueOrFalse
 
-    def pointsWorth = 20
+    def pointsWorth:Int
+
+    def getInstanceAtPoint(point:Point, isHit:Boolean):Invader
 }

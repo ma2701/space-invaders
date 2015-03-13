@@ -1,7 +1,7 @@
 package com.ui
 
 import org.scalatest.FunSuite
-import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.invader.types.CrabInvader
 import java.awt.Point
 
 class ScoreCalculationTest extends FunSuite {
@@ -13,7 +13,7 @@ class ScoreCalculationTest extends FunSuite {
     }
 
     test("given 1 invader hit that is worth 20 pts then calculateScore returns 20") {
-        val invaderHitByMissile = new Invader(new Point(0,0))
+        val invaderHitByMissile = new CrabInvader(new Point(0,0))
 
         assertResult(20) {
             ScoreCalculation.calculatePoints(Seq(invaderHitByMissile))

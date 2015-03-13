@@ -1,16 +1,16 @@
 package com.ui
 
-import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.invader.types.CrabInvader
 import org.scalatest.FunSuite
 import java.awt.{Point, Graphics}
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
 import org.mockito.Matchers._
 
-class InvaderTest extends FunSuite with MockitoSugar {
+class CrabInvaderTest extends FunSuite with MockitoSugar {
 
     test("can move an invader to position ") {
-        val invader = new Invader(new Point(10, 10))
+        val invader = new CrabInvader(new Point(10, 10))
 
         assertResult(50) {
             invader.moveTo(new Point(50,50)).topLeft.x
@@ -18,7 +18,7 @@ class InvaderTest extends FunSuite with MockitoSugar {
     }
 
     test("can draw itself") {
-        val invader = new Invader(new Point(10, 10))
+        val invader = new CrabInvader(new Point(10, 10))
         val mockGraphics = mock[Graphics]
 
         doNothing().when(mockGraphics).fillRect(anyInt(), anyInt(), anyInt(), anyInt())
