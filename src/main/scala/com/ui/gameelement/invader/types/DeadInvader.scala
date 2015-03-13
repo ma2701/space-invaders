@@ -17,6 +17,6 @@ class DeadInvader(tl:Point) extends Invader(tl)  {
 
     override def pointsWorth = 0
 
-    override def getInstanceAtPoint(point: Point, isHit: Boolean): Invader = new DeadInvader(point)
+    override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader = new DeadInvader(point)
 
 }

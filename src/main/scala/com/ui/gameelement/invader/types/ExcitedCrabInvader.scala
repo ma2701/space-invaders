@@ -9,7 +9,7 @@ case class ExcitedCrabInvader(tl:Point, hit:Boolean) extends Invader(tl, hit) wi
 
     override val parts: List[SingleDisplayElement] = parts(x,y)
 
-    override def getInstanceAtPoint(point: Point, isHit: Boolean): Invader =
+    override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader =
         new CrabInvader(point,isHit)
 
     override def pointsWorth: Int = 30

@@ -23,5 +23,10 @@ class ExplodedInvader(tl:Point,
 
     override def pointsWorth = 0
 
-    override def getInstanceAtPoint(point: Point, isHit: Boolean): Invader = new ExplodedInvader(point,explosionTime)
+    /**
+     * once hit and exploding it does not make sense to get an opposite character
+     *
+     */
+    override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader =
+        new ExplodedInvader(point,explosionTime)
 }

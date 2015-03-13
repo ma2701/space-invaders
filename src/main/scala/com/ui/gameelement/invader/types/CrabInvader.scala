@@ -7,7 +7,7 @@ import com.ui.gameelement.invader.CrabInvaderParts
 case class CrabInvader(tl:Point, hit:Boolean = false) extends Invader(tl,hit) with CrabInvaderParts {
     override val parts: List[SingleDisplayElement] = parts(x,y)
 
-    override def getInstanceAtPoint(point: Point, isHit: Boolean): Invader =
+    override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader =
         new ExcitedCrabInvader(point,isHit)
 
     override def pointsWorth: Int = 30

@@ -9,7 +9,7 @@ case class OctopusInvader(tl: Point,
 
     override val parts: List[SingleDisplayElement] = parts(x, y)
 
-    override def getInstanceAtPoint(point: Point, isHit: Boolean): Invader = ExcitedOctopusInvader(point,isHit)
+    override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader = ExcitedOctopusInvader(point,isHit)
 
     override def pointsWorth: Int = 10
 }
