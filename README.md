@@ -31,7 +31,7 @@ TODO:
 
 2.1) reset all game elements when the whole game is reset
 
-3) implement different invader types with different points
+3) implement different invader types with different points   -- ALMOST DONE
 
 4) display "game over" when game is over
 
