@@ -31,7 +31,7 @@ TODO:
 
 2.1) reset all game elements when the whole game is reset
 
-2.2) update "lives" area when player is hit
+2.2) update "lives" area when player is hit                             -- DONE
 
 3) implement different invader types with different points   -- ALMOST DONE
 

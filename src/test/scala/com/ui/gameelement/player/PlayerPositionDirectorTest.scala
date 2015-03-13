@@ -42,4 +42,14 @@ class PlayerPositionDirectorTest extends FunSuite {
             PlayerPositionDirector.newPositionToLeft( shooter)
         }
     }
+
+    test("given starting point in the lives panel then calculate positions of all player elements on the lives panel") {
+
+        val startingPoint = new Point(10,10)
+
+        val positions = PlayerPositionDirector.calculatePlayerPositionsOnLivesPanel(startingPoint)
+
+        assert(startingPoint === positions(0))
+    }
+
 }
