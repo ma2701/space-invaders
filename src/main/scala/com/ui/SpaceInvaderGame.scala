@@ -20,13 +20,13 @@ object SpaceInvaderGame {
 }
 
 class SpaceInvaderGame() {
-    private val initialPosition: Point = new Point(0, 0)
+    private[this] val initialPosition: Point = new Point(0, 0)
 
-    private var invaderArmy      = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
-    private var barricades       = new Barricades(initialPosition)
-    private var player :Player   = new ShootingPlayer(initialPosition)
-    private var missilesInFlight = new MissilesInFlight()
-    private var droppingBombs    = new DroppingBombs()
+    private[this] var invaderArmy      = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
+    private[this] var barricades       = new Barricades(initialPosition)
+    private[this] var player :Player   = new ShootingPlayer(initialPosition)
+    private[this] var missilesInFlight = new MissilesInFlight()
+    private[this] var droppingBombs    = new DroppingBombs()
 
     def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
 
