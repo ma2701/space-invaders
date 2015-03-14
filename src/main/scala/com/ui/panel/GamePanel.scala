@@ -21,7 +21,7 @@ import com.ui.gameelement.GameElementPositionManager
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
-    private val SCREEN_REFRESH_RATE_IN_MILLIS = 2
+    private val SCREEN_REFRESH_RATE_IN_MILLIS = 1
 
     private[this] val PREFERRED_WIDTH : Int = 878
     private[this] val PREFERRED_HEIGHT: Int = 600
