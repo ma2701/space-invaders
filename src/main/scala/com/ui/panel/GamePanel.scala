@@ -51,8 +51,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
             gameLogic.setScore(gameState.score)
         }
 
-        ScorePanel.updateScore(gameLogic.currentScore)
-        LivesPanel.updateLives(gameLogic.livesLeft)
+        GameStatusPanel.updateStats(gameLogic.livesLeft, gameLogic.currentScore)
 
         displayBarricades(gameState.elements.barricades, g)
 

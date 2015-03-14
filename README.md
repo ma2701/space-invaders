@@ -33,7 +33,7 @@ TODO:
 
 2.2) update "lives" area when player is hit                             -- DONE
 
-3) implement different invader types with different points   -- ALMOST DONE
+3) implement different invader types with different points              -- ALMOST DONE
 
 4) display "game over" when game is over
 
