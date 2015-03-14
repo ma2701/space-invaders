@@ -18,7 +18,6 @@ import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.GameElementPositionManager
-import com.ui.panel.ScorePanel._
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
@@ -39,10 +38,8 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionManager(getWidth, getHeight))
 
-        updateScore(gameLogic.currentScore)
-
         if(spaceInvaderGame.isTimeToResetGame) {
-            spaceInvaderGame = new SpaceInvaderGame
+            spaceInvaderGame = spaceInvaderGame.resetAll
         }
 
         gameLogic = if (gameState.elements.player.isHit) {

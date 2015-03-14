@@ -1,9 +1,9 @@
 package com.ui
 
 import com.ui.gameelement.invader.types.Invader
-import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
+import com.ui.gameelement.invader.{InvaderArmyPositionDirector, ArmyCommander, InvaderArmy}
 import java.awt._
-import com.ui.gameelement.barricade.{Barricade, Barricades}
+import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.player.{PlayerPositionDirector, Player}
 import scala.util.Try
 import com.ui.gameelement.missile.MissilesInFlight
@@ -29,7 +29,7 @@ class SpaceInvaderGame() {
 
     def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
 
-        val gameElements = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
+        val gameElements     = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
         val updatedPositions = positionMngr.updatePositionOfGameElements(gameElements)
 
         updateElementsOnScreen(updatedPositions)
@@ -46,18 +46,23 @@ class SpaceInvaderGame() {
                            .removeMissiles(firstElementInListOfTuples(collidedElements.shotInvaders))
                            .removeMissiles(firstElementInListOfTuples(collidedElements.hitBarricadesByMissiles))
 
-        droppingBombs = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
-        player        = if(collidedElements.isPlayerShot) player.copy(isHit = true) else player
+        droppingBombs    = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
+        player           = if(collidedElements.isPlayerShot) player.copy(isHit = true) else player
 
-        val elements = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
-        val pntThisRound: Int = calculatePoints(shotInvaders(collidedElements))
+        val elements     = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
+        val pntThisRound = calculatePointsWon(shotInvaders(collidedElements))
 
         GameState(elements, pntThisRound)
     }
 
-    def invaderKillCount: Int      = invaderArmy.allDeadInvaders.size
+    def invaderKillCount = invaderArmy.allDeadInvaders.size
 
-    def isTimeToResetGame: Boolean = invaderArmy.isEveryoneDead || player.isHit
+    def isTimeToResetGame= invaderArmy.isEveryoneDead || player.isHit
+
+    def resetAll:SpaceInvaderGame= {
+        InvaderArmyPositionDirector.resetAll
+        new SpaceInvaderGame
+    }
 
     def getPlayerPosition: Option[Point] = Try(player.shootingTipPosition).toOption
 
@@ -75,12 +80,6 @@ class SpaceInvaderGame() {
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {
             t => t._2.markHitByMissile
-        }
-    }
-
-    private def markHitBarricades(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Barricade)]) {
-        shotSoldiersAndBulletsThatKilledThem.foreach {
-            t => println(s"marking ${t._2} hit")
         }
     }
 

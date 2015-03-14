@@ -8,7 +8,7 @@ class ScoreCalculationTest extends FunSuite {
 
     test("given no invader by player missiles then calculateScore returns 0") {
         assertResult(0) {
-            ScoreCalculation.calculatePoints(Nil)
+            ScoreCalculation.calculatePointsWon(Nil)
         }
     }
 
@@ -16,7 +16,7 @@ class ScoreCalculationTest extends FunSuite {
         val invaderHitByMissile = new CrabInvader(new Point(0,0))
 
         assertResult(20) {
-            ScoreCalculation.calculatePoints(Seq(invaderHitByMissile))
+            ScoreCalculation.calculatePointsWon(Seq(invaderHitByMissile))
         }
     }
 }

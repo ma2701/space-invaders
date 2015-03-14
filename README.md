@@ -29,7 +29,7 @@ TODO:
 
 2) fix the player game element to look more like the original game      -- DONE
 
-2.1) reset all game elements when the whole game is reset
+2.1) reset all game elements when the whole game is reset               -- DONE
 
 2.2) update "lives" area when player is hit                             -- DONE
 

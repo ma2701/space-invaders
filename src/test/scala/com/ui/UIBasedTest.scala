@@ -1,7 +1,6 @@
 package com.ui
 
 import javax.swing.JFrame
-import com.ui.panel.ScorePanel
 
 trait UIBasedTest {
 

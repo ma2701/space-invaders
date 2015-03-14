@@ -45,6 +45,9 @@ object InvaderArmyPositionDirector {
             }
     }
 
+    def resetAll:Unit =
+        this.initialPosition = new Point()
+
     private def setInitialPosition(displayWindow: Rectangle, armyBoundingBox: Rectangle): Point = {
         val x: Int = (displayWindow.width  - armyBoundingBox.width) / 2
         val y: Int = (displayWindow.height - armyBoundingBox.height) / 2

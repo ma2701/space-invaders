@@ -2,7 +2,7 @@ package com.ui
 
 import org.jdesktop.layout._
 import javax.swing.JFrame
-import com.ui.panel.{ScorePanel, GameStatusPanel, GamePanel}
+import com.ui.panel.{GameStatusPanel, GamePanel}
 
 class SpaceInvadersUI() extends javax.swing.JFrame {
 

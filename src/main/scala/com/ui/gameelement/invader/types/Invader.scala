@@ -16,7 +16,9 @@ abstract class Invader(topLeft: Point,
                    var isHit: Boolean = false) extends Displayable(topLeft)  {
     /**
      * if this one is hit by a missile then when moving turn it into an exploded invader (well it's hit so it should explode..)
-     * else return an opposite opposite character than this instance. This will make the invader animated on the screen
+     * else return an opposite opposite character than this instance. Opposite in this
+     * context means if this is normal *invader then opposite of it would be an excited version. This will make
+     * the invader animated on the screen
      *
      * @param point: the location to move this invader to
      * @return     : new  invader at a new location
