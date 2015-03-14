@@ -41,7 +41,7 @@ TODO:
 
 6) implement game pausing
 
-7) implement exploded player - display it before resetting the game for another round
+7) implement exploded player - display it before resetting the game for another round -- DONE
 
 8) implement variable velocity for invader army
 
