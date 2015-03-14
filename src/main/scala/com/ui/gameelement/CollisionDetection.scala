@@ -5,7 +5,7 @@ import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.barricade.{Barricades, Barricade}
 import com.ui.GameElements
 import com.ui.gameelement.bomb.Bomb
-import com.ui.gameelement.player.Player
+import com.ui.gameelement.player.types.Player
 
 
 object CollisionDetection {

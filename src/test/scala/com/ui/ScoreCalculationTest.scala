@@ -12,10 +12,10 @@ class ScoreCalculationTest extends FunSuite {
         }
     }
 
-    test("given 1 invader hit that is worth 20 pts then calculateScore returns 20") {
+    test("given 1 invader hit that is worth 30 pts then calculateScore returns 30") {
         val invaderHitByMissile = new CrabInvader(new Point(0,0))
 
-        assertResult(20) {
+        assertResult(30) {
             ScoreCalculation.calculatePointsWon(Seq(invaderHitByMissile))
         }
     }

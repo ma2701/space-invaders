@@ -3,18 +3,19 @@ package com.ui.panel
 import javax.swing.{JLabel, JPanel}
 import java.awt.{Color, Point, Graphics, Font}
 import com.ui.gameelement.Displayable
-import com.ui.gameelement.player.{PlayerPositionDirector, Player}
+import com.ui.gameelement.player.PlayerPositionDirector
+import com.ui.gameelement.player.types.{ShootingPlayer, Player}
 
 
 object GameStatusPanel extends JPanel {
 
-    private val panelTitleName  = "S T A T S"
-    private val panelTextFont   = new Font("Verdana", Font.BOLD, 14)
-    private val score           = new JLabel
+    private[this] val panelTitleName  = "S T A T S"
+    private[this] val panelTextFont   = new Font("Verdana", Font.BOLD, 14)
+    private[this] val score           = new JLabel
 
     private[this] var livesLeft = 3
 
-    val mainPanelLayout = new org.jdesktop.layout.GroupLayout(this)
+    private val mainPanelLayout = new org.jdesktop.layout.GroupLayout(this)
     setPanelAttributes
 
     override def paintComponent(g: Graphics): Unit = {
@@ -36,7 +37,7 @@ object GameStatusPanel extends JPanel {
         val startingPoint = new Point(getWidth/3 , 21)
         PlayerPositionDirector.calculatePlayerPositionsOnLivesPanel(startingPoint, livesLeft)
         .foreach { point=>
-            val player = new Player(point)
+            val player = new ShootingPlayer(point)
             player.draw(g)
         }
     }

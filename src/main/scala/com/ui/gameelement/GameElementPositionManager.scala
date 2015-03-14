@@ -8,8 +8,8 @@ import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
-import com.ui.gameelement.player.Player
 import com.ui.GameElements
+import com.ui.gameelement.player.types.Player
 
 /**
  * 

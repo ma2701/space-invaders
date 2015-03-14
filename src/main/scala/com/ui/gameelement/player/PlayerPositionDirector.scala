@@ -1,6 +1,7 @@
 package com.ui.gameelement.player
 
 import java.awt.Point
+import com.ui.gameelement.player.types.{ShootingPlayer, Player}
 
 object PlayerPositionDirector {
 
@@ -21,7 +22,7 @@ object PlayerPositionDirector {
 
     val BUFFER_BETWEEN_LIVES = 10
     def calculatePlayerPositionsOnLivesPanel(startingPoint: Point, count:Int = 3): Seq[Point] = {
-        val playerBoundingBox = new Player(new Point(0,0)).boundingBox
+        val playerBoundingBox = new ShootingPlayer(new Point(0,0)).boundingBox
 
         0 until (count) map{ i:Int =>
             new Point(startingPoint.x + (i*playerBoundingBox.width) + (i*BUFFER_BETWEEN_LIVES), startingPoint.y )

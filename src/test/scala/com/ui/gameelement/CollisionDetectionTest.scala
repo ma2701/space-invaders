@@ -6,10 +6,10 @@ import java.awt.Point
 import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.missile.{Missile, MissilesInFlight}
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
-import com.ui.gameelement.player.Player
 import com.ui.GameElements
 import com.ui.gameelement.invader.types.CrabInvader
 import com.ui.gameelement.CollisionDetection._
+import com.ui.gameelement.player.types.ShootingPlayer
 
 
 class CollisionDetectionTest extends FunSuite {
@@ -24,7 +24,7 @@ class CollisionDetectionTest extends FunSuite {
         val barricades  = new Barricades(startingPosition)
         val missiles    = new MissilesInFlight(List(new Missile(startingPosition)))
         val bombs       = new DroppingBombs(List(new Bomb(startingPosition)))
-        val player      = new Player(startingPosition)
+        val player      = new ShootingPlayer(startingPosition)
 
         val positionManager = new GameElementPositionManager(screenWidth, screenHeight)
         val gameElementsWithUpdatedPositions = positionManager.updatePositionOfGameElements(GameElements(invaderArmy, missiles, barricades,player, bombs))
@@ -42,7 +42,7 @@ class CollisionDetectionTest extends FunSuite {
         val barricades  = new Barricades(startingPosition)
         val missiles    = new MissilesInFlight(List(new Missile(startingPosition)))
         val bombs       = new DroppingBombs(List(new Bomb(startingPosition)))
-        val player      = new Player(startingPosition)
+        val player      = new ShootingPlayer(startingPosition)
 
         val positionManager = new GameElementPositionManager(screenWidth, screenHeight)
         val gameElementsWithUpdatedPositions = positionManager.updatePositionOfGameElements(GameElements(invaderArmy, missiles, barricades,player, bombs))

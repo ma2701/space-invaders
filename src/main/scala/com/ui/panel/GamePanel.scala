@@ -13,11 +13,11 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.player.Player
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.GameElementPositionManager
+import com.ui.gameelement.player.types.Player
 
 object GamePanel extends JPanel with Runnable with ActionListener {
 
@@ -38,11 +38,10 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionManager(getWidth, getHeight))
 
-        if(spaceInvaderGame.isTimeToResetGame) {
+        if(gameState.isTimeToResetGame)
             spaceInvaderGame = spaceInvaderGame.resetAll
-        }
 
-        gameLogic = if (gameState.elements.player.isHit) {
+        gameLogic = if (gameState.elements.player.isHit && gameState.isTimeToResetGame) {
             gameLogic.playerShotOnce.setScore(gameState.score)
         } else {
             gameLogic.setScore(gameState.score)
