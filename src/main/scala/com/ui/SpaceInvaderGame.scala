@@ -30,9 +30,8 @@ class SpaceInvaderGame() {
     def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
 
         val gameElements     = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
-        val updatedPositions = positionMngr.updatePositionOfGameElements(gameElements)
 
-        updateElementsOnScreen(updatedPositions)
+        updateElementsOnScreen(positionMngr.updatePositionOfGameElements(gameElements))
 
         droppingBombs = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
 
@@ -98,11 +97,11 @@ class SpaceInvaderGame() {
     }
 
     private def updateElementsOnScreen(updatedGameElements: GameElements)= {
-        barricades = updatedGameElements.barricades
-        player = updatedGameElements.player
+        barricades       = updatedGameElements.barricades
+        player           = updatedGameElements.player
         missilesInFlight = updatedGameElements.missilesInFlight
-        droppingBombs = updatedGameElements.droppingBombs
-        invaderArmy = updatedGameElements.invaderArmy
+        droppingBombs    = updatedGameElements.droppingBombs
+        invaderArmy      = updatedGameElements.invaderArmy
     }
 
     private def now: Long = System.currentTimeMillis()

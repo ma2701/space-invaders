@@ -18,12 +18,17 @@ object CollisionDetection {
             isPlayerHit(gameElements.player, gameElements.droppingBombs.bombs)
         )
 
+    /**
+     * *
+     * @param missiles flying around in the game right now
+     * @param army     invader army moving about
+     * @return         invaders and the missiles that kill them
+     */
     private def findShotInvaders(missiles: Seq[Missile], army: Seq[Invader]): Seq[(Missile, Invader)] =
         findCollidedItems(missiles, army)
 
     private def findBarricadesHitWithMissiles(missiles: Seq[Missile], barricades: Barricades): Seq[(Missile, Barricade)] =
         findCollidedItems(missiles, barricades.covers)
-
 
     private def findBarricadesHitWithBombs(bombs: Seq[Bomb], barricades: Barricades): Seq[(Bomb, Barricade)] =
         findCollidedItems(bombs, barricades.covers)

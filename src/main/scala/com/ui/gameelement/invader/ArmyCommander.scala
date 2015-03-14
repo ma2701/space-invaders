@@ -10,15 +10,22 @@ object ArmyCommander {
     def ROW_CNT = 5
     def COL_CNT = 11
 
+    def CRAB_INVADER_CNT = 22
+
     def formAnArmy(startingPosition:Point):Seq[Invader] =
         allInvaderPositionsFromStartingPoint(startingPosition)
         .zipWithIndex
         .map {
             positionIndexTuple => positionIndexTuple._2 match {
-                case i if(i<22) => CrabInvader(positionIndexTuple._1)
-                case i if(i>=22) => OctopusInvader(positionIndexTuple._1)
+                case currentInvaderCnt if(!hasCreatedEnoughCrabInvader(currentInvaderCnt)) =>
+                    CrabInvader(positionIndexTuple._1)
+                case currentInvaderCnt if(hasCreatedEnoughCrabInvader(currentInvaderCnt)) =>
+                    OctopusInvader(positionIndexTuple._1)
             }
         }
+
+
+    private def hasCreatedEnoughCrabInvader(currentInvaderCnt: Int):Boolean = currentInvaderCnt >= CRAB_INVADER_CNT
 
     def calculateInvaderPos(row:Int, col:Int, startingPoint:Point):Point = {
         new Point( startingPoint.x + (col * Invader.INVADER_WIDTH) + (col*BUFFER_BETWEEN_SOLDIERS) ,

@@ -51,7 +51,7 @@ object GameStatusPanel extends JPanel {
     }
 
     private def displayLives(g:Graphics):Unit = {
-        val startingPoint = new Point(this.getWidth/2,25)
+        val startingPoint = new Point(getWidth/3 , 21)
         PlayerPositionDirector.calculatePlayerPositionsOnLivesPanel(startingPoint, livesLeft)
         .foreach { point=>
             val player = new Player(point)
