@@ -1,6 +1,6 @@
 package com.ui
 
-class GameLogic(val livesLeft:Int = 3, val currentScore:Int=0) {
+class GameLogic(val livesLeft:Int = 1, val currentScore:Int=0) {
 
     def playerShotOnce: GameLogic      = new GameLogic(livesLeft - 1 , currentScore)
 

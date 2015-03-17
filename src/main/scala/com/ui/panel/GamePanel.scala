@@ -18,13 +18,15 @@ import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.GameElementPositionManager
 import com.ui.gameelement.player.types.Player
+import com.ui.gameelement.gameover.GameOver
 
 object GamePanel extends JPanel with Runnable with ActionListener {
-
-    private val SCREEN_REFRESH_RATE_IN_MILLIS = 1
-
+    private[this] val SCREEN_REFRESH_RATE_IN_MILLIS = 1
     private[this] val PREFERRED_WIDTH : Int = 878
     private[this] val PREFERRED_HEIGHT: Int = 600
+
+    private[this] val WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW: Long = 5000
+
     private[this] var animator: Thread = null
     private[this] var gameLogic:GameLogic = new GameLogic()
 
@@ -33,12 +35,20 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     setPanelAttributes
 
     override def paintComponent(g: Graphics): Unit = {
-
         super.paintComponent(g)
 
+        if(!gameLogic.isGameOver)
+            updateScreen(g)
+        else
+            displayGameOverAnimation(g)
+    }
+
+    override def run(): Unit = mainGameLoop
+
+    def updateScreen(g: Graphics) {
         val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionManager(getWidth, getHeight))
 
-        if(gameState.isTimeToResetGame)
+        if (gameState.isTimeToResetGame)
             spaceInvaderGame = spaceInvaderGame.resetAll
 
         gameLogic = if (gameState.elements.player.isHit && gameState.isTimeToResetGame) {
@@ -60,12 +70,14 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         displayInvaderArmy(gameState.elements.invaderArmy, g)
     }
 
-    override
-    def run(): Unit = mainGameLoop
+    def displayGameOverAnimation(g: Graphics) {
+        val GAME_OVER_TEXT_LOCATION: Point = new Point(getWidth/4, getHeight / 2)
+        displayGameOver(GameOver(GAME_OVER_TEXT_LOCATION), g)
+    }
 
     private def mainGameLoop: Unit = {
-        var beforeTime = System.currentTimeMillis()
 
+        var beforeTime = System.currentTimeMillis()
         do {
 
             repaint()
@@ -76,6 +88,8 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         } while (!gameLogic.isGameOver)
 
+        Thread.sleep(WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW)
+        
         System.exit(0)
     }
 
@@ -120,6 +134,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit      = missiles.draw(g)
     private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit               = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit     = invaderArmy.draw(g)
+    private def displayGameOver(gameOver:GameOver, g:Graphics):Unit               = gameOver.draw(g)
 
 
     private def displayGameOver(g:Graphics) {
