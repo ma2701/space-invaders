@@ -15,5 +15,5 @@ case class ExplodedPlayer(tplft: Point,
     override def shootingTipPosition: Point = new Point(0,0)
 
     // display exploded shooter for .5 second
-    override def beenExplodingForTooLong(currentTime: Long): Boolean = (currentTime - explosionTime) >= 1000
+    override def beenExplodingForTooLong(currentTime: Long): Boolean = (currentTime - explosionTime) >= 500
 }

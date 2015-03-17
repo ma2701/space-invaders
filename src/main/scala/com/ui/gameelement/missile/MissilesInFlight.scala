@@ -9,7 +9,7 @@ class MissilesInFlight(val missiles: Seq[Missile] = Nil) {
     // oldest missile fired
     def removeOffScreenMissile: MissilesInFlight =
         if (!missiles.isEmpty && missiles.reverse.last.head.y < 0)
-            new MissilesInFlight(missiles.init) // take all but the oldest fire missile
+            new MissilesInFlight(missiles.init) // take all but the oldest fired missile
         else this
 
     def updatePosition: MissilesInFlight =
