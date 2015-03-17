@@ -76,7 +76,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         } while (!gameLogic.isGameOver)
 
-        System.exit(0) // temporary
+        System.exit(0)
     }
 
     private def sleep(beforeTime: Long) {
@@ -89,10 +89,10 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
     override
     def addNotify: Unit = {
-        super.addNotify();
+        super.addNotify()
 
-        animator = new Thread(this);
-        animator.start();
+        animator = new Thread(this)
+        animator.start()
     }
 
     override
@@ -115,17 +115,16 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         }
     }
 
-    private def displayBarricades(barricades:Barricades, g:Graphics):Unit = barricades.draw(g)
-    private def displayShooter (shooter:Player, g:Graphics):Unit = shooter.draw(g)
-    private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit = missiles.draw(g)
-    private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit = bombs.draw(g)
-    private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit = invaderArmy.draw(g)
+    private def displayBarricades(barricades:Barricades, g:Graphics):Unit         = barricades.draw(g)
+    private def displayShooter (shooter:Player, g:Graphics):Unit                  = shooter.draw(g)
+    private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit      = missiles.draw(g)
+    private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit               = bombs.draw(g)
+    private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit     = invaderArmy.draw(g)
 
 
     private def displayGameOver(g:Graphics) {
         g.setColor(Color.RED)
         g.drawString("GAME OVER", this.getHeight/2 , this.getWidth /2 )
-
     }
 
     private def setPanelAttributes {

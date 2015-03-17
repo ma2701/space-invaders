@@ -2,8 +2,7 @@ package com.ui.gameelement.player
 
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import java.awt.Color
-import java.awt.Color._
+import com.ui.gameelement.barricade.GreenDisplayElement
 
 
 trait PlayerParts {
@@ -13,11 +12,6 @@ trait PlayerParts {
         MidSection(x, y),
         Bottom(x, y)
     )
-}
-
-abstract class GreenDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
-    extends SingleDisplayElement(x, y,xOffsetFromCentre,  yOffsetFromCentre){
-    override val color:Color = GREEN
 }
 
 object TopSection {
