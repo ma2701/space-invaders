@@ -25,7 +25,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private[this] val PREFERRED_WIDTH : Int = 878
     private[this] val PREFERRED_HEIGHT: Int = 600
 
-    private[this] val WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW: Long = 5000
+    private[this] val WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW: Long = 2000
 
     private[this] var animator: Thread = null
     private[this] var gameLogic:GameLogic = new GameLogic()
@@ -71,7 +71,8 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     }
 
     def displayGameOverAnimation(g: Graphics) {
-        val GAME_OVER_TEXT_LOCATION: Point = new Point(getWidth/4, getHeight / 2)
+        val GAME_OVER_TEXT_LOCATION: Point = new Point(getWidth/3, getHeight / 2)
+
         displayGameOver(GameOver(GAME_OVER_TEXT_LOCATION), g)
     }
 

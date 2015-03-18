@@ -35,7 +35,7 @@ TODO:
 
 3) implement different invader types with different points              -- ALMOST DONE
 
-4) display "game over" when game is over                                -- ALMOST DONE
+4) display "game over" when game is over                                -- DONE
 
 5) implement mystery invader in red with surprise point assigned to it.
 
