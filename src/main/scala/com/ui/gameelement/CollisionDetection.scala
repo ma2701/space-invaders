@@ -36,7 +36,6 @@ object CollisionDetection {
     private def isPlayerHit(player:Player, bombs:Seq[Bomb]):Boolean =
         (!bombs.isEmpty) && hasCollided(bombs.reverse.head, player)
 
-
     private def findCollidedItems[T <: Displayable, A <: Displayable](items: Seq[T], otherItems: Seq[A]): Seq[(T, A)] = {
 
         def findAHit(item: T, listOfOtherItems: Seq[A]): Option[A] = {

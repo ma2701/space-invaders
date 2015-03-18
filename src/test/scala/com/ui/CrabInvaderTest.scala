@@ -9,7 +9,7 @@ import org.mockito.Matchers._
 
 class CrabInvaderTest extends FunSuite with MockitoSugar {
 
-    test("can move an invader to position ") {
+    test("given a crab invader then it can be moved to position x,y") {
         val invader = new CrabInvader(new Point(10, 10))
 
         assertResult(50) {
@@ -17,7 +17,7 @@ class CrabInvaderTest extends FunSuite with MockitoSugar {
         }
     }
 
-    test("can draw itself") {
+    test("given a crab invader then it can draw itself") {
         val invader = new CrabInvader(new Point(10, 10))
         val mockGraphics = mock[Graphics]
 

@@ -8,11 +8,7 @@ import com.ui.gameelement.barricade.Barricade
 
 class BarricadeTest extends FunSuite with MockitoSugar {
 
-    test("can create an instance") {
-        val instance = new Barricade(new Point(0, 0))
-    }
-
-    test("can get the bounding box") {
+    test("given instance of barricade then boundingBox returns bbx of barricade") {
         val instance = new Barricade(new Point(0, 0))
 
         val expectedWidth  = instance.parts.sortWith( _.getBoundingBox.width > _.getBoundingBox.width)(0).getBoundingBox.width
@@ -22,4 +18,5 @@ class BarricadeTest extends FunSuite with MockitoSugar {
             instance.boundingBox
         }
     }
+
 }

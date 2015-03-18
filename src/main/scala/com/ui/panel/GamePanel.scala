@@ -91,7 +91,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         Thread.sleep(WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW)
         
-        System.exit(0)
+        System.exit(0) // temp
     }
 
     private def sleep(beforeTime: Long) {
@@ -136,12 +136,6 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit               = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit     = invaderArmy.draw(g)
     private def displayGameOver(gameOver:GameOver, g:Graphics):Unit               = gameOver.draw(g)
-
-
-    private def displayGameOver(g:Graphics) {
-        g.setColor(Color.RED)
-        g.drawString("GAME OVER", this.getHeight/2 , this.getWidth /2 )
-    }
 
     private def setPanelAttributes {
         setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))
