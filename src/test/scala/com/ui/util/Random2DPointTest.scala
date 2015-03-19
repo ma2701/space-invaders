@@ -2,6 +2,7 @@ package com.ui.util
 
 
 import org.scalatest.FunSuite
+import com.ui.util.random.Random2DPoint
 
 class Random2DPointTest extends FunSuite {
 

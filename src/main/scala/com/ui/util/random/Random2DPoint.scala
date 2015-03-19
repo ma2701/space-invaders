@@ -1,4 +1,4 @@
-package com.ui.util
+package com.ui.util.random
 
 import java.awt.Point
 

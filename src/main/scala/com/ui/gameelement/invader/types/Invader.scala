@@ -4,7 +4,7 @@ import java.awt.{Point, Rectangle}
 
 import com.ui.gameelement.Displayable
 import com.ui.gameelement.displayelement._
-import com.ui.util.RandomNumberGenerator
+import com.ui.util.random.RandomBoolean
 
 
 object Invader {
@@ -37,7 +37,7 @@ abstract class Invader(topLeft: Point,
 
     def beenExplodingForTooLong(currentTime: Long): Boolean = false
 
-    def feelLikeDroppingABomb: Boolean = new RandomNumberGenerator().randomTrueOrFalse
+    def feelLikeDroppingABomb: Boolean = new RandomBoolean().randomTrueOrFalse
 
     def pointsWorth:Int
 
