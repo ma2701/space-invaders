@@ -5,7 +5,7 @@ import javax.swing.JPanel
 import java.awt._
 import com.ui.gameelement.Displayable
 import org.jdesktop.layout.GroupLayout
-import com.ui.gameelement.gameover.GameOver
+import com.ui.gameelement.invader.types.MysteryInvader
 
 class TestUIFrame extends JFrame {
     setResizable(false)
@@ -16,7 +16,7 @@ class TestUIFrame extends JFrame {
     pack()
 
     private def initAllComponents: Unit = {
-        val panel = new TestUIPanel(new GameOver(new Point(10,10)))
+        val panel = new TestUIPanel(new MysteryInvader(new Point(10,10)))
 
         val layout: GroupLayout = new GroupLayout(getContentPane)
 
