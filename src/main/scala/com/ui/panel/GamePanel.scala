@@ -71,7 +71,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     }
 
     def displayGameOverAnimation(g: Graphics) {
-        val GAME_OVER_TEXT_LOCATION: Point = new Point(getWidth/3, getHeight / 2)
+        val GAME_OVER_TEXT_LOCATION: Point = new Point(50+(getWidth/3), getHeight / 2)
 
         displayGameOver(GameOver(GAME_OVER_TEXT_LOCATION), g)
     }
