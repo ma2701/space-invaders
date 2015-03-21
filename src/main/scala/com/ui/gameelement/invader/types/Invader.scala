@@ -37,7 +37,7 @@ abstract class Invader(topLeft: Point,
 
     def beenExplodingForTooLong(currentTime: Long): Boolean = false
 
-    def feelLikeDroppingABomb: Boolean = new RandomBoolean().randomTrueOrFalse
+    def feelLikeDroppingABomb: Boolean = new RandomBoolean().nextRandomTrueWithOneOutOfNChance(2)
 
     def pointsWorth:Int
 

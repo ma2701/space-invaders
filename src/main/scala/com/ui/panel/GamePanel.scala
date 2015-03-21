@@ -19,6 +19,7 @@ import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.GameElementPositionManager
 import com.ui.gameelement.player.types.Player
 import com.ui.gameelement.gameover.GameOver
+import com.ui.gameelement.invader.types.MysteryInvader
 
 object GamePanel extends JPanel with Runnable with ActionListener {
     private[this] val SCREEN_REFRESH_RATE_IN_MILLIS = 1
@@ -68,6 +69,8 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         displayBombs(gameState.elements.droppingBombs, g)
 
         displayInvaderArmy(gameState.elements.invaderArmy, g)
+
+        displayMysteryInvader(gameState.elements.mysteryInvader, g)
     }
 
     def displayGameOverAnimation(g: Graphics) {
@@ -136,6 +139,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit               = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit     = invaderArmy.draw(g)
     private def displayGameOver(gameOver:GameOver, g:Graphics):Unit               = gameOver.draw(g)
+    private def displayMysteryInvader (mysteryInvader:Option[MysteryInvader], g:Graphics):Unit = mysteryInvader.map(_.draw(g))
 
     private def setPanelAttributes {
         setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))

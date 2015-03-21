@@ -1,6 +1,6 @@
 package com.ui
 
-import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.invader.types.{MysteryInvader, Invader}
 import com.ui.gameelement.invader.{InvaderArmyPositionDirector, ArmyCommander, InvaderArmy}
 import java.awt._
 import com.ui.gameelement.barricade.Barricades
@@ -14,23 +14,26 @@ import com.ui.gameelement.{CollidedElements, GameElementPositionManager}
 import com.ui.gameelement.CollisionDetection._
 import com.ui.ScoreCalculation._
 import com.ui.gameelement.player.types.{ExplodedPlayer, ShootingPlayer, Player}
+import com.ui.util.random.RandomNumberGenerator
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
 }
 
 class SpaceInvaderGame() {
+    private[this] val random                 = new RandomNumberGenerator()
     private[this] val initialPosition: Point = new Point(0, 0)
 
-    private[this] var invaderArmy      = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
-    private[this] var barricades       = new Barricades(initialPosition)
-    private[this] var player :Player   = new ShootingPlayer(initialPosition)
-    private[this] var missilesInFlight = new MissilesInFlight()
-    private[this] var droppingBombs    = new DroppingBombs()
+    private[this] var invaderArmy                            = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
+    private[this] var barricades                             = new Barricades(initialPosition)
+    private[this] var player        : Player                 = new ShootingPlayer(initialPosition)
+    private[this] var missilesInFlight                       = new MissilesInFlight()
+    private[this] var droppingBombs                          = new DroppingBombs()
+    private[this] var mysteryInvader: Option[MysteryInvader] = None
 
     def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
 
-        val gameElements     = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
+        val gameElements   = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs, mysteryInvader)
 
         updateElementsOnScreen(positionMngr.updatePositionOfGameElements(gameElements))
 
@@ -49,10 +52,10 @@ class SpaceInvaderGame() {
         droppingBombs    = droppingBombs.removeBombs(bombsToBeRemovedOffScreen(collidedElements))
         player           = if(collidedElements.isPlayerShot) new ExplodedPlayer(player.topLeft) else player
 
-        val elements     = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs)
-        val pntThisRound = calculatePointsWon(shotInvaders(collidedElements))
+        val elements     = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs, mysteryInvader)
+        val pntWonRound  = calculatePointsWon(shotInvaders(collidedElements))
 
-        GameState(elements, pntThisRound, isTimeToResetGame)
+        GameState(elements, pntWonRound, isTimeToResetGame)
     }
 
     def invaderKillCount = invaderArmy.allDeadInvaders.size
@@ -103,6 +106,7 @@ class SpaceInvaderGame() {
         missilesInFlight = updatedGameElements.missilesInFlight
         droppingBombs    = updatedGameElements.droppingBombs
         invaderArmy      = updatedGameElements.invaderArmy
+        mysteryInvader   = updatedGameElements.mysteryInvader
     }
 
     private def now: Long = System.currentTimeMillis()

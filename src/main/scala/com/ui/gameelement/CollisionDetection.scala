@@ -20,7 +20,7 @@ object CollisionDetection {
 
     /**
      * *
-     * @param missiles flying around in the game right now
+     * @param missiles missiles flying around in the game right now
      * @param army     invader army moving about
      * @return         invaders and the missiles that kill them
      */

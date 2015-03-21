@@ -3,8 +3,30 @@ package com.ui.gameelement.invader.types
 import java.awt.Point
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.invader.{MysteryInvaderMovementDirection, MysteryInvaderParts}
-import com.ui.gameelement.invader.MysteryInvaderDirection.RightToLeft
-import com.ui.util.random.RandomNumberGenerator
+import com.ui.gameelement.invader.MysteryInvaderDirection.{LeftToRight, RightToLeft}
+import com.ui.util.random.{RandomDirection, RandomBoolean, RandomNumberGenerator}
+
+object MysteryInvader{
+    def initialPositionOnRight(screenWidth:Int) = new Point(screenWidth - 10, 20)
+    def initialPositionOnLeft                   = new Point(10, 20)
+
+    val ODDS_OF_INSTANCE_CREATION               = 1000
+    /**
+     * There is ~ 1 in ODDS_OF_INSTANCE_CREATION chance that this creates an instance of MysteryInvader
+     * and 50% chance the created instance starts on the left side of the screen
+     * */
+    def maybeCreateAnInstance(screenWidth:Int):Option[MysteryInvader] = {
+        val random = new RandomBoolean()
+
+        if(random.nextRandomTrueWithOneOutOfNChance(ODDS_OF_INSTANCE_CREATION)) {
+            if(random.nextRandomTrueWithOneOutOfNChance(2)) {
+                Some(new MysteryInvader(initialPositionOnLeft,LeftToRight))
+            } else {
+                Some(new MysteryInvader(initialPositionOnRight(screenWidth),RightToLeft))
+            }
+        } else None
+    }
+}
 
 case class MysteryInvader(tl:Point,
                           val direction:MysteryInvaderMovementDirection=RightToLeft,
@@ -13,7 +35,14 @@ case class MysteryInvader(tl:Point,
     override val parts: List[SingleDisplayElement] = parts(x,y)
 
     override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader =
-        new ExcitedCrabInvader(point,isHit)
+        new MysteryInvader(point,direction, hit)
 
     override def pointsWorth: Int = new RandomNumberGenerator().next(20.to(200))
+
+    def removeIfOffScreen(displayW:Int ):Option[MysteryInvader] = direction match {
+        case RightToLeft if(topLeft.x  + this.boundingBox.width <=0) => None
+        case RightToLeft                                             => Some(this)
+        case LeftToRight if(topLeft.x >= displayW)                   => None
+        case LeftToRight                                             => Some(this)
+    }
 }
