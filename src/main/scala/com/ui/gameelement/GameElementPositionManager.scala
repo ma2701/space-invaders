@@ -31,17 +31,14 @@ import com.ui.gameelement.invader.types.{ExplodedInvader, Invader, MysteryInvade
 class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
     private val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, (3 * screenHeight) / 4)
 
-    def updatePositionOfGameElements(elements: GameElements): GameElements = {
-
-        val invaderArmy = updateInvaderArmyPosition(elements.invaderArmy)
-        val missilesInFlight = updateMissilesPosition(elements.missilesInFlight)
-        val barricades = updatedBarricadePosition(elements.barricades)
-        val player = updatePlayerPositionIfRequired(elements.player)
-        val bombs = updateBombsPosition(elements.droppingBombs)
-        val mysteryInvader = updateMysteryInvaderPosition(elements.mysteryInvader)
-
-        new GameElements(invaderArmy, missilesInFlight, barricades, player, bombs, mysteryInvader)
-    }
+    def updatePositionOfGameElements(elements: GameElements): GameElements =
+        GameElements(
+            updateInvaderArmyPosition(elements.invaderArmy),
+            updateMissilesPosition(elements.missilesInFlight),
+            updatedBarricadePosition(elements.barricades),
+            updatePlayerPositionIfRequired(elements.player),
+            updateBombsPosition(elements.droppingBombs),
+            updateMysteryInvaderPosition(elements.mysteryInvader))
 
     private def updatedBarricadePosition(barricades: Barricades): Barricades = {
         val barricadeLocation: Point = new Point(screenWidth / 5, screenHeight - (screenHeight / 4))

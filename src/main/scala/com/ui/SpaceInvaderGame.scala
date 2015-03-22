@@ -1,6 +1,6 @@
 package com.ui
 
-import com.ui.gameelement.invader.types.{MysteryInvader, Invader}
+import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.invader.{InvaderArmyPositionDirector, ArmyCommander, InvaderArmy}
 import java.awt._
 import com.ui.gameelement.barricade.Barricades
@@ -89,7 +89,6 @@ class SpaceInvaderGame() {
         possibleHit.map { t =>
             t._2.markHitByMissile
         }
-
     }
 
     private def shotInvaders(collidedElements: CollidedElements): Seq[Invader] =
