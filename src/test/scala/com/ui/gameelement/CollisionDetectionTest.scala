@@ -26,8 +26,8 @@ class CollisionDetectionTest extends FunSuite {
         val bombs       = new DroppingBombs(List(new Bomb(startingPosition)))
         val player      = new ShootingPlayer(startingPosition)
 
-        val positionManager = new GameElementPositionManager(screenWidth, screenHeight)
-        val gameElementsWithUpdatedPositions = positionManager.updatePositionOfGameElements(GameElements(invaderArmy, missiles, barricades,player, bombs))
+        val positionManager = new GameElementPosition(screenWidth, screenHeight)
+        val gameElementsWithUpdatedPositions = positionManager.updateAllGameElementPositions(GameElements(invaderArmy, missiles, barricades,player, bombs))
 
         val collidedElements = detectCollisions(gameElementsWithUpdatedPositions)
 
@@ -44,8 +44,8 @@ class CollisionDetectionTest extends FunSuite {
         val bombs       = new DroppingBombs(List(new Bomb(startingPosition)))
         val player      = new ShootingPlayer(startingPosition)
 
-        val positionManager = new GameElementPositionManager(screenWidth, screenHeight)
-        val gameElementsWithUpdatedPositions = positionManager.updatePositionOfGameElements(GameElements(invaderArmy, missiles, barricades,player, bombs))
+        val positionManager = new GameElementPosition(screenWidth, screenHeight)
+        val gameElementsWithUpdatedPositions = positionManager.updateAllGameElementPositions(GameElements(invaderArmy, missiles, barricades,player, bombs))
 
         val playerPosition  = gameElementsWithUpdatedPositions.player.topLeft
         val bombHittingPlayer = new Bomb(playerPosition)

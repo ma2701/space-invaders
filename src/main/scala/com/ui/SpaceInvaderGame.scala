@@ -10,7 +10,7 @@ import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
-import com.ui.gameelement.{CollidedElements, GameElementPositionManager}
+import com.ui.gameelement.{CollidedElements, GameElementPosition}
 import com.ui.gameelement.CollisionDetection._
 import com.ui.ScoreCalculation._
 import com.ui.gameelement.player.types.{ExplodedPlayer, ShootingPlayer, Player}
@@ -29,11 +29,11 @@ class SpaceInvaderGame() {
     private[this] var droppingBombs                          = new DroppingBombs()
     private[this] var mysteryInvader: Option[Invader]        = None
 
-    def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
+    def updatedGameElements(positionMngr: GameElementPosition): GameState = {
 
         val gameElements   = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs, mysteryInvader)
 
-        updateElementsOnScreen(positionMngr.updatePositionOfGameElements(gameElements))
+        updateElementsOnScreen(positionMngr.updateAllGameElementPositions(gameElements))
 
         droppingBombs = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
 

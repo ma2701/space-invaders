@@ -28,10 +28,10 @@ import com.ui.gameelement.invader.types.{ExplodedInvader, Invader, MysteryInvade
  *                     asks the relevant director for an updated position and then moves the game element to that position...
  */
 
-class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
+class GameElementPosition(screenWidth: Int, screenHeight: Int) {
     private val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, (3 * screenHeight) / 4)
 
-    def updatePositionOfGameElements(elements: GameElements): GameElements =
+    def updateAllGameElementPositions(elements: GameElements): GameElements =
         GameElements(
             updateInvaderArmyPosition(elements.invaderArmy),
             updateMissilesPosition(elements.missilesInFlight),

@@ -16,7 +16,7 @@ import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.bomb.DroppingBombs
-import com.ui.gameelement.GameElementPositionManager
+import com.ui.gameelement.GameElementPosition
 import com.ui.gameelement.player.types.Player
 import com.ui.gameelement.gameover.GameOver
 import com.ui.gameelement.invader.types.Invader
@@ -46,7 +46,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     override def run(): Unit = mainGameLoop
 
     def updateScreen(g: Graphics) {
-        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPositionManager(getWidth, getHeight))
+        val gameState = spaceInvaderGame.updatedGameElements(new GameElementPosition(getWidth, getHeight))
 
         if (gameState.isTimeToResetGame)
             spaceInvaderGame = spaceInvaderGame.resetAll
