@@ -33,7 +33,7 @@ class SpaceInvaderGame() {
 
         val gameElements   = GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs, mysteryInvader)
 
-        updateElementsOnScreen(positionMngr.updateAllGameElementPositions(gameElements))
+        updateElementsOnScreen(positionMngr.repositionGameElements(gameElements))
 
         droppingBombs = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
 

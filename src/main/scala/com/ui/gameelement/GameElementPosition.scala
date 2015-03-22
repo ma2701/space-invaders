@@ -31,7 +31,7 @@ import com.ui.gameelement.invader.types.{ExplodedInvader, Invader, MysteryInvade
 class GameElementPosition(screenWidth: Int, screenHeight: Int) {
     private val displayWindowBoundingBox = new Rectangle(0, 0, screenWidth, (3 * screenHeight) / 4)
 
-    def updateAllGameElementPositions(elements: GameElements): GameElements =
+    def repositionGameElements(elements: GameElements): GameElements =
         GameElements(
             updateInvaderArmyPosition(elements.invaderArmy),
             updateMissilesPosition(elements.missilesInFlight),
