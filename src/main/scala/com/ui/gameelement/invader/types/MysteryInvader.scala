@@ -15,10 +15,10 @@ object MysteryInvader {
 
     def initialPositionOnLeft = new Point(10, 20)
 
-    val ODDS_OF_INSTANCE_CREATION = 1000
+    val ODDS_OF_INSTANCE_CREATION = 2000
 
     /**
-     * There is ~ 1 in ODDS_OF_INSTANCE_CREATION chance that this creates an instance of MysteryInvader
+     * There is ~ 1 in $ODDS_OF_INSTANCE_CREATION chance that this creates an instance of MysteryInvader
      * and 50% chance the created instance starts on the left side of the screen
      **/
     def maybeCreateAnInstance(screenWidth: Int): Option[MysteryInvader] = {

@@ -70,14 +70,12 @@ class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
 
     private def updateMysteryInvaderPosition(possibleInvader: Option[Invader]): Option[Invader] =
         possibleInvader match {
-            case Some(invader ) if(invader.isInstanceOf[MysteryInvader])  =>
-                val invaderInNewPos: Invader = invader.moveTo(nxtPosition(invader.asInstanceOf[MysteryInvader]))
-                if(invaderInNewPos.isInstanceOf[ExplodedInvader]) {
-                    Some(invaderInNewPos)
-                } else {
-                    invaderInNewPos.asInstanceOf[MysteryInvader].removeIfOffScreen(screenWidth)
+            case Some(invader:MysteryInvader)=>
+                invader.moveTo(nxtPosition(invader)) match {
+                    case (movedInvader:ExplodedInvader) => Some(movedInvader)
+                    case (movedInvader:MysteryInvader)  => movedInvader.removeIfOffScreen(screenWidth)
                 }
-            case Some(invader ) if(invader.isInstanceOf[ExplodedInvader]) =>
+            case Some(invader:ExplodedInvader)=>
                 if(invader.beenExplodingForTooLong(now))
                     None
                 else Some(invader)
