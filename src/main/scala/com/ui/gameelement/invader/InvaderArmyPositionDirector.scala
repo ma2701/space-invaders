@@ -10,7 +10,7 @@ object InvaderArmyPositionDirector {
     val ONE_HOP_IN_X_DIRECTION = 15
     val ONE_HOP_IN_Y_DIRECTION = 20
 
-    private[this] var initialPosition   : Point                = new Point(0,0)
+    private[this] var initialPosition   : Point                = new Point
     private[this] var currentPosition   : Point                = _
     private[this] var direction         : MovementDirection    = _
     private[this] var generalDirection  : GeneralArmyDirection = _
@@ -81,7 +81,7 @@ object InvaderArmyPositionDirector {
     }
 
     private def isInInitialState: Boolean =
-        initialPosition == new Point(0,0)
+        initialPosition == new Point
 
     private def moveDown: Point = {
         direction = Down

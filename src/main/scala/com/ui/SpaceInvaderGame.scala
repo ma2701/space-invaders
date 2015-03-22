@@ -20,7 +20,7 @@ object SpaceInvaderGame {
 }
 
 class SpaceInvaderGame() {
-    private[this] val initialPosition: Point = new Point(0, 0)
+    private[this] val initialPosition: Point = new Point
 
     private[this] var invaderArmy                            = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
     private[this] var barricades                             = new Barricades(initialPosition)

@@ -7,12 +7,11 @@ import com.ui.gameelement.invader.MysteryInvaderDirection.{LeftToRight, RightToL
 import com.ui.util.random.{RandomBoolean, RandomNumberGenerator}
 
 object MysteryInvader {
-    val INVADER_WIDTH : Int = 13 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
-    val INVADER_HEIGHT: Int = 7 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
-    val possiblePoints      = List(100, 200, 400, 800)
+    val INVADER_WIDTH       = 13 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
+    val INVADER_HEIGHT      = 7 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
+    val POSSIBLE_POINTS     = List(200,400,800,1600)
 
     def initialPositionOnRight(screenWidth: Int) = new Point(screenWidth - 10, 20)
-
     def initialPositionOnLeft = new Point(10, 20)
 
     val ODDS_OF_INSTANCE_CREATION = 2000
@@ -49,7 +48,7 @@ case class MysteryInvader(tl: Point,
         new MysteryInvader(point, direction, hit)
 
     override def pointsWorth: Int =
-        possiblePoints(new RandomNumberGenerator().next(0.to(possiblePoints.size - 1)))
+        POSSIBLE_POINTS(new RandomNumberGenerator().next(0.to(POSSIBLE_POINTS.size - 1)))
 
     def removeIfOffScreen(displayW: Int): Option[MysteryInvader] = direction match {
         case RightToLeft if (topLeft.x + this.boundingBox.width <= 0) => None
