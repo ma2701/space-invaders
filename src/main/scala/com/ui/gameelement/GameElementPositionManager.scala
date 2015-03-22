@@ -5,7 +5,7 @@ import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.player.PlayerPositionDirector._
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.bomb.DroppingBombs
-import com.ui.gameelement.invader. InvaderArmy
+import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.invader.MysteryInvaderPositionDirector.{nextPosition => nxtPosition}
 import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
@@ -18,14 +18,14 @@ import com.ui.gameelement.invader.types.{ExplodedInvader, Invader, MysteryInvade
  * @param screenWidth  : game area display width
  * @param screenHeight : height 
  *
- * this class is responsible for moving game elements on the screen. It updates their positions
- * based on their current position.
- * All game elements are positioned relative to the screen width and height.
- * Originally all game elements are positioned at (0,0) on the screen a call to
- * updatePositionsOfGameElements() repositions everything
+ *                     this class is responsible for moving game elements on the screen. It updates their positions
+ *                     based on their current position.
+ *                     All game elements are positioned relative to the screen width and height.
+ *                     Originally all game elements are positioned at (0,0) on the screen a call to
+ *                     updatePositionsOfGameElements() repositions everything
  *
- * Each game element has a its own (game_element)PositionDirector. This class simply
- * asks the relevant director for an updated position and then moves the game element to that position...
+ *                     Each game element has a its own (game_element)PositionDirector. This class simply
+ *                     asks the relevant director for an updated position and then moves the game element to that position...
  */
 
 class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
@@ -33,12 +33,12 @@ class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
 
     def updatePositionOfGameElements(elements: GameElements): GameElements = {
 
-        val invaderArmy      = updateInvaderArmyPosition(elements.invaderArmy)
+        val invaderArmy = updateInvaderArmyPosition(elements.invaderArmy)
         val missilesInFlight = updateMissilesPosition(elements.missilesInFlight)
-        val barricades       = updatedBarricadePosition(elements.barricades)
-        val player           = updatePlayerPositionIfRequired(elements.player)
-        val bombs            = updateBombsPosition(elements.droppingBombs)
-        val mysteryInvader   = updateMysteryInvaderPosition(elements.mysteryInvader)
+        val barricades = updatedBarricadePosition(elements.barricades)
+        val player = updatePlayerPositionIfRequired(elements.player)
+        val bombs = updateBombsPosition(elements.droppingBombs)
+        val mysteryInvader = updateMysteryInvaderPosition(elements.mysteryInvader)
 
         new GameElements(invaderArmy, missilesInFlight, barricades, player, bombs, mysteryInvader)
     }
@@ -70,17 +70,17 @@ class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
 
     private def updateMysteryInvaderPosition(possibleInvader: Option[Invader]): Option[Invader] =
         possibleInvader match {
-            case Some(invader:MysteryInvader)=>
+            case Some(invader: MysteryInvader) =>
                 invader.moveTo(nxtPosition(invader)) match {
-                    case (movedInvader:ExplodedInvader) => Some(movedInvader)
-                    case (movedInvader:MysteryInvader)  => movedInvader.removeIfOffScreen(screenWidth)
+                    case (movedInvader: ExplodedInvader) => Some(movedInvader)
+                    case (movedInvader: MysteryInvader) => movedInvader.removeIfOffScreen(screenWidth)
                 }
-            case Some(invader:ExplodedInvader)=>
-                if(invader.beenExplodingForTooLong(now))
+            case Some(invader: ExplodedInvader) =>
+                if (invader.beenExplodingForTooLong(now))
                     None
                 else Some(invader)
             case None =>
-               MysteryInvader.maybeCreateAnInstance(screenWidth)
+                MysteryInvader.maybeCreateAnInstance(screenWidth)
         }
 
     private def now: Long = System.currentTimeMillis()

@@ -37,7 +37,7 @@ TODO:
 
 4) display "game over" when game is over                                -- DONE
 
-5) implement mystery invader in red with surprise point assigned to it.
+5) implement mystery invader in red with surprise point assigned to it. -- DONE
 
 6) implement game pausing
 
