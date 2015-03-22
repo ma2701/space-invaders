@@ -2,15 +2,14 @@ package com.ui.panel
 
 import javax.swing.{JLabel, JPanel}
 import java.awt.{Color, Point, Graphics, Font}
-import com.ui.gameelement.Displayable
 import com.ui.gameelement.player.PlayerPositionDirector
-import com.ui.gameelement.player.types.{ShootingPlayer, Player}
+import com.ui.gameelement.player.types.ShootingPlayer
 
 
 object GameStatusPanel extends JPanel {
 
     private[this] val panelTitleName  = "S T A T S"
-    private[this] val panelTextFont   = new Font("Verdana", Font.BOLD, 14)
+    private[this] val panelTextFont   = new Font("Verdana", Font.BOLD, 12)
     private[this] val score           = new JLabel
 
     private[this] var livesLeft = 3

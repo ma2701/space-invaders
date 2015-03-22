@@ -10,5 +10,5 @@ case class CollidedElements(
                                hitBarricadesByMissiles: Seq[(Missile, Barricade)],
                                hitBarricadesByBombs: Seq[(Bomb, Barricade)],
                                isPlayerShot: Boolean,
-                               mysteryInvaderHit: Option[(Missile, MysteryInvader)]
+                               mysteryInvaderHit: Option[(Missile,Invader)]
                             )

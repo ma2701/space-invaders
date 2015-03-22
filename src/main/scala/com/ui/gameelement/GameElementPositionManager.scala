@@ -11,7 +11,7 @@ import com.ui.util.InvaderArmyMoveDelay._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.GameElements
 import com.ui.gameelement.player.types.Player
-import com.ui.gameelement.invader.types.MysteryInvader
+import com.ui.gameelement.invader.types.{ExplodedInvader, Invader, MysteryInvader}
 
 /**
  *
@@ -68,11 +68,19 @@ class GameElementPositionManager(screenWidth: Int, screenHeight: Int) {
         else invaderArmy
     }
 
-    private def updateMysteryInvaderPosition(possibleInvader: Option[MysteryInvader]): Option[MysteryInvader] =
+    private def updateMysteryInvaderPosition(possibleInvader: Option[Invader]): Option[Invader] =
         possibleInvader match {
-            case Some(invader )  =>
-                invader.moveTo(nxtPosition(invader)).asInstanceOf[MysteryInvader]
-                .removeIfOffScreen(screenWidth)
+            case Some(invader ) if(invader.isInstanceOf[MysteryInvader])  =>
+                val invaderInNewPos: Invader = invader.moveTo(nxtPosition(invader.asInstanceOf[MysteryInvader]))
+                if(invaderInNewPos.isInstanceOf[ExplodedInvader]) {
+                    Some(invaderInNewPos)
+                } else {
+                    invaderInNewPos.asInstanceOf[MysteryInvader].removeIfOffScreen(screenWidth)
+                }
+            case Some(invader ) if(invader.isInstanceOf[ExplodedInvader]) =>
+                if(invader.beenExplodingForTooLong(now))
+                    None
+                else Some(invader)
             case None =>
                MysteryInvader.maybeCreateAnInstance(screenWidth)
         }

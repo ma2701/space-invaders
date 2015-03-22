@@ -27,7 +27,7 @@ class SpaceInvaderGame() {
     private[this] var player        : Player                 = new ShootingPlayer(initialPosition)
     private[this] var missilesInFlight                       = new MissilesInFlight()
     private[this] var droppingBombs                          = new DroppingBombs()
-    private[this] var mysteryInvader: Option[MysteryInvader] = None
+    private[this] var mysteryInvader: Option[Invader]        = None
 
     def updatedGameElements(positionMngr: GameElementPositionManager): GameState = {
 
@@ -93,7 +93,8 @@ class SpaceInvaderGame() {
     }
 
     private def shotInvaders(collidedElements: CollidedElements): Seq[Invader] =
-        secondElementInListOfTuples(collidedElements.shotInvaders)
+        collidedElements.mysteryInvaderHit.map{t=> Seq(t._2)}.getOrElse(Nil) ++
+            secondElementInListOfTuples(collidedElements.shotInvaders)
 
     private def bombsToBeRemovedOffScreen(collidedElements: CollidedElements): Seq[Bomb] =
         firstElementInListOfTuples(collidedElements.hitBarricadesByBombs)

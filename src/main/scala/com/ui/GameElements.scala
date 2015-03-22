@@ -5,7 +5,7 @@ import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.player.types.Player
-import com.ui.gameelement.invader.types.MysteryInvader
+import com.ui.gameelement.invader.types.{Invader, MysteryInvader}
 
 
 case class GameElements(
@@ -14,5 +14,5 @@ case class GameElements(
                          barricades: Barricades,
                          player: Player,
                          droppingBombs:DroppingBombs,
-                         mysteryInvader:Option[MysteryInvader] = None
+                         mysteryInvader:Option[Invader] = None
                        )

@@ -19,18 +19,17 @@ import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.GameElementPositionManager
 import com.ui.gameelement.player.types.Player
 import com.ui.gameelement.gameover.GameOver
-import com.ui.gameelement.invader.types.MysteryInvader
+import com.ui.gameelement.invader.types.Invader
 
 object GamePanel extends JPanel with Runnable with ActionListener {
     private[this] val SCREEN_REFRESH_RATE_IN_MILLIS = 1
-    private[this] val PREFERRED_WIDTH : Int = 878
-    private[this] val PREFERRED_HEIGHT: Int = 600
+    private[this] val PREFERRED_WIDTH = 878
+    private[this] val PREFERRED_HEIGHT= 600
 
-    private[this] val WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW: Long = 2000
+    private[this] val DELAY_BEFORE_CLOSING_MAIN_WINDOW= 1000
 
     private[this] var animator: Thread = null
     private[this] var gameLogic:GameLogic = new GameLogic()
-
     private[this] var spaceInvaderGame = new SpaceInvaderGame
 
     setPanelAttributes
@@ -92,7 +91,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
 
         } while (!gameLogic.isGameOver)
 
-        Thread.sleep(WAIT_TIME_BEFORE_CLOSING_MAIN_WINDOW)
+        Thread.sleep(DELAY_BEFORE_CLOSING_MAIN_WINDOW)
         
         System.exit(0) // temp
     }
@@ -139,7 +138,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit               = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit     = invaderArmy.draw(g)
     private def displayGameOver(gameOver:GameOver, g:Graphics):Unit               = gameOver.draw(g)
-    private def displayMysteryInvader (mysteryInvader:Option[MysteryInvader], g:Graphics):Unit = mysteryInvader.map(_.draw(g))
+    private def displayMysteryInvader (mysteryInvader:Option[Invader], g:Graphics):Unit = mysteryInvader.map(_.draw(g))
 
     private def setPanelAttributes {
         setBorder(javax.swing.BorderFactory.createTitledBorder("SI"))

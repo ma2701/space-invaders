@@ -34,18 +34,17 @@ object CollisionDetection {
     private def findBarricadesHitWithBombs(bombs: Seq[Bomb], barricades: Barricades): Seq[(Bomb, Barricade)] =
         findCollidedItems(bombs, barricades.covers)
 
-    private def isPlayerHit(player:Player, bombs:Seq[Bomb]):Boolean =
+    private def isPlayerHit(player: Player, bombs: Seq[Bomb]): Boolean =
         (!bombs.isEmpty) && hasCollided(bombs.reverse.head, player)
 
-    def mysteryInvaderHit(mysteryInvader: Option[MysteryInvader], missiles: Seq[Missile]): Option[(Missile, MysteryInvader)] =
-        mysteryInvader.flatMap { invader =>
-            findCollidedItems(missiles, Seq(invader)) match {
-                case Nil      => None
-                case h :: Nil =>
-                    Some(h)
-                case h :: s :: Nil =>
-                    Some(h)
-            }
+    def mysteryInvaderHit(mysteryInvader: Option[Invader], missiles: Seq[Missile]): Option[(Missile, Invader)] =
+        mysteryInvader.flatMap {
+            invader =>
+                findCollidedItems(missiles, Seq(invader)) match {
+                    case Nil => None
+                    case h :: Nil => Some(h)
+                    case h :: s :: Nil => Some(h)
+                }
         }
 
     private def findCollidedItems[T <: Displayable, A <: Displayable](items: Seq[T], otherItems: Seq[A]): Seq[(T, A)] = {
