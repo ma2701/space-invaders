@@ -14,14 +14,12 @@ import com.ui.gameelement.{CollidedElements, GameElementPositionManager}
 import com.ui.gameelement.CollisionDetection._
 import com.ui.ScoreCalculation._
 import com.ui.gameelement.player.types.{ExplodedPlayer, ShootingPlayer, Player}
-import com.ui.util.random.RandomNumberGenerator
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
 }
 
 class SpaceInvaderGame() {
-    private[this] val random                 = new RandomNumberGenerator()
     private[this] val initialPosition: Point = new Point(0, 0)
 
     private[this] var invaderArmy                            = new InvaderArmy(ArmyCommander.formAnArmy(initialPosition))
@@ -39,9 +37,10 @@ class SpaceInvaderGame() {
 
         droppingBombs = droppingBombs.addToDroppingBombs(invaderArmy.dropRandomBomb(player.shootingTipPosition))
 
-        val collidedElements = detectCollisions(GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs))
+        val collidedElements = detectCollisions(GameElements(invaderArmy, missilesInFlight, barricades, player, droppingBombs, mysteryInvader))
 
         markHitInvaders(collidedElements.shotInvaders)
+        markMysteryInvaderHit(collidedElements.mysteryInvaderHit)
 
         invaderArmy = invaderArmy.makeDeadInvadersInvisible
 
@@ -84,6 +83,13 @@ class SpaceInvaderGame() {
         shotSoldiersAndBulletsThatKilledThem.foreach {
             t => t._2.markHitByMissile
         }
+    }
+
+    private def markMysteryInvaderHit(possibleHit: Option[(Missile, Invader)]) = {
+        possibleHit.map { t =>
+            t._2.markHitByMissile
+        }
+
     }
 
     private def shotInvaders(collidedElements: CollidedElements): Seq[Invader] =

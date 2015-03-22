@@ -72,7 +72,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
 
         assert(newArmy.army.size === 1)
 
-        assert(newArmy.army(0).isInstanceOf[DeadInvader])
+        assert(newArmy.army(0) == DeadInvader)
     }
 
     test("given all soldiers have not been hit with missile then  makeDeadInvadersInvisible has no effect") {
@@ -87,8 +87,7 @@ class InvaderArmyTest extends FunSuite with MockitoSugar {
     }
 
     test("given an army of all dead invader soldiers then call to dropRandomBomb returns no bombs..the dead can't drop bombs") {
-        val deadInvader= new DeadInvader(new Point(0, 0))
-        val invaderArmy = new InvaderArmy(List(deadInvader))
+        val invaderArmy = new InvaderArmy(List(DeadInvader))
 
         assertResult(None){
             invaderArmy.dropRandomBomb(new Point(0,0))

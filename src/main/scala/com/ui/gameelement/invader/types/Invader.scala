@@ -9,7 +9,7 @@ import com.ui.util.random.RandomBoolean
 
 object Invader {
     val INVADER_WIDTH : Int = 11 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
-    val INVADER_HEIGHT: Int = 8 * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
+    val INVADER_HEIGHT: Int = 8  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
 }
 
 abstract class Invader(topLeft: Point,
@@ -38,6 +38,8 @@ abstract class Invader(topLeft: Point,
     def beenExplodingForTooLong(currentTime: Long): Boolean = false
 
     def feelLikeDroppingABomb: Boolean = new RandomBoolean().nextRandomTrueWithOneOutOfNChance(2)
+
+    def makeInvisible: Invader = DeadInvader
 
     def pointsWorth:Int
 

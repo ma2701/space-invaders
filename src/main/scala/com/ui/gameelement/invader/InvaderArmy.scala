@@ -1,10 +1,8 @@
 package com.ui.gameelement.invader
 
 import java.awt.{Rectangle, Point, Graphics}
-import com.ui.gameelement.invader.types.{Invader, DeadInvader}
-import com.ui.gameelement.missile.Missile
+import com.ui.gameelement.invader.types.{DeadInvader, Invader}
 import ArmyCommander._
-import com.ui.gameelement.barricade.{Barricade, Barricades}
 import com.ui.gameelement.bomb.Bomb
 import com.ui.util.BombDropDelay._
 
@@ -26,7 +24,7 @@ class InvaderArmy(val army: Seq[Invader]) {
         new InvaderArmy(army.map {
             invader: Invader =>
                 if (invader.beenExplodingForTooLong(now))
-                    makeInvisible(invader)
+                    invader.makeInvisible
                 else invader
         })
 
@@ -58,9 +56,9 @@ class InvaderArmy(val army: Seq[Invader]) {
      */
     def allArmyPositions: Seq[Rectangle] = army.map(_.boundingBox)
 
-    def allDeadInvaders: Seq[Invader] = army.filter(_.isInstanceOf[DeadInvader])
+    def allDeadInvaders: Seq[Invader]    = army.filter(_  == DeadInvader)
 
-    def isEveryoneDead                = allDeadInvaders.size == army.size
+    def isEveryoneDead                   = allDeadInvaders.size == army.size
 
     def getBoundingBox: Rectangle = {
         val topLeftMostSoldier = army(0)
@@ -72,6 +70,4 @@ class InvaderArmy(val army: Seq[Invader]) {
     }
 
     private def now: Long = System.currentTimeMillis()
-
-    private def makeInvisible(soldier: Invader): Invader = new DeadInvader(soldier.topLeft)
 }

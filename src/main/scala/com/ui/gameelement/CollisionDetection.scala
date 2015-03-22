@@ -1,7 +1,7 @@
 package com.ui.gameelement
 
-import com.ui.gameelement.missile.Missile
-import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.missile.{MissilesInFlight, Missile}
+import com.ui.gameelement.invader.types.{MysteryInvader, Invader}
 import com.ui.gameelement.barricade.{Barricades, Barricade}
 import com.ui.GameElements
 import com.ui.gameelement.bomb.Bomb
@@ -15,7 +15,8 @@ object CollisionDetection {
             findShotInvaders(gameElements.missilesInFlight.missiles, gameElements.invaderArmy.army),
             findBarricadesHitWithMissiles(gameElements.missilesInFlight.missiles, gameElements.barricades),
             findBarricadesHitWithBombs(gameElements.droppingBombs.bombs, gameElements.barricades),
-            isPlayerHit(gameElements.player, gameElements.droppingBombs.bombs)
+            isPlayerHit(gameElements.player, gameElements.droppingBombs.bombs),
+            mysteryInvaderHit(gameElements.mysteryInvader, gameElements.missilesInFlight.missiles)
         )
 
     /**
@@ -35,6 +36,17 @@ object CollisionDetection {
 
     private def isPlayerHit(player:Player, bombs:Seq[Bomb]):Boolean =
         (!bombs.isEmpty) && hasCollided(bombs.reverse.head, player)
+
+    def mysteryInvaderHit(mysteryInvader: Option[MysteryInvader], missiles: Seq[Missile]): Option[(Missile, MysteryInvader)] =
+        mysteryInvader.flatMap { invader =>
+            findCollidedItems(missiles, Seq(invader)) match {
+                case Nil      => None
+                case h :: Nil =>
+                    Some(h)
+                case h :: s :: Nil =>
+                    Some(h)
+            }
+        }
 
     private def findCollidedItems[T <: Displayable, A <: Displayable](items: Seq[T], otherItems: Seq[A]): Seq[(T, A)] = {
 

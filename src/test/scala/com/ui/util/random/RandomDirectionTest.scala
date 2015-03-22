@@ -9,7 +9,7 @@ class RandomDirectionTest extends FunSuite {
         val rand = new RandomDirection
 
         val vals = 1.to(100).map { i =>
-            rand.randomLeftOrRightDirection
+            rand.randomRightWithOneInNChance(2)
         }
 
         assertResult(100){

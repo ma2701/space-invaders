@@ -1,12 +1,15 @@
 package com.ui.gameelement.invader.types
 
-import java.awt.Point
+import java.awt.{Rectangle, Point}
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.invader.{MysteryInvaderMovementDirection, MysteryInvaderParts}
 import com.ui.gameelement.invader.MysteryInvaderDirection.{LeftToRight, RightToLeft}
-import com.ui.util.random.{RandomDirection, RandomBoolean, RandomNumberGenerator}
+import com.ui.util.random.{RandomBoolean, RandomNumberGenerator}
 
 object MysteryInvader{
+    val INVADER_WIDTH : Int = 13 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH
+    val INVADER_HEIGHT: Int = 7  * SingleDisplayElement.DEFAULT_ELEMENT_HEIGHT
+
     def initialPositionOnRight(screenWidth:Int) = new Point(screenWidth - 10, 20)
     def initialPositionOnLeft                   = new Point(10, 20)
 
@@ -33,6 +36,9 @@ case class MysteryInvader(tl:Point,
                           hit:Boolean = false) extends Invader(tl,hit) with MysteryInvaderParts {
 
     override val parts: List[SingleDisplayElement] = parts(x,y)
+
+    override def boundingBox: Rectangle =
+        new Rectangle(topLeft.x, topLeft.y, MysteryInvader.INVADER_WIDTH, MysteryInvader.INVADER_HEIGHT)
 
     override def getOppositeCharacterAtPoint(point: Point, isHit: Boolean): Invader =
         new MysteryInvader(point,direction, hit)
