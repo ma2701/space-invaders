@@ -13,7 +13,7 @@ class MissilesInFlightTest extends FunSuite {
         new MissilesInFlight
     }
 
-    test("can add a missile") {
+    test("given an instance of MissileInFlight then addToMissiles adds missile to existing missiles") {
         assertResult(1){
             new MissilesInFlight()
             .addToMissiles(new Missile(new Point(0,0)))
@@ -21,7 +21,7 @@ class MissilesInFlightTest extends FunSuite {
         }
     }
 
-    test("can remove a missile") {
+    test("given an instance of MissileInFlight then removeMissiles will remove the given missile ") {
         val missiles = List(
             new Missile(new Point(0, 0)),
             new Missile(initialMissilePosition))
@@ -36,7 +36,7 @@ class MissilesInFlightTest extends FunSuite {
         }
     }
 
-    test("can move all missiles to point x,y on screen") {
+    test("given an instance of MissileInFlight then call to updatePosition will move missiles to a predetermined point on screen") {
         val missiles = List(new Missile(initialMissilePosition))
 
         val missilesInFlight= new MissilesInFlight(missiles).updatePosition
@@ -46,18 +46,7 @@ class MissilesInFlightTest extends FunSuite {
         }
     }
 
-    test("can remove missile that is off screen") {
-
-        val missiles = List(new Missile(new Point(10, -1)))
-
-        val missilesInFlight= new MissilesInFlight(missiles).removeOffScreenMissile
-
-        assertResult(0){
-            missilesInFlight.missiles.size
-        }
-    }
-
-    test("can remove the oldest missile fired off screen") {
+    test("given an instance of MissileInFlight then call to removeOffScreenMissile will remove the oldest shot missile if required") {
 
         val oldestMissileFired= new Missile(new Point(10, -1))
         val recentlyFiredMissile= new Missile(new Point(10, 200))
