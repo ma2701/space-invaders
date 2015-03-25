@@ -6,11 +6,6 @@ import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.displayelement.SingleDisplayElement._
 
 
-abstract class RedDisplayElement(x: Int, y: Int, width: Int, height: Int)
-    extends SingleDisplayElement(x,y, width, height){
-    override val color:Color = RED
-}
-
 abstract class BlackDisplayElement(x: Int, y: Int, width: Int, height: Int)
     extends SingleDisplayElement(x,y, width, height){
     override val color:Color = BLACK

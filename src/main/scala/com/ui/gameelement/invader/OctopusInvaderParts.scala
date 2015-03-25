@@ -42,12 +42,6 @@ abstract class WhiteDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffs
     extends SingleDisplayElement(x, y, xOffsetFromCentre, yOffsetFromCentre){
     override val color:Color = WHITE
 }
-
-abstract class BlackDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
-    extends SingleDisplayElement(x, y, xOffsetFromCentre, yOffsetFromCentre){
-    override val color:Color = BLACK
-}
-
 object Crown {
     val xOffset = 3;
     val yOffset = 0
