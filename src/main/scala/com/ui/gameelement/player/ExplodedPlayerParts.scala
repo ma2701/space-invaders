@@ -1,8 +1,7 @@
 package com.ui.gameelement.player
 
-import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.{GreenDisplayElement, SingleDisplayElement}
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import com.ui.gameelement.barricade.GreenDisplayElement
 
 
 trait ExplodedPlayerParts {

@@ -1,9 +1,7 @@
 package com.ui.gameelement.invader
 
-import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.{WhiteDisplayElement, BlackDisplayElement, SingleDisplayElement}
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import java.awt.Color
-import java.awt.Color._
 
 trait OctopusInvaderParts {
     def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
@@ -38,10 +36,7 @@ trait ExcitedOctopusInvaderParts {
     )
 }
 
-abstract class WhiteDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
-    extends SingleDisplayElement(x, y, xOffsetFromCentre, yOffsetFromCentre){
-    override val color:Color = WHITE
-}
+
 object Crown {
     val xOffset = 3;
     val yOffset = 0

@@ -2,9 +2,8 @@ package com.ui.gameelement.gameover
 
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import com.ui.gameelement.bomb.WhiteDisplayElement
-import java.awt.Color
-import java.awt.Color._
+import com.ui.gameelement.displayelement.GreenDisplayElement
+
 
 trait GameOverParts {
     def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
@@ -49,10 +48,6 @@ trait GameOverParts {
         RMid(x, y)
     )
 }
-abstract class GameOverDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
-    extends SingleDisplayElement(x, y, xOffsetFromCentre, yOffsetFromCentre){
-    override val color:Color = GREEN
-}
 
 object GTop {
     val xOffset = 1;
@@ -60,7 +55,7 @@ object GTop {
 }
 
 
-case class GTop(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class GTop(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, GTop.xOffset),
     yOffset(topLeftY, GTop.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -70,7 +65,7 @@ object GMid {
     val yOffset = 3
 }
 
-case class GMid(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class GMid(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, GMid.xOffset),
     yOffset(topLeftY, GMid.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 3 * DEFAULT_ELEMENT_HEIGHT)
@@ -80,7 +75,7 @@ object GBottom {
     val yOffset = 6
 }
 
-case class GBottom(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class GBottom(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, GBottom.xOffset),
     yOffset(topLeftY, GBottom.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -90,7 +85,7 @@ object GHookMid {
     val yOffset = 5
 }
 
-case class GHookMid(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class GHookMid(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, GHookMid.xOffset),
     yOffset(topLeftY, GHookMid.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -100,7 +95,7 @@ object GHookTop {
     val yOffset = 4
 }
 
-case class GHookTop(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class GHookTop(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, GHookTop.xOffset),
     yOffset(topLeftY, GHookTop.yOffset),
     (2 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -110,7 +105,7 @@ object ATop {
     val yOffset = 2
 }
 
-case class ATop(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ATop(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ATop.xOffset),
     yOffset(topLeftY, ATop.yOffset),
     (2 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -120,7 +115,7 @@ object ATopSupport {
     val yOffset = 3
 }
 
-case class ATopSupport(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ATopSupport(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ATopSupport.xOffset),
     yOffset(topLeftY, ATopSupport.yOffset),
     (4 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -130,7 +125,7 @@ object ABridgeLeft {
     val yOffset = 4
 }
 
-case class ABridgeLeft(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ABridgeLeft(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ABridgeLeft.xOffset),
     yOffset(topLeftY, ABridgeLeft.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -140,7 +135,7 @@ object ABridgeRight {
     val yOffset = 4
 }
 
-case class ABridgeRight(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ABridgeRight(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ABridgeRight.xOffset),
     yOffset(topLeftY, ABridgeRight.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -150,7 +145,7 @@ object ARightLeg {
     val yOffset = 5
 }
 
-case class ARightLeg(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ARightLeg(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ARightLeg.xOffset),
     yOffset(topLeftY, ARightLeg.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 2 * DEFAULT_ELEMENT_HEIGHT)
@@ -160,7 +155,7 @@ object ALeftLeg {
     val yOffset = 5
 }
 
-case class ALeftLeg(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ALeftLeg(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ALeftLeg.xOffset),
     yOffset(topLeftY, ALeftLeg.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 2 * DEFAULT_ELEMENT_HEIGHT)
@@ -170,7 +165,7 @@ object AMidBridge {
     val yOffset = 5
 }
 
-case class AMidBridge(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class AMidBridge(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, AMidBridge.xOffset),
     yOffset(topLeftY, AMidBridge.yOffset),
     (2 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -180,7 +175,7 @@ object MTopOne {
     val yOffset = 2
 }
 
-case class MTopOne(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class MTopOne(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, MTopOne.xOffset),
     yOffset(topLeftY, MTopOne.yOffset),
     (2 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -190,7 +185,7 @@ object MTopTwo {
     val yOffset = 2
 }
 
-case class MTopTwo(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class MTopTwo(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, MTopTwo.xOffset),
     yOffset(topLeftY, MTopTwo.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -200,7 +195,7 @@ object MTLeftLeg {
     val yOffset = 3
 }
 
-case class MTLeftLeg(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class MTLeftLeg(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, MTLeftLeg.xOffset),
     yOffset(topLeftY, MTLeftLeg.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 4 * DEFAULT_ELEMENT_HEIGHT)
@@ -210,7 +205,7 @@ object MMidLeg {
     val yOffset = 3
 }
 
-case class MMidLeg(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class MMidLeg(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, MMidLeg.xOffset),
     yOffset(topLeftY, MMidLeg.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 4 * DEFAULT_ELEMENT_HEIGHT)
@@ -220,7 +215,7 @@ object MRightLeg {
     val yOffset = 3
 }
 
-case class MRightLeg(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class MRightLeg(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, MRightLeg.xOffset),
     yOffset(topLeftY, MRightLeg.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 4 * DEFAULT_ELEMENT_HEIGHT)
@@ -230,7 +225,7 @@ object EUpright {
     val yOffset = 2
 }
 
-case class EUpright(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class EUpright(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, EUpright.xOffset),
     yOffset(topLeftY, EUpright.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 5 * DEFAULT_ELEMENT_HEIGHT)
@@ -240,7 +235,7 @@ object ETop {
     val yOffset = 2
 }
 
-case class ETop(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ETop(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ETop.xOffset),
     yOffset(topLeftY, ETop.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -250,7 +245,7 @@ object EMid {
     val yOffset = 4
 }
 
-case class EMid(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class EMid(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, EMid.xOffset),
     yOffset(topLeftY, EMid.yOffset),
     (2 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -260,7 +255,7 @@ object EBottom {
     val yOffset = 6
 }
 
-case class EBottom(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class EBottom(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, EBottom.xOffset),
     yOffset(topLeftY, EBottom.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -270,7 +265,7 @@ object OLeft {
     val yOffset = 3
 }
 
-case class OLeft(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class OLeft(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, OLeft.xOffset),
     yOffset(topLeftY, OLeft.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 3 * DEFAULT_ELEMENT_HEIGHT)
@@ -280,7 +275,7 @@ object OTop {
     val yOffset = 2
 }
 
-case class OTop(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class OTop(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, OTop.xOffset),
     yOffset(topLeftY, OTop.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -290,7 +285,7 @@ object OBottom {
     val yOffset = 6
 }
 
-case class OBottom(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class OBottom(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, OBottom.xOffset),
     yOffset(topLeftY, OBottom.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -300,7 +295,7 @@ object ORight {
     val yOffset = 3
 }
 
-case class ORight(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class ORight(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, ORight.xOffset),
     yOffset(topLeftY, ORight.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 3 * DEFAULT_ELEMENT_HEIGHT)
@@ -310,7 +305,7 @@ object VLeft {
     val yOffset = 2
 }
 
-case class VLeft(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class VLeft(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, VLeft.xOffset),
     yOffset(topLeftY, VLeft.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 3 * DEFAULT_ELEMENT_HEIGHT)
@@ -320,7 +315,7 @@ object VRight {
     val yOffset = 2
 }
 
-case class VRight(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class VRight(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, VRight.xOffset),
     yOffset(topLeftY, VRight.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 3 * DEFAULT_ELEMENT_HEIGHT)
@@ -330,7 +325,7 @@ object VBottom {
     val yOffset = 6
 }
 
-case class VBottom(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class VBottom(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, VBottom.xOffset),
     yOffset(topLeftY, VBottom.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -340,7 +335,7 @@ object VBottomRight {
     val yOffset = 5
 }
 
-case class VBottomRight(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class VBottomRight(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, VBottomRight.xOffset),
     yOffset(topLeftY, VBottomRight.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -350,7 +345,7 @@ object VBottomLeft {
     val yOffset = 5
 }
 
-case class VBottomLeft(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class VBottomLeft(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, VBottomLeft.xOffset),
     yOffset(topLeftY, VBottomLeft.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -360,7 +355,7 @@ object E2Upright {
     val yOffset = 2
 }
 
-case class E2Upright(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class E2Upright(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, E2Upright.xOffset),
     yOffset(topLeftY, E2Upright.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 5 * DEFAULT_ELEMENT_HEIGHT)
@@ -370,7 +365,7 @@ object E2Top {
     val yOffset = 2
 }
 
-case class E2Top(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class E2Top(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, E2Top.xOffset),
     yOffset(topLeftY, E2Top.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -380,7 +375,7 @@ object E2Mid {
     val yOffset = 4
 }
 
-case class E2Mid(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class E2Mid(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, E2Mid.xOffset),
     yOffset(topLeftY, E2Mid.yOffset),
     (2 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -390,7 +385,7 @@ object E2Bottom {
     val yOffset = 6
 }
 
-case class E2Bottom(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class E2Bottom(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, E2Bottom.xOffset),
     yOffset(topLeftY, E2Bottom.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -400,7 +395,7 @@ object RTop {
     val yOffset = 2
 }
 
-case class RTop(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class RTop(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, RTop.xOffset),
     yOffset(topLeftY, RTop.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -410,7 +405,7 @@ object RLeft {
     val yOffset = 2
 }
 
-case class RLeft(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class RLeft(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, RLeft.xOffset),
     yOffset(topLeftY, RLeft.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 5 * DEFAULT_ELEMENT_HEIGHT)
@@ -420,7 +415,7 @@ object RRight {
     val yOffset = 5
 }
 
-case class RRight(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class RRight(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, RRight.xOffset),
     yOffset(topLeftY, RRight.yOffset),
     (DEFAULT_ELEMENT_WIDTH), 2 * DEFAULT_ELEMENT_HEIGHT)
@@ -430,7 +425,7 @@ object RBottom {
     val yOffset = 4
 }
 
-case class RBottom(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class RBottom(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, RBottom.xOffset),
     yOffset(topLeftY, RBottom.yOffset),
     (3 * DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)
@@ -440,7 +435,7 @@ object RMid {
     val yOffset = 3
 }
 
-case class RMid(topLeftX: Int, topLeftY: Int) extends GameOverDisplayElement(
+case class RMid(topLeftX: Int, topLeftY: Int) extends GreenDisplayElement(
     xOffset(topLeftX, RMid.xOffset),
     yOffset(topLeftY, RMid.yOffset),
     (DEFAULT_ELEMENT_WIDTH), DEFAULT_ELEMENT_HEIGHT)

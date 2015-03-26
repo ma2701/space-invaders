@@ -1,9 +1,7 @@
 package com.ui.gameelement.invader
 
-import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.{RedDisplayElement, SingleDisplayElement}
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import java.awt.Color
-import java.awt.Color.RED
 
 trait ExplodedInvaderParts {
     def parts(x:Int, y:Int): List[SingleDisplayElement] = List[SingleDisplayElement](
@@ -30,10 +28,7 @@ trait ExplodedInvaderParts {
         new BottomLeftDiagonalBottom(x,y))
 }
 
-abstract class RedDisplayElement(x: Int, y: Int, width: Int, height: Int)
-    extends SingleDisplayElement(x,y, width, height){
-    override val color:Color = RED
-}
+
 
 object TopRightDiagonalTop{
     val xOffset = 7;

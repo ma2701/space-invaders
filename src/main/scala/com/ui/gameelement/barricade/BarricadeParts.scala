@@ -1,9 +1,7 @@
 package com.ui.gameelement.barricade
 
-import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.ui.gameelement.displayelement.{GreenDisplayElement, SingleDisplayElement}
 import com.ui.gameelement.displayelement.SingleDisplayElement._
-import java.awt.Color
-import java.awt.Color._
 
 trait BarricadeParts {
     def parts(x: Int, y: Int): List[SingleDisplayElement] = List[SingleDisplayElement](
@@ -30,10 +28,7 @@ trait BarricadeParts {
     )
 }
 
-abstract class GreenDisplayElement(x: Int, y: Int, xOffsetFromCentre: Int, yOffsetFromCentre: Int)
-    extends SingleDisplayElement(x, y, xOffsetFromCentre, yOffsetFromCentre) {
-    override val color: Color = GREEN
-}
+
 
 object TopSection {
     val xOffset = 3;
