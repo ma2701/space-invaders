@@ -7,7 +7,7 @@ import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.player.PlayerPositionDirector
 import scala.util.Try
 import com.ui.gameelement.missile.MissilesInFlight
-import com.ui.util.MissileShootingDelay.isTimeToShootOneMissile
+import com.ui.util.MissileShootingTimer.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
 import com.ui.gameelement.{CollidedElements, GameElementPosition}

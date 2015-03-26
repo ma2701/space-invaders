@@ -7,7 +7,7 @@ import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.invader.MysteryInvaderPositionDirector.{nextPosition => nxtPosition}
-import com.ui.util.InvaderArmyMoveDelay._
+import com.ui.util.InvaderArmyTimer._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.GameElements
 import com.ui.gameelement.player.types.Player

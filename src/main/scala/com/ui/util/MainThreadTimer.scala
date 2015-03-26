@@ -1,7 +1,7 @@
 package com.ui.util
 
 
-object MainThreadDelayUtil {
+object MainThreadTimer {
 
     def calculateThreadSleepTime(startTimeBeforePaintOp:Long, delay:Long ):Long = {
         val timeDiff = System.currentTimeMillis() - startTimeBeforePaintOp

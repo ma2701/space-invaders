@@ -4,7 +4,7 @@ import javax.swing.JPanel
 
 import java.awt._
 
-import com.ui.util.MainThreadDelayUtil._
+import com.ui.util.MainThreadTimer._
 import com.ui.{GameLogic, SpaceInvaderGame}
 import java.awt.Color
 import java.awt.Graphics
