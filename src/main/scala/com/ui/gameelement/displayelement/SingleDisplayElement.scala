@@ -3,9 +3,9 @@ package com.ui.gameelement.displayelement
 import java.awt.{Color, Rectangle}
 
 object SingleDisplayElement {
-    val DEFAULT_ELEMENT_WIDTH  = 4
+    val DEFAULT_ELEMENT_WIDTH  = 2
     // PIXELS
-    val DEFAULT_ELEMENT_HEIGHT = 3
+    val DEFAULT_ELEMENT_HEIGHT = 2
 
     def xOffset(x: Int, xOffset: Double): Int = x + (xOffset * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH).toInt
 
