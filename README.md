@@ -27,9 +27,7 @@ This is my take on the Space invader game. It was done as a fun project using Sc
 
 Every 10K points the player is rewarded with an extra life.
 
-As the player shoots invaders and gets points the game becomes more and more difficult as in invaders move
-
-around faster and the bombs they drop also drop at a faster rate.
+As the player shoots invaders and gets points the game becomes more and more difficult as in invaders move around faster and the bombs they drop also drop at a faster rate.
 
 
 TODO:
