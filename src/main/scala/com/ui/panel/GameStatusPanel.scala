@@ -4,6 +4,7 @@ import javax.swing.{JLabel, JPanel}
 import java.awt.{Color, Point, Graphics, Font}
 import com.ui.gameelement.player.PlayerPositionDirector
 import com.ui.gameelement.player.types.ShootingPlayer
+import com.GameLogic
 
 
 object GameStatusPanel extends JPanel {
@@ -12,7 +13,7 @@ object GameStatusPanel extends JPanel {
     private[this] val panelTextFont   = new Font("Verdana", Font.BOLD, 12)
     private[this] val score           = new JLabel
 
-    private[this] var livesLeft = 3
+    private[this] var livesLeft       = GameLogic.INITIAL_NUM_LIVES
 
     private val mainPanelLayout = new org.jdesktop.layout.GroupLayout(this)
     setPanelAttributes

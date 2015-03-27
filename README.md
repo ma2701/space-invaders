@@ -7,14 +7,10 @@ scala 2.10
 
 sbt 0.13.2
 
-<h3>To generate and run executable jar</h3>
-```
-sbt> assembly
-```
-and then:
+<h3>To execute jar and run the game</h3>
 
 ```
-java -jar target/scala-2.10/SI.jar
+sbt assembly && java -jar target/scala-2.10/SI.jar
 ````
 
 To run the game from within sbt:

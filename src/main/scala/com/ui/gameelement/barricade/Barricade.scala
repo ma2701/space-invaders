@@ -12,7 +12,7 @@ case class Barricade(tplft: Point) extends Displayable(tplft) with BarricadePart
 
     override def boundingBox: Rectangle = {
         val longestBlock = parts.sortWith( _.getBoundingBox.width > _.getBoundingBox.width)(0)
-        val height        = parts.take(12).map(_.getBoundingBox.height).sum
+        val height       = parts.take(12).map(_.getBoundingBox.height).sum
 
         new Rectangle(x, y, longestBlock.getBoundingBox.getWidth.toInt, height)
     }

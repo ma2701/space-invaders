@@ -8,10 +8,10 @@ object GameConfiguration {
 
     def setGameDifficulty(pnts: Int) {
         pnts match {
-            case n if (isEasy(n)) => currConfig = Easy
+            case n if (isEasy(n))     => currConfig = Easy
             case n if (isModerate(n)) => currConfig = Moderate
-            case n if (isHard(n)) => currConfig = Hard
-            case _ => currConfig = Nirvana
+            case n if (isHard(n))     => currConfig = Hard
+            case _                    => currConfig  = Nirvana
         }
     }
 
