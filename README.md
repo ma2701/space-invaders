@@ -23,25 +23,18 @@ To run the game from within sbt:
 sbt> run Driver
 ```
 
+This is my take on the Space invader game. It was done as a fun project using Scala.
+
+Every 10K points the player is rewarded with an extra life.
+
+As the player shoots invaders and gets points the game becomes more and more difficult as in invaders move
+
+around faster and the bombs they drop also drop at a faster rate.
+
+
 TODO:
 
-1) move invader army lower so that it gets very close to the barricades -- DONE
+1) implement different invader types with different points              -- ALMOST DONE
 
-2) fix the player game element to look more like the original game      -- DONE
-
-2.1) reset all game elements when the whole game is reset               -- DONE
-
-2.2) update "lives" area when player is hit                             -- DONE
-
-3) implement different invader types with different points              -- ALMOST DONE
-
-4) display "game over" when game is over                                -- DONE
-
-5) implement mystery invader in red with surprise point assigned to it. -- DONE
-
-6) implement game pausing
-
-7) implement exploded player - display it before resetting the game for another round -- DONE
-
-8) implement variable velocity for invader army
+2) implement game pausing
 
