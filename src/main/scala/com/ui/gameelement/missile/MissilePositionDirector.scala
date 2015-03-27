@@ -1,11 +1,10 @@
 package com.ui.gameelement.missile
 
 import java.awt.Point
+import com.ui.GameConfiguration.currentConfig
 
 object MissilePositionDirector {
 
-    val SINGLE_HOP_IN_Y = 3
-
     def nextPosition(missile:Missile):Point =
-        new Point(missile.head.getX.toInt , missile.head.getY.toInt - SINGLE_HOP_IN_Y)
+        new Point(missile.head.getX.toInt , missile.head.getY.toInt - currentConfig.missileYDelta)
 }

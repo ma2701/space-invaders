@@ -5,6 +5,7 @@ object GameLogic {
 }
 case class GameLogic(val livesLeft:Int = 3, val currentScore:Int=0, val level:Int = 0 ) {
     import GameLogic._
+
     def playerShotOnce: GameLogic      = copy(livesLeft = livesLeft - 1)
 
     def isGameOver:Boolean             = livesLeft == 0

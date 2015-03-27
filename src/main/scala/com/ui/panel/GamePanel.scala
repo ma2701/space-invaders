@@ -20,6 +20,7 @@ import com.ui.gameelement.GameElementPosition
 import com.ui.gameelement.player.types.Player
 import com.ui.gameelement.gameover.GameOver
 import com.ui.gameelement.invader.types.Invader
+import com.ui.GameConfiguration
 
 object GamePanel extends JPanel with Runnable with ActionListener {
     private[this] val SCREEN_REFRESH_RATE_IN_MILLIS = 1
@@ -56,6 +57,8 @@ object GamePanel extends JPanel with Runnable with ActionListener {
         } else {
             gameLogic.setScore(gameState.score)
         }
+
+        GameConfiguration.setGameDifficulty(gameLogic.currentScore)
 
         GameStatusPanel.updateStats(gameLogic.livesLeft, gameLogic.currentScore)
 

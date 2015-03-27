@@ -9,7 +9,7 @@ class DroppingBombsTest extends FunSuite {
     
     test("given a bomb that has reached the bottom of the screen then call to removeOffScreen will remove ") {
 
-        val bomb = new Bomb(new Point(10, 190))
+        val bomb = new Bomb(new Point(10, 195))
 
         val droppingBombs = new DroppingBombs(Seq(bomb))
 

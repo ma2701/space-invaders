@@ -4,12 +4,10 @@ import java.awt.{Rectangle, Point}
 
 import com.ui.gameelement.invader.Direction.{Right, Left, Up, Down}
 import com.ui.gameelement.invader.GeneralArmyDirection.GeneralArmyDirection
+import com.ui.GameConfiguration.currentConfig
 
 
 object InvaderArmyPositionDirector {
-    val ONE_HOP_IN_X_DIRECTION = 15
-    val ONE_HOP_IN_Y_DIRECTION = 20
-
     private[this] var initialPosition   : Point                = new Point
     private[this] var currentPosition   : Point                = _
     private[this] var direction         : MovementDirection    = _
@@ -28,12 +26,12 @@ object InvaderArmyPositionDirector {
                     if (hasReachedLeftWall)
                         moveUpOrDown
                     else
-                        moveInXAxis(-ONE_HOP_IN_X_DIRECTION)
+                        moveInXAxis(-currentConfig.invaderArmyXDelta)
                 case Right =>
                     if (hasReachedRightWall(armyBoundingBox, displayWindow))
                         moveUpOrDown
                     else
-                        moveInXAxis(ONE_HOP_IN_X_DIRECTION)
+                        moveInXAxis(currentConfig.invaderArmyXDelta)
                 case Up =>
                     if (hasReachedTopWall)
                         generalDirection = Downward
@@ -85,22 +83,22 @@ object InvaderArmyPositionDirector {
 
     private def moveDown: Point = {
         direction = Down
-        moveInYAxis(ONE_HOP_IN_Y_DIRECTION)
+        moveInYAxis(currentConfig.invaderArmyYDelta)
     }
 
     private def moveUp: Point = {
         direction = Up
-        moveInYAxis(-ONE_HOP_IN_Y_DIRECTION)
+        moveInYAxis(-currentConfig.invaderArmyYDelta)
     }
 
     private def moveLeft: Point = {
         direction = Left
-        moveInXAxis(-ONE_HOP_IN_X_DIRECTION)
+        moveInXAxis(-currentConfig.invaderArmyXDelta)
     }
 
     private def moveRight: Point = {
         direction = Right
-        moveInXAxis(ONE_HOP_IN_X_DIRECTION)
+        moveInXAxis(currentConfig.invaderArmyXDelta)
     }
 
     private def hasReachedTopWall: Boolean = currentPosition.y < 0

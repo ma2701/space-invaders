@@ -81,7 +81,7 @@ class CollisionDetectionTest extends FunSuite {
 
         val invaderArmy = new InvaderArmy(List(new CrabInvader(new Point(0,0))))
 
-        val missiles = List(new Missile(new Point(26,0)))
+        val missiles = List(new Missile(new Point(0,0)))
 
         assert(hasCollided(missiles(0), invaderArmy.army(0)))
     }
