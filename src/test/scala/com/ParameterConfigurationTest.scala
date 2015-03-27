@@ -1,7 +1,6 @@
-package com.ui
+package com
 
 import org.scalatest.FunSuite
-import com.Easy
 
 class ParameterConfigurationTest extends FunSuite {
 

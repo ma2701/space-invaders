@@ -1,8 +1,8 @@
-package com.ui
+package com
 
 import org.scalatest.FunSuite
 import org.scalatest.BeforeAndAfter
-import com.{GameConfiguration, Nirvana, Moderate, Easy}
+import com.GameConfiguration
 
 class GameConfigurationTest extends FunSuite with BeforeAndAfter {
 
