@@ -1,4 +1,4 @@
-package com.ui
+package com
 
 import com.ui.gameelement.invader.types.Invader
 

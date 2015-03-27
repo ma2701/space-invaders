@@ -1,4 +1,4 @@
-package com.ui.util
+package com.util
 
 abstract class Timer {
 

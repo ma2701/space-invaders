@@ -2,7 +2,8 @@ package com.ui.gameelement.bomb
 
 import org.scalatest.FunSuite
 import java.awt.Point
-import com.ui.GameConfiguration.currentConfig
+import com.GameConfiguration
+import GameConfiguration.currentConfig
 
 class BombPositionDirectorTest extends FunSuite {
 
@@ -10,7 +11,7 @@ class BombPositionDirectorTest extends FunSuite {
 
         val currentPos = new Point(0,0)
 
-        assertResult(new Point(0, 0 + currentConfig.bombDropRate)){
+        assertResult(new Point(0, 0 + currentConfig.bombVelocity)){
             BombPositionDirector.nextPosition(currentPos)
         }
     }

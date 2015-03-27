@@ -8,7 +8,7 @@ import com.ui.gameelement.player.types.ShootingPlayer
 
 object GameStatusPanel extends JPanel {
 
-    private[this] val panelTitleName  = "S T A T S"
+    private[this] val panelTitleName  = "G A M E    S T A T S"
     private[this] val panelTextFont   = new Font("Verdana", Font.BOLD, 12)
     private[this] val score           = new JLabel
 

@@ -1,4 +1,4 @@
-package com.ui
+package com
 
 object GameLogic {
     val REQUIRED_POINTS_FOR_EXTRA_LIFE: Int = 10000

@@ -1,10 +1,11 @@
 package com.ui.gameelement.missile
 
 import java.awt.Point
-import com.ui.GameConfiguration.currentConfig
+import com.GameConfiguration
+import GameConfiguration.currentConfig
 
 object MissilePositionDirector {
 
     def nextPosition(missile:Missile):Point =
-        new Point(missile.head.getX.toInt , missile.head.getY.toInt - currentConfig.missileYDelta)
+        new Point(missile.head.getX.toInt , missile.head.getY.toInt - currentConfig.missileVelocity)
 }

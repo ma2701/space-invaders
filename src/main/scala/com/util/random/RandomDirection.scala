@@ -1,4 +1,4 @@
-package com.ui.util.random
+package com.util.random
 
 import com.ui.gameelement.invader.MysteryInvaderMovementDirection
 import com.ui.gameelement.invader.MysteryInvaderDirection.{RightToLeft, LeftToRight}

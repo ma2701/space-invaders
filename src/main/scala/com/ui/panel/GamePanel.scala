@@ -2,10 +2,10 @@ package com.ui.panel
 
 import javax.swing.JPanel
 
-import java.awt._
 
-import com.ui.util.MainThreadTimer._
-import com.ui.{GameLogic, SpaceInvaderGame}
+import com.util.MainThreadTimer._
+import java.awt.Point
+import java.awt.Font
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.event.ActionEvent
@@ -20,12 +20,12 @@ import com.ui.gameelement.GameElementPosition
 import com.ui.gameelement.player.types.Player
 import com.ui.gameelement.gameover.GameOver
 import com.ui.gameelement.invader.types.Invader
-import com.ui.GameConfiguration
+import com.{GameConfiguration, GameLogic, SpaceInvaderGame}
 
 object GamePanel extends JPanel with Runnable with ActionListener {
     private[this] val SCREEN_REFRESH_RATE_IN_MILLIS = 1
-    private[this] val PREFERRED_WIDTH = 878
-    private[this] val PREFERRED_HEIGHT= 600
+    private[this] val PREFERRED_WIDTH = 580
+    private[this] val PREFERRED_HEIGHT= 480
 
     private[this] val DELAY_BEFORE_CLOSING_MAIN_WINDOW= 1000
 

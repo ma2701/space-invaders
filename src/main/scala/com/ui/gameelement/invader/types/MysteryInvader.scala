@@ -4,7 +4,7 @@ import java.awt.{Rectangle, Point}
 import com.ui.gameelement.displayelement.SingleDisplayElement
 import com.ui.gameelement.invader.{MysteryInvaderMovementDirection, MysteryInvaderParts}
 import com.ui.gameelement.invader.MysteryInvaderDirection.{LeftToRight, RightToLeft}
-import com.ui.util.random.{RandomBoolean, RandomNumberGenerator}
+import com.util.random.{RandomBoolean, RandomNumberGenerator}
 
 object MysteryInvader {
     val INVADER_WIDTH       = 13 * SingleDisplayElement.DEFAULT_ELEMENT_WIDTH

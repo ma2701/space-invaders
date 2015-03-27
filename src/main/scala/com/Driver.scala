@@ -1,4 +1,6 @@
-package com.ui
+package com
+
+import com.ui.SpaceInvadersUI
 
 object Driver extends App {
 

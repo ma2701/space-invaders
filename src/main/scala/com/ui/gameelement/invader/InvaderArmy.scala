@@ -4,7 +4,7 @@ import java.awt.{Rectangle, Point, Graphics}
 import com.ui.gameelement.invader.types.{DeadInvader, Invader}
 import ArmyCommander._
 import com.ui.gameelement.bomb.Bomb
-import com.ui.util.BombDropTimer._
+import com.util.BombDropTimer._
 
 
 class InvaderArmy(val army: Seq[Invader]) {

@@ -1,4 +1,4 @@
-package com.ui
+package com
 
 import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.invader.{InvaderArmyPositionDirector, ArmyCommander, InvaderArmy}
@@ -7,13 +7,14 @@ import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.player.PlayerPositionDirector
 import scala.util.Try
 import com.ui.gameelement.missile.MissilesInFlight
-import com.ui.util.MissileShootingTimer.isTimeToShootOneMissile
+import com.util.MissileShootingTimer.isTimeToShootOneMissile
 import com.ui.gameelement.missile.Missile
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
-import com.ui.gameelement.{CollidedElements, GameElementPosition}
-import com.ui.gameelement.CollisionDetection._
-import com.ui.ScoreCalculation._
+import com.ui.gameelement.GameElementPosition
+import CollisionDetection._
+import ScoreCalculation._
 import com.ui.gameelement.player.types.{ExplodedPlayer, ShootingPlayer, Player}
+import com.ui.GameElements
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false

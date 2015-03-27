@@ -4,7 +4,8 @@ import java.awt.{Rectangle, Point}
 
 import com.ui.gameelement.invader.Direction.{Right, Left, Up, Down}
 import com.ui.gameelement.invader.GeneralArmyDirection.GeneralArmyDirection
-import com.ui.GameConfiguration.currentConfig
+import com.GameConfiguration
+import GameConfiguration.currentConfig
 
 
 object InvaderArmyPositionDirector {
@@ -26,12 +27,12 @@ object InvaderArmyPositionDirector {
                     if (hasReachedLeftWall)
                         moveUpOrDown
                     else
-                        moveInXAxis(-currentConfig.invaderArmyXDelta)
+                        moveInXAxis(-currentConfig.invaderArmyXVelocity)
                 case Right =>
                     if (hasReachedRightWall(armyBoundingBox, displayWindow))
                         moveUpOrDown
                     else
-                        moveInXAxis(currentConfig.invaderArmyXDelta)
+                        moveInXAxis(currentConfig.invaderArmyXVelocity)
                 case Up =>
                     if (hasReachedTopWall)
                         generalDirection = Downward
@@ -83,22 +84,22 @@ object InvaderArmyPositionDirector {
 
     private def moveDown: Point = {
         direction = Down
-        moveInYAxis(currentConfig.invaderArmyYDelta)
+        moveInYAxis(currentConfig.invaderArmyYVelocity)
     }
 
     private def moveUp: Point = {
         direction = Up
-        moveInYAxis(-currentConfig.invaderArmyYDelta)
+        moveInYAxis(-currentConfig.invaderArmyYVelocity)
     }
 
     private def moveLeft: Point = {
         direction = Left
-        moveInXAxis(-currentConfig.invaderArmyXDelta)
+        moveInXAxis(-currentConfig.invaderArmyXVelocity)
     }
 
     private def moveRight: Point = {
         direction = Right
-        moveInXAxis(currentConfig.invaderArmyXDelta)
+        moveInXAxis(currentConfig.invaderArmyXVelocity)
     }
 
     private def hasReachedTopWall: Boolean = currentPosition.y < 0

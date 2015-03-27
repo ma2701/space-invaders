@@ -1,8 +1,8 @@
 package com.ui.gameelement
 
 import java.awt.{Point, Graphics, Rectangle}
-import com.ui.SpaceInvaderGame
 import com.ui.gameelement.displayelement.SingleDisplayElement
+import com.SpaceInvaderGame
 
 abstract class Displayable(val topLeft: Point){
     val parts:List[SingleDisplayElement]

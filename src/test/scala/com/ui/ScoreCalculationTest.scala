@@ -3,6 +3,7 @@ package com.ui
 import org.scalatest.FunSuite
 import com.ui.gameelement.invader.types.CrabInvader
 import java.awt.Point
+import com.ScoreCalculation
 
 class ScoreCalculationTest extends FunSuite {
 

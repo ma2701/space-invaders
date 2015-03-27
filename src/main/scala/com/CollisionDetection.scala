@@ -1,11 +1,12 @@
-package com.ui.gameelement
+package com
 
-import com.ui.gameelement.missile.{MissilesInFlight, Missile}
-import com.ui.gameelement.invader.types.{MysteryInvader, Invader}
+import com.ui.gameelement.missile.Missile
+import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.barricade.{Barricades, Barricade}
 import com.ui.GameElements
 import com.ui.gameelement.bomb.Bomb
 import com.ui.gameelement.player.types.Player
+import com.ui.gameelement.Displayable
 
 
 object CollisionDetection {

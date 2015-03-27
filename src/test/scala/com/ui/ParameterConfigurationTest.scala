@@ -1,6 +1,7 @@
 package com.ui
 
 import org.scalatest.FunSuite
+import com.Easy
 
 class ParameterConfigurationTest extends FunSuite {
 
@@ -9,8 +10,8 @@ class ParameterConfigurationTest extends FunSuite {
     }
 
     test("given level 0 then all game configuration can be obtained"){
-        assert(3===Easy.bombDropRate)
-        assert(15===Easy.invaderArmyXDelta)
-        assert(20===Easy.invaderArmyYDelta)
+        assert(2===Easy.bombVelocity)
+        assert(15===Easy.invaderArmyXVelocity)
+        assert(20===Easy.invaderArmyYVelocity)
     }
 }

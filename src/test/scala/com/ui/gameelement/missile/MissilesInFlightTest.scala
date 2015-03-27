@@ -3,7 +3,8 @@ package com.ui.gameelement.missile
 
 import org.scalatest.FunSuite
 import java.awt.Point
-import com.ui.GameConfiguration.currentConfig
+import com.GameConfiguration
+import GameConfiguration.currentConfig
 
 class MissilesInFlightTest extends FunSuite {
     val initialMissilePosition: Point = new Point(10, 10)
@@ -40,7 +41,7 @@ class MissilesInFlightTest extends FunSuite {
 
         val missilesInFlight= new MissilesInFlight(missiles).updatePosition
 
-        assertResult(new Point(10, initialMissilePosition.y - currentConfig.missileYDelta)){
+        assertResult(new Point(10, initialMissilePosition.y - currentConfig.missileVelocity)){
             missilesInFlight.missiles(0).topLeft
         }
     }

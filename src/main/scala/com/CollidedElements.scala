@@ -1,7 +1,7 @@
-package com.ui.gameelement
+package com
 
 import com.ui.gameelement.missile.Missile
-import com.ui.gameelement.invader.types.{MysteryInvader, Invader}
+import com.ui.gameelement.invader.types.Invader
 import com.ui.gameelement.barricade.Barricade
 import com.ui.gameelement.bomb.Bomb
 

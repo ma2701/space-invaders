@@ -1,4 +1,4 @@
-package com.ui.util
+package com.util
 
 object InvaderArmyTimer extends Timer {
 

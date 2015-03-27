@@ -1,4 +1,4 @@
-package com.ui.util
+package com.util
 
 object BombDropTimer extends Timer {
     private[this] var lastTimeDroppedADuece: Long   = 0L

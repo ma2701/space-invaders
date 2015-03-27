@@ -1,4 +1,6 @@
-package com.ui
+package com
+
+import com.ui.GameElements
 
 case class GameState(
                         elements:GameElements,

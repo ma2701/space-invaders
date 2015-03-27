@@ -1,7 +1,9 @@
 package com.ui
 
 import org.scalatest.FunSuite
+import com.GameLogic
 import GameLogic.REQUIRED_POINTS_FOR_EXTRA_LIFE
+import com.GameLogic
 
 class GameLogicTest extends FunSuite {
 

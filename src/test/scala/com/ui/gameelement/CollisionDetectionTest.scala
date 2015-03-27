@@ -8,7 +8,8 @@ import com.ui.gameelement.missile.{Missile, MissilesInFlight}
 import com.ui.gameelement.bomb.{Bomb, DroppingBombs}
 import com.ui.GameElements
 import com.ui.gameelement.invader.types.CrabInvader
-import com.ui.gameelement.CollisionDetection._
+import com.CollisionDetection
+import CollisionDetection._
 import com.ui.gameelement.player.types.ShootingPlayer
 
 

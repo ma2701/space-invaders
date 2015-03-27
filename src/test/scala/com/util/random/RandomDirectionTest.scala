@@ -1,4 +1,4 @@
-package com.ui.util.random
+package com.util.random
 
 import org.scalatest.FunSuite
 import com.ui.gameelement.invader.MysteryInvaderDirection.{LeftToRight, RightToLeft}

@@ -7,7 +7,7 @@ import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.bomb.DroppingBombs
 import com.ui.gameelement.invader.InvaderArmy
 import com.ui.gameelement.invader.MysteryInvaderPositionDirector.{nextPosition => nxtPosition}
-import com.ui.util.InvaderArmyTimer._
+import com.util.InvaderArmyTimer._
 import com.ui.gameelement.invader.InvaderArmyPositionDirector._
 import com.ui.GameElements
 import com.ui.gameelement.player.types.Player
@@ -41,13 +41,14 @@ class GameElementPosition(screenWidth: Int, screenHeight: Int) {
             updateMysteryInvaderPosition(elements.mysteryInvader))
 
     private def updatedBarricadePosition(barricades: Barricades): Barricades = {
-        val barricadeLocation: Point = new Point(screenWidth / 5, screenHeight - (screenHeight / 4))
+        val diff = (screenWidth - barricades.boundingBox.width) / 2
+        val barricadeLocation: Point = new Point(diff , screenHeight - (screenHeight / 4))
         barricades.moveTo(barricadeLocation)
     }
 
     private def updatePlayerPositionIfRequired(player: Player): Player =
         player.topLeft match {
-            case p: Point if (p.x == 0 && p.y == 0) => player.moveTo(playerInitialPosition(screenWidth, screenHeight))
+            case p: Point if (p == new Point) => player.moveTo(playerInitialPosition(screenWidth, screenHeight))
             case _ => player
 
         }

@@ -1,4 +1,4 @@
-package com.ui.util.random
+package com.util.random
 
 
 class RandomBoolean(randomNumberGenerator:RandomNumberGenerator = new RandomNumberGenerator) {

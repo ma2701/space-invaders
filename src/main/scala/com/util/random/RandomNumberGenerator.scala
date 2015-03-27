@@ -1,4 +1,4 @@
-package com.ui.util.random
+package com.util.random
 
 import java.util.Random
 
