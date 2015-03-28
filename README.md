@@ -21,6 +21,13 @@ sbt> run Driver
 
 This is my version of the Space invader game. It was done as a fun project using Scala.
 
+The main challenge was to minimize mutability. As this is a game, it has to maintain state
+
+from one frame to the next so having mutable state is a must, the trick was to keep it minimal.
+
+
+<h3>Game logic</h3>
+
 Every 10K points the player is rewarded with an extra life.
 
 As the player shoots invaders and gets points the game becomes more and more difficult as in
