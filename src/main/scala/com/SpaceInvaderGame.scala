@@ -15,6 +15,7 @@ import CollisionDetection._
 import ScoreCalculation._
 import com.ui.gameelement.player.types.{ExplodedPlayer, ShootingPlayer, Player}
 import com.ui.GameElements
+import com.sound.PlayerShooting
 
 object SpaceInvaderGame {
     val DEBUG_MODE = false
@@ -74,6 +75,7 @@ class SpaceInvaderGame() {
     def shootSingleMissileFrom(position: Point): Unit =
         if (isTimeToShootOneMissile(now)) {
             missilesInFlight = missilesInFlight.addToMissiles(new Missile(position))
+            PlayerShooting.play
         }
 
     def movePlayerLeft: Unit =
@@ -84,7 +86,9 @@ class SpaceInvaderGame() {
 
     private def markHitInvaders(shotSoldiersAndBulletsThatKilledThem: Seq[(Missile, Invader)]) {
         shotSoldiersAndBulletsThatKilledThem.foreach {
-            t => t._2.markHitByMissile
+            t =>
+                t._2.markHitByMissile
+               // SoundEffect.playInvaderHit
         }
     }
 

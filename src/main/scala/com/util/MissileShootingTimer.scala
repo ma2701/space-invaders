@@ -6,7 +6,7 @@ object MissileShootingTimer extends Timer {
 
     override def setLastInvocationTime(t: Long): Unit = lastTimMissileFired = t
 
-    override val timerDelay: Long = 100
+    override val timerDelay: Long = 500
 
     override def lastInvocationTime: Long = lastTimMissileFired
 
