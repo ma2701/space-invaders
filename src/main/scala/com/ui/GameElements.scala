@@ -1,11 +1,11 @@
 package com.ui
 
-import com.ui.gameelement.invader.InvaderArmy
-import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.bomb.DroppingBombs
+import com.ui.gameelement.bomb.FallingBombs
+import com.ui.gameelement.invader.InvaderArmy
+import com.ui.gameelement.invader.types.Invader
+import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.player.types.Player
-import com.ui.gameelement.invader.types.{Invader, MysteryInvader}
 
 
 case class GameElements(
@@ -13,6 +13,6 @@ case class GameElements(
                          missilesInFlight: MissilesInFlight,
                          barricades: Barricades,
                          player: Player,
-                         droppingBombs:DroppingBombs,
+                         droppingBombs:FallingBombs,
                          mysteryInvader:Option[Invader] = None
                        )

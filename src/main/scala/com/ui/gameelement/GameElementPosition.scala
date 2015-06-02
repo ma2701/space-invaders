@@ -1,17 +1,18 @@
 package com.ui.gameelement
 
 import java.awt.{Point, Rectangle}
-import com.ui.gameelement.barricade.Barricades
-import com.ui.gameelement.player.PlayerPositionDirector._
-import com.ui.gameelement.missile.MissilesInFlight
-import com.ui.gameelement.bomb.DroppingBombs
-import com.ui.gameelement.invader.InvaderArmy
-import com.ui.gameelement.invader.MysteryInvaderPositionDirector.{nextPosition => nxtPosition}
-import com.util.InvaderArmyTimer._
-import com.ui.gameelement.invader.InvaderArmyPositionDirector._
+
 import com.ui.GameElements
-import com.ui.gameelement.player.types.Player
+import com.ui.gameelement.barricade.Barricades
+import com.ui.gameelement.bomb.FallingBombs
+import com.ui.gameelement.invader.InvaderArmy
+import com.ui.gameelement.invader.InvaderArmyPositionDirector._
+import com.ui.gameelement.invader.MysteryInvaderPositionDirector.{nextPosition => nxtPosition}
 import com.ui.gameelement.invader.types.{ExplodedInvader, Invader, MysteryInvader}
+import com.ui.gameelement.missile.MissilesInFlight
+import com.ui.gameelement.player.PlayerPositionDirector._
+import com.ui.gameelement.player.types.Player
+import com.util.InvaderArmyTimer._
 
 /**
  *
@@ -56,7 +57,7 @@ class GameElementPosition(screenWidth: Int, screenHeight: Int) {
     private def updateMissilesPosition(missilesInFlight: MissilesInFlight): MissilesInFlight =
         missilesInFlight.updatePosition.removeOffScreenMissile
 
-    private def updateBombsPosition(droppingBombs: DroppingBombs): DroppingBombs =
+    private def updateBombsPosition(droppingBombs: FallingBombs): FallingBombs =
         droppingBombs.updatePosition.removeOffScreenBombs(screenHeight)
 
 

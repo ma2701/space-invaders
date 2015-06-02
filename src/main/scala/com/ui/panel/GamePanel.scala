@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent
 import com.ui.gameelement.barricade.Barricades
 import com.ui.gameelement.missile.MissilesInFlight
 import com.ui.gameelement.invader.InvaderArmy
-import com.ui.gameelement.bomb.DroppingBombs
+import com.ui.gameelement.bomb.FallingBombs
 import com.ui.gameelement.GameElementPosition
 import com.ui.gameelement.player.types.Player
 import com.ui.gameelement.gameover.GameOver
@@ -138,7 +138,7 @@ object GamePanel extends JPanel with Runnable with ActionListener {
     private def displayBarricades(barricades:Barricades, g:Graphics):Unit         = barricades.draw(g)
     private def displayShooter (shooter:Player, g:Graphics):Unit                  = shooter.draw(g)
     private def displayMissiles (missiles:MissilesInFlight, g:Graphics):Unit      = missiles.draw(g)
-    private def displayBombs (bombs:DroppingBombs, g:Graphics):Unit               = bombs.draw(g)
+    private def displayBombs (bombs:FallingBombs, g:Graphics):Unit               = bombs.draw(g)
     private def displayInvaderArmy (invaderArmy:InvaderArmy, g:Graphics):Unit     = invaderArmy.draw(g)
     private def displayGameOver(gameOver:GameOver, g:Graphics):Unit               = gameOver.draw(g)
     private def displayMysteryInvader (mysteryInvader:Option[Invader], g:Graphics):Unit = mysteryInvader.map(_.draw(g))
