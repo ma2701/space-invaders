@@ -34,10 +34,3 @@ As the player shoots invaders and gets points the game becomes more and more dif
 
 invaders move around faster and the bombs they drop also drop at a faster rate.
 
-
-TODO:
-
-1) implement different invader types with different points              -- ALMOST DONE
-
-2) implement game pausing
-
