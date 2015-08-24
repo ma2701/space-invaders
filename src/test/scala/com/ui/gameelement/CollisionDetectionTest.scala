@@ -2,7 +2,6 @@ package com.ui.gameelement
 
 import java.awt.Point
 
-import com.CollisionDetection
 import com.CollisionDetection._
 import com.ui.GameElements
 import com.ui.gameelement.barricade.Barricades
@@ -11,7 +10,7 @@ import com.ui.gameelement.invader.types.CrabInvader
 import com.ui.gameelement.invader.{ArmyCommander, InvaderArmy}
 import com.ui.gameelement.missile.{Missile, MissilesInFlight}
 import com.ui.gameelement.player.types.ShootingPlayer
-
+import org.scalatest.FunSuite
 
 class CollisionDetectionTest extends FunSuite {
 
